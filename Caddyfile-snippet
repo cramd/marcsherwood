@@ -1,0 +1,26 @@
+# -------------------------------------------------------------
+# Proxmox Lab Caddyfile Snippet
+# Append this to your existing main Caddyfile in your lab setup.
+# Ensure the root path matches where you deploy the Astro 'dist' folder.
+# -------------------------------------------------------------
+
+marcsherwood.com {
+    # Point to the static build output of Astro
+    root * /var/www/marcsherwood/dist
+    
+    # Enable file server for static assets
+    file_server
+    
+    # Standard compression
+    encode gzip zstd
+    
+    # Handle client-side routing and fallback for Astro static builds
+    try_files {path} {path}/index.html /404.html
+
+    # Basic security headers
+    header {
+        Strict-Transport-Security "max-age=31536000;"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+    }
+}

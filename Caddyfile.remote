@@ -1,0 +1,85 @@
+#HONEOSS CADDYFILE LETSENCRYPT AND CF DNS
+
+http://192.168.0.62 {
+    root * /var/www/analyst-pro
+    route {
+        try_files {path} /index.html
+        file_server
+    }
+}
+
+marc.honeos.ai {
+    reverse_proxy https://marcsherwood-portfolio.web.app {
+        header_up Host marcsherwood-portfolio.web.app
+        header_up X-Real-IP {remote_host}
+    }
+}
+
+battery.fuzzynacho.org {
+    reverse_proxy 192.168.0.118:8010
+}
+
+team.proservability.com {
+    reverse_proxy 192.168.0.67:80
+}
+
+honeos.ai {
+    redir https://www.honeos.ai{uri} 308
+}
+
+fuzzynacho.org {
+    redir https://www.fuzzynacho.org{uri} 308
+}
+
+www.fuzzynacho.org {
+    handle_path /blog* {
+        root * /var/www/blog
+        file_server
+    }
+    handle /dementia.html {
+        root * /var/www/fuzzynacho.org
+        file_server
+    }
+    reverse_proxy localhost:3000
+}
+
+www.marcsherwood.com {
+    redir https://marcsherwood.com{uri} 308
+}
+
+marcsherwood.com {
+    root * /var/www/marcsherwood.com
+    file_server
+    try_files {path} {path}/index.html /404.html
+}
+
+www.honeos.ai {
+    redir /privacy /privacy.html 308
+    redir /privacy/ /privacy.html 308
+    redir /terms /tos.html 308
+    redir /terms/ /tos.html 308
+    redir /tos /tos.html 308
+    redir /tos/ /tos.html 308
+
+    @html path *.html /
+    header @html Cache-Control "no-cache, no-store, must-revalidate"
+
+    root * /var/www/analyst-pro
+    route {
+        try_files {path} {path}.html /index.html
+        file_server
+    }
+}
+
+honeoss.com {
+    redir https://www.honeos.ai{uri} 308
+}
+
+www.honeoss.com {
+    redir https://www.honeos.ai{uri} 308
+}
+
+dir.fuzzynacho.org {
+    root * /var/www/dir.fuzzynacho.org
+    file_server
+}

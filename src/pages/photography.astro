@@ -1,0 +1,40 @@
+---
+import type { ImageMetadata } from 'astro';
+import PhotoGallery from '../components/PhotoGallery.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_DESCRIPTION } from '../consts';
+
+// Automatically import all images in the favorites directory
+const imageFiles = import.meta.glob<{ default: ImageMetadata }>('/src/assets/favorites/*.{jpeg,jpg,png,gif,webp}', { eager: true });
+
+let galleryImages = Object.values(imageFiles).map((file) => ({
+  src: file.default.src,
+  w: file.default.width,
+  h: file.default.height,
+  alt: "Favorite photo"
+}));
+
+// Fallback to placeholders if the folder is empty so the page doesn't look broken
+if (galleryImages.length === 0) {
+  galleryImages = [
+    { src: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200&auto=format&fit=crop", w: 1200, h: 800, alt: "Motorcycle on road" },
+    { src: "https://images.unsplash.com/photo-1610992015732-2449b76344bc?q=80&w=1200&auto=format&fit=crop", w: 1200, h: 800, alt: "EDC Knife" },
+    { src: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=1200&auto=format&fit=crop", w: 1200, h: 800, alt: "Mechanical Watch" },
+    { src: "https://images.unsplash.com/photo-1517409277800-47b7fb6a1b26?q=80&w=1200&auto=format&fit=crop", w: 1200, h: 800, alt: "Flashlight" },
+    { src: "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=1200&auto=format&fit=crop", w: 1200, h: 800, alt: "Motorcycle helmet" },
+    { src: "https://images.unsplash.com/photo-1520690280459-22a36b35d8e7?q=80&w=1200&auto=format&fit=crop", w: 1200, h: 800, alt: "Vintage camera" }
+  ];
+}
+---
+
+<BaseLayout title="Photography | Marc Sherwood" description={SITE_DESCRIPTION} mainClass="flex-grow container mx-auto px-6 py-12 max-w-5xl">
+			<section class="mb-12 animate-fade-in">
+				<h1 class="text-4xl font-bold mb-4 tracking-tight">Photography</h1>
+				<p class="text-slate-400 text-lg max-w-2xl">A collection of my favorite shots. Bikes, gear, and travel.</p>
+			</section>
+
+			<section class="animate-fade-in" style="animation-delay: 0.1s;">
+				<PhotoGallery images={galleryImages} galleryId="main-gallery" />
+			</section>
+
+</BaseLayout>

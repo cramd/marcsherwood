@@ -1,0 +1,35 @@
+---
+import type { ImageMetadata } from 'astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	image?: ImageMetadata;
+	mainClass?: string;
+}
+
+const {
+	title,
+	description,
+	image,
+	mainClass = 'flex-grow container mx-auto px-6 py-12 max-w-4xl',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} image={image} />
+		<slot name="head" />
+	</head>
+	<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
+		<Header />
+		<main class={mainClass}>
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

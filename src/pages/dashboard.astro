@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_DESCRIPTION } from '../consts';
+---
+
+<BaseLayout title="Dashboard | Marc Sherwood" description={SITE_DESCRIPTION} mainClass="container">
+	<Fragment slot="head">
+		<style>
+			.dashboard-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-top: 2rem;
+				margin-bottom: 4rem;
+			}
+
+			.section-title {
+				font-size: 1.25rem;
+				margin-bottom: 1.5rem;
+				border-bottom: 1px solid var(--border-color);
+				padding-bottom: 0.75rem;
+				color: var(--text-primary);
+			}
+
+			.pro-card {
+				background: var(--bg-surface);
+				border: 1px solid var(--border-color);
+				border-radius: var(--radius);
+				padding: 2rem;
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			.pro-card:hover {
+				border-color: rgba(255, 255, 255, 0.15);
+				box-shadow: var(--glass-shadow);
+			}
+
+			.task-list {
+				list-style: none;
+				padding: 0;
+			}
+
+			.task-item {
+				background: var(--bg-color-alt);
+				padding: 1rem;
+				border-radius: var(--radius-sm);
+				margin-bottom: 0.75rem;
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				border: 1px solid var(--border-color);
+				transition: border-color 0.2s ease;
+			}
+
+			.task-item:hover {
+				border-color: var(--text-muted);
+			}
+
+			.task-checkbox {
+				width: 20px;
+				height: 20px;
+				border-radius: 4px;
+				border: 1px solid var(--text-muted);
+				display: inline-block;
+				cursor: pointer;
+				transition: all 0.2s ease;
+			}
+
+			.task-checkbox.checked {
+				background: var(--text-muted);
+				position: relative;
+			}
+
+			.task-checkbox.checked::after {
+				content: '✓';
+				color: var(--bg-color);
+				position: absolute;
+				top: 50%; left: 50%;
+				transform: translate(-50%, -50%);
+				font-weight: bold;
+				font-size: 12px;
+			}
+
+			.task-text {
+				flex-grow: 1;
+				font-size: 0.95rem;
+				color: var(--text-primary);
+			}
+
+			.task-tag {
+				font-size: 0.75rem;
+				padding: 0.2rem 0.6rem;
+				border-radius: var(--radius-sm);
+				background: var(--bg-surface);
+				color: var(--text-secondary);
+				border: 1px solid var(--border-color);
+				font-family: 'JetBrains Mono', monospace;
+			}
+
+			.note-card {
+				background: var(--bg-color-alt);
+				padding: 1.25rem;
+				border-radius: var(--radius-sm);
+				border: 1px solid var(--border-color);
+				margin-bottom: 1.5rem;
+			}
+
+			.metric-value {
+				font-size: 2.5rem;
+				font-weight: 600;
+				color: var(--text-primary);
+				font-family: 'JetBrains Mono', monospace;
+			}
+
+			textarea.modern-input {
+				width: 100%;
+				background: var(--bg-color-alt);
+				border: 1px solid var(--border-color);
+				color: var(--text-primary);
+				padding: 1rem;
+				border-radius: var(--radius-sm);
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 0.9rem;
+				resize: vertical;
+				transition: border-color 0.2s ease;
+			}
+
+			textarea.modern-input:focus {
+				outline: none;
+				border-color: var(--text-secondary);
+			}
+		</style>
+	</Fragment>
+
+	<h1 class="animate-fade-in text-gradient">Command Center</h1>
+	<p class="animate-fade-in" style="animation-delay: 0.1s; color: var(--text-secondary);">Your personal dashboard for managing projects, tasks, and ideas.</p>
+
+	<div class="dashboard-grid animate-fade-in" style="animation-delay: 0.2s;">
+		<div class="pro-card">
+			<h2 class="section-title">Active Tasks</h2>
+			<ul class="task-list">
+				<li class="task-item">
+					<div class="task-checkbox checked"></div>
+					<div class="task-text" style="text-decoration: line-through; color: var(--text-muted);">Refactor styling system</div>
+					<div class="task-tag">Dev</div>
+				</li>
+				<li class="task-item">
+					<div class="task-checkbox"></div>
+					<div class="task-text">Update Proxmox Caddy configs</div>
+					<div class="task-tag">Ops</div>
+				</li>
+				<li class="task-item">
+					<div class="task-checkbox"></div>
+					<div class="task-text">Write case study on trial conversion</div>
+					<div class="task-tag">Content</div>
+				</li>
+			</ul>
+			<button class="btn" style="width: 100%; margin-top: 1rem;">+ New Task</button>
+		</div>
+
+		<div class="pro-card">
+			<h2 class="section-title">Scratchpad</h2>
+			<div class="note-card">
+				<h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--text-primary);">Astro & Caddy</h3>
+				<p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">Since the lab handles multiple subdomains, keep the Caddyfile modular. Point the root directly to /dist for the static build.</p>
+			</div>
+			<textarea class="modern-input" rows="3" placeholder="Jot down a quick thought..."></textarea>
+			<button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Save Note</button>
+		</div>
+
+		<div class="pro-card">
+			<h2 class="section-title">Weekly Overview</h2>
+			<div style="display: flex; justify-content: space-around; text-align: center; margin-top: 3rem;">
+				<div>
+					<div class="metric-value">12</div>
+					<div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 500; letter-spacing: 1px; margin-top: 0.5rem;">Commits</div>
+				</div>
+				<div>
+					<div class="metric-value">3</div>
+					<div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 500; letter-spacing: 1px; margin-top: 0.5rem;">Posts</div>
+				</div>
+				<div>
+					<div class="metric-value">5</div>
+					<div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 500; letter-spacing: 1px; margin-top: 0.5rem;">Tasks</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</BaseLayout>

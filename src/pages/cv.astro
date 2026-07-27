@@ -1,0 +1,259 @@
+---
+import BlueskyFeed from '../components/BlueskyFeed.astro';
+import LinkedInEmbed from '../components/LinkedInEmbed.astro';
+import GitHubProfile from '../components/GitHubProfile.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_DESCRIPTION } from '../consts';
+---
+
+<BaseLayout title="Marc Sherwood | Technical GTM Lead" description={SITE_DESCRIPTION} mainClass="flex-grow container mx-auto px-6 py-12 max-w-5xl">
+			<!-- Hero Section -->
+			<section class="py-16 animate-fade-in">
+				<div class="inline-block px-3 py-1 mb-6 text-sm font-mono text-blue-400 bg-blue-900/30 border border-blue-500/30 rounded-full">
+					Available for strategic consultation
+				</div>
+				<h1 class="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
+					Hi, I'm <span class="text-gradient">Marc Sherwood</span>.
+				</h1>
+				<p class="text-xl text-slate-300 max-w-3xl leading-relaxed mb-8">
+					Technical GTM Lead & Strategist bridging the gap between complex engineering systems and commercial growth. I specialize in DevTools, AI Operations, and scalable platforms.
+				</p>
+				<div class="flex flex-wrap gap-4">
+					<a href="/dashboard" class="px-6 py-3 bg-white text-slate-950 font-semibold rounded-lg hover:bg-slate-200 transition-colors">
+						View Command Center
+					</a>
+					<a href="https://linkedin.com/in/marcsherwood" target="_blank" class="px-6 py-3 glass-panel text-slate-100 font-semibold rounded-lg hover:bg-slate-800 transition-colors flex items-center gap-2">
+						<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+						Connect on LinkedIn
+					</a>
+				</div>
+			</section>
+
+			<!-- Featured Projects Section -->
+			<section class="mt-8 mb-16 animate-fade-in" style="animation-delay: 0.1s;">
+				<div class="text-center mb-10">
+					<h2 class="text-3xl font-bold text-slate-100 mb-4 tracking-tight">Featured Projects</h2>
+					<p class="text-slate-400 max-w-2xl mx-auto">Explore a selection of recent projects focused on AI utilities, data enrichment, and mobile-first products. Hover on skill tags to see where they are applied.</p>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					
+					<!-- Project 1 -->
+					<div class="glass-panel rounded-2xl overflow-hidden flex flex-col h-full border border-slate-800 bg-slate-900/50 hover:border-slate-700 transition-colors">
+						<div class="h-48 w-full bg-gradient-to-b from-slate-700 to-slate-900 relative">
+							<!-- Image placeholder -->
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAwTDggOFpNOCAwTDAgOFoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMSI+PC9wYXRoPgo8L3N2Zz4=')]"></div>
+						</div>
+						<div class="p-6 flex flex-col flex-grow">
+							<div class="flex justify-between items-center mb-3">
+								<span class="text-[10px] font-bold text-purple-400 tracking-wider uppercase">COSS GTM & AI Intelligence</span>
+								<span class="text-[11px] font-mono text-slate-400">2026</span>
+							</div>
+							<div class="flex justify-between items-center mb-4">
+								<h3 class="text-2xl font-bold text-slate-100">HoneOS.ai</h3>
+								<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-700">
+									<div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+									<span class="text-[10px] font-medium text-slate-300">Online</span>
+								</div>
+							</div>
+							<p class="text-sm text-slate-400 leading-relaxed mb-6 flex-grow">
+								An automated pipeline research platform (HoneOS Vision) and marketing stack that tracks engineering signals to surface Open Source Qualified Leads (OQLs).
+							</p>
+							<div class="flex flex-wrap gap-2 mb-8">
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">React SPA</span>
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">Firebase Hosting</span>
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">Docker</span>
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">Cloud Run</span>
+							</div>
+							<a href="https://marc.honeos.ai" target="_blank" class="mt-auto w-full py-3 rounded-lg bg-black/50 hover:bg-slate-800 transition-colors text-center text-sm font-medium text-slate-200 border border-slate-800 flex justify-center items-center gap-2">
+								View Details <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+							</a>
+						</div>
+					</div>
+
+					<!-- Project 2 -->
+					<div class="glass-panel rounded-2xl overflow-hidden flex flex-col h-full border border-slate-800 bg-slate-900/50 hover:border-slate-700 transition-colors">
+						<div class="h-48 w-full bg-gradient-to-b from-slate-700 to-slate-900 relative">
+							<!-- Image placeholder -->
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAwTDggOFpNOCAwTDAgOFoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMSI+PC9wYXRoPgo8L3N2Zz4=')]"></div>
+						</div>
+						<div class="p-6 flex flex-col flex-grow">
+							<div class="flex justify-between items-center mb-3">
+								<span class="text-[10px] font-bold text-purple-400 tracking-wider uppercase">Infrastructure Monitoring</span>
+								<span class="text-[11px] font-mono text-slate-400">2026</span>
+							</div>
+							<div class="flex justify-between items-center mb-4">
+								<h3 class="text-2xl font-bold text-slate-100">Looking Glass</h3>
+								<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-700">
+									<div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+									<span class="text-[10px] font-medium text-slate-300">Online</span>
+								</div>
+							</div>
+							<p class="text-sm text-slate-400 leading-relaxed mb-6 flex-grow">
+								A deployment orchestrator and dashboard that wires a local VictoriaMetrics instance to a Proxmox server via ShiftMon for automated infrastructure monitoring and analytics.
+							</p>
+							<div class="flex flex-wrap gap-2 mb-8">
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">Proxmox VE</span>
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">VictoriaMetrics</span>
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">Docker</span>
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">Ansible</span>
+							</div>
+							<a href="#" class="mt-auto w-full py-3 rounded-lg bg-black/50 hover:bg-slate-800 transition-colors text-center text-sm font-medium text-slate-200 border border-slate-800 flex justify-center items-center gap-2">
+								View Details <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+							</a>
+						</div>
+					</div>
+
+					<!-- Project 3 -->
+					<div class="glass-panel rounded-2xl overflow-hidden flex flex-col h-full border border-slate-800 bg-slate-900/50 hover:border-slate-700 transition-colors">
+						<div class="h-48 w-full bg-gradient-to-b from-slate-700 to-slate-900 relative">
+							<!-- Image placeholder -->
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAwTDggOFpNOCAwTDAgOFoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMSI+PC9wYXRoPgo8L3N2Zz4=')]"></div>
+						</div>
+						<div class="p-6 flex flex-col flex-grow">
+							<div class="flex justify-between items-center mb-3">
+								<span class="text-[10px] font-bold text-cyan-400 tracking-wider uppercase">Mobile App & DevOps</span>
+								<span class="text-[11px] font-mono text-slate-400">2026</span>
+							</div>
+							<div class="flex justify-between items-center mb-4">
+								<h3 class="text-2xl font-bold text-slate-100">Social Battery</h3>
+								<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-700">
+									<div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+									<span class="text-[10px] font-medium text-slate-300">Online</span>
+								</div>
+							</div>
+							<p class="text-sm text-slate-400 leading-relaxed mb-6 flex-grow">
+								A personalized energy-tracking mobile app designed to log daily activities and prevent burnout, utilizing Tailscale for a zero-friction, secure self-hosted deployment ecosystem.
+							</p>
+							<div class="flex flex-wrap gap-2 mb-8">
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">Mobile Dev</span>
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">Tailscale</span>
+								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-300 bg-black/40 border border-slate-800 rounded-md">Self-Hosted</span>
+							</div>
+							<a href="#" class="mt-auto w-full py-3 rounded-lg bg-black/50 hover:bg-slate-800 transition-colors text-center text-sm font-medium text-slate-200 border border-slate-800 flex justify-center items-center gap-2">
+								View Details <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</section>
+
+			<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-12 animate-fade-in" style="animation-delay: 0.2s;">
+				
+				<!-- Left Column: CV / Portfolio -->
+				<div class="lg:col-span-7 space-y-16">
+					
+					<!-- Experience Timeline -->
+					<section>
+						<h2 class="text-2xl font-semibold mb-8 flex items-center gap-3 border-b border-slate-800 pb-4">
+							<svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+							Professional Experience
+						</h2>
+						
+						<div class="space-y-10 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
+							
+							<!-- Experience 1 -->
+							<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+								<div class="flex items-center justify-center w-10 h-10 rounded-full border border-slate-700 bg-slate-900 text-slate-500 group-[.is-active]:text-blue-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+									<svg class="w-4 h-4 fill-current" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 14A6 6 0 1 1 8 2a6 6 0 0 1 0 12z"/></svg>
+								</div>
+								<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-6 rounded-xl">
+									<div class="flex flex-col mb-2">
+										<span class="font-bold text-slate-100 text-lg">Founder & PLG Strategist</span>
+										<span class="text-blue-400 font-medium">HoneOSS</span>
+										<time class="font-mono text-sm text-slate-500 mt-1">Jan 2026 – Present</time>
+									</div>
+									<p class="text-slate-300 text-sm leading-relaxed">
+										Operating with a 0→1 mentality to help technical and open-source platforms improve monetization, optimize conversions, and scale toward $10M+ ARR.
+									</p>
+								</div>
+							</div>
+							
+							<!-- Experience 2 -->
+							<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+								<div class="flex items-center justify-center w-10 h-10 rounded-full border border-slate-700 bg-slate-900 text-slate-500 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+									<svg class="w-4 h-4 fill-current" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 14A6 6 0 1 1 8 2a6 6 0 0 1 0 12z"/></svg>
+								</div>
+								<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-6 rounded-xl opacity-80 hover:opacity-100 transition-opacity">
+									<div class="flex flex-col mb-2">
+										<span class="font-bold text-slate-100 text-lg">Technical Marketing & PLG</span>
+										<span class="text-blue-400 font-medium">VictoriaMetrics</span>
+										<time class="font-mono text-sm text-slate-500 mt-1">Nov 2024 – Feb 2026</time>
+									</div>
+									<p class="text-slate-300 text-sm leading-relaxed">
+										Drove developer-focused monetization pipelines, trial-to-paid conversion optimizations, and self-serve onboarding metrics for high-performance TSDB infrastructure.
+									</p>
+								</div>
+							</div>
+
+						</div>
+					</section>
+
+					<!-- Skills Matrix -->
+					<section>
+						<h2 class="text-2xl font-semibold mb-6 flex items-center gap-3 border-b border-slate-800 pb-4">
+							<svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+							Skills Matrix
+						</h2>
+						
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<div class="glass-panel p-5 rounded-xl">
+								<h3 class="text-slate-100 font-medium mb-3 border-b border-slate-700/50 pb-2">GTM & Strategy</h3>
+								<div class="flex flex-wrap gap-2">
+									<span class="px-3 py-1 bg-slate-800/80 border border-slate-700 text-slate-300 text-xs rounded-md font-mono">PLG Models</span>
+									<span class="px-3 py-1 bg-slate-800/80 border border-slate-700 text-slate-300 text-xs rounded-md font-mono">Monetization</span>
+									<span class="px-3 py-1 bg-slate-800/80 border border-slate-700 text-slate-300 text-xs rounded-md font-mono">DevRel</span>
+									<span class="px-3 py-1 bg-slate-800/80 border border-slate-700 text-slate-300 text-xs rounded-md font-mono">Cohort Analysis</span>
+								</div>
+							</div>
+							<div class="glass-panel p-5 rounded-xl">
+								<h3 class="text-slate-100 font-medium mb-3 border-b border-slate-700/50 pb-2">Technical Core</h3>
+								<div class="flex flex-wrap gap-2">
+									<span class="px-3 py-1 bg-blue-900/20 border border-blue-800 text-blue-300 text-xs rounded-md font-mono">Astro / React</span>
+									<span class="px-3 py-1 bg-blue-900/20 border border-blue-800 text-blue-300 text-xs rounded-md font-mono">AI Ops / LLMs</span>
+									<span class="px-3 py-1 bg-blue-900/20 border border-blue-800 text-blue-300 text-xs rounded-md font-mono">Docker / Caddy</span>
+									<span class="px-3 py-1 bg-blue-900/20 border border-blue-800 text-blue-300 text-xs rounded-md font-mono">TSDBs</span>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- GitHub Section -->
+					<section>
+						<h2 class="text-2xl font-semibold mb-6 flex items-center gap-3 border-b border-slate-800 pb-4">
+							<svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+							Open Source & Development
+						</h2>
+						<GitHubProfile />
+					</section>
+
+				</div>
+
+				<!-- Right Column: Social Feeds -->
+				<div class="lg:col-span-5 space-y-10">
+					
+					<section>
+						<h2 class="text-2xl font-semibold mb-6 flex items-center gap-3 border-b border-slate-800 pb-4">
+							<svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+							Activity Stream
+						</h2>
+						
+						<!-- Bluesky Integration -->
+						<BlueskyFeed handle="cramd.bsky.social" limit={3} />
+						
+						<div class="my-8"></div>
+						
+						<!-- LinkedIn Embed -->
+						<!-- Replace the src with your actual LinkedIn post embed URL -->
+						<LinkedInEmbed 
+							src="https://www.linkedin.com/embed/feed/update/urn:li:share:7244439169622941697" 
+							title="Marc Sherwood LinkedIn Post" 
+							height="400" 
+						/>
+
+					</section>
+
+				</div>
+			</div>
+</BaseLayout>

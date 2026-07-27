@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE_DESCRIPTION } from '../../consts';
+
+const garageEntries = (await getCollection('garage')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout title="The Bike Garage | Marc Sherwood" description={SITE_DESCRIPTION}>
+	<section class="mb-12 animate-fade-in">
+		<h1 class="text-4xl font-bold mb-4 tracking-tight">The Bike Garage</h1>
+		<p class="text-slate-400 text-lg max-w-2xl">Service manuals, ride logs, and maintenance tracking for my motorcycles.</p>
+	</section>
+
+	<section class="animate-fade-in" style="animation-delay: 0.1s;">
+		<div class="space-y-6">
+			{
+				garageEntries.map((entry) => (
+					<a href={`/garage/${entry.id}/`} class="block glass-panel p-6 rounded-xl hover:border-orange-500/50 transition-colors group">
+						<div class="flex justify-between items-start mb-2">
+							<div>
+								<h2 class="text-2xl font-bold text-slate-100 group-hover:text-orange-400 transition-colors">{entry.data.title}</h2>
+								<span class="text-sm font-mono text-orange-400">{entry.data.bikeModel}</span>
+							</div>
+							<div class="flex flex-col items-end">
+								<span class="px-2.5 py-1 text-xs font-medium bg-slate-800 border border-slate-700 rounded-md text-slate-300 mb-2">{entry.data.type}</span>
+								<span class="text-xs font-mono text-slate-500"><FormattedDate date={entry.data.date} /></span>
+							</div>
+						</div>
+						{entry.data.description && (
+							<p class="text-slate-400 mt-2">{entry.data.description}</p>
+						)}
+					</a>
+				))
+			}
+
+			{garageEntries.length === 0 && (
+				<div class="p-8 text-center glass-panel rounded-xl">
+					<p class="text-slate-400">The garage is currently empty. Time to go for a ride!</p>
+				</div>
+			)}
+		</div>
+	</section>
+</BaseLayout>

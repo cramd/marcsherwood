@@ -1,0 +1,131 @@
+---
+// src/components/GitHubProfile.astro
+interface Props {
+  compact?: boolean;
+}
+
+interface Repo {
+  id: number;
+  name: string;
+  description: string;
+  html_url: string;
+  language: string;
+  stargazers_count: number;
+  forks_count: number;
+}
+
+interface GitHubUser {
+  login: string;
+  name: string;
+  avatar_url: string;
+  bio: string;
+  public_repos: number;
+  followers: number;
+  html_url: string;
+}
+
+// Language colors map for common languages
+const languageColors: Record<string, string> = {
+  JavaScript: '#f1e05a',
+  TypeScript: '#3178c6',
+  Python: '#3572A5',
+  HTML: '#e34c26',
+  CSS: '#563d7c',
+  Astro: '#ff5a03',
+  Shell: '#89e051',
+  Vue: '#41b883',
+  React: '#61dafb',
+  Go: '#00ADD8'
+};
+
+const getLanguageColor = (lang: string) => languageColors[lang] || '#8b949e';
+
+// Fetch data at build time
+let user: GitHubUser | null = null;
+let repos: Repo[] = [];
+let fetchError = false;
+
+try {
+  // Use a generic user-agent as required by GitHub API
+  const headers = { 'User-Agent': 'Astro-Portfolio-Builder' };
+  
+  const userResponse = await fetch('https://api.github.com/users/cramd', { headers });
+  if (userResponse.ok) {
+    user = await userResponse.json();
+  }
+
+  // Fetch 6 most recently updated repos
+  const reposResponse = await fetch('https://api.github.com/users/cramd/repos?sort=updated&per_page=6', { headers });
+  if (reposResponse.ok) {
+    repos = await reposResponse.json();
+    // Filter out forks if desired, or keep them. Let's keep all recent activity.
+  }
+} catch (e) {
+  console.error("Failed to fetch GitHub data:", e);
+  fetchError = true;
+}
+
+const { compact = false } = Astro.props;
+---
+
+{fetchError && (
+  <div class="glass-panel p-6 rounded-xl border border-red-500/30 bg-red-500/10">
+    <p class="text-red-400">Failed to load GitHub profile data. Please try again later.</p>
+  </div>
+)}
+
+{!fetchError && user && (
+  <div class="animate-fade-in" style="animation-delay: 0.2s;">
+    {/* Header Profile Section */}
+    <div class="flex items-center gap-4 mb-8">
+      <img src={user.avatar_url} alt={`${user.login} avatar`} class="w-16 h-16 rounded-full border-2 border-slate-700" loading="lazy" />
+      <div>
+        <h2 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
+          {user.name || user.login}
+          <a href={user.html_url} target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white transition-colors">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </h2>
+        <p class="text-slate-400">{user.bio}</p>
+        <div class="flex gap-4 mt-2 text-sm text-slate-500">
+          <span class="flex items-center gap-1"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> {user.followers} followers</span>
+          <span class="flex items-center gap-1"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg> {user.public_repos} repos</span>
+        </div>
+      </div>
+    </div>
+
+    {!compact && (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {repos.map(repo => (
+          <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="group glass-panel p-5 rounded-xl flex flex-col hover:border-slate-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-800/50 transition-all duration-300">
+            <div class="flex items-start justify-between mb-2">
+              <h3 class="text-lg font-bold text-slate-200 group-hover:text-cyan-400 transition-colors flex items-center gap-2 truncate">
+                <svg class="w-5 h-5 text-slate-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                {repo.name}
+              </h3>
+            </div>
+            <p class="text-sm text-slate-400 flex-grow mb-4 line-clamp-2">
+              {repo.description || "No description provided."}
+            </p>
+            <div class="flex items-center gap-4 text-xs text-slate-500">
+              {repo.language && (
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full" style={`background-color: ${getLanguageColor(repo.language)}`}></span>
+                  {repo.language}
+                </span>
+              )}
+              <span class="flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                {repo.stargazers_count}
+              </span>
+              <span class="flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"></path><path d="M12 12v3"></path></svg>
+                {repo.forks_count}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+)}

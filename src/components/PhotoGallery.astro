@@ -1,0 +1,40 @@
+---
+// src/components/PhotoGallery.astro
+// Expects an array of image objects: { src: string, w: number, h: number, alt: string }
+interface Props {
+  images: { src: string; w: number; h: number; alt: string }[];
+  galleryId?: string;
+}
+
+const { images, galleryId = "my-gallery" } = Astro.props;
+---
+
+<div class="pswp-gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id={galleryId}>
+  {images.map((img) => (
+    <a 
+      href={img.src} 
+      data-pswp-width={img.w} 
+      data-pswp-height={img.h} 
+      target="_blank"
+      class="block overflow-hidden rounded-xl border border-slate-800 hover:border-slate-600 transition-colors bg-slate-800"
+    >
+      <img 
+        src={img.src} 
+        alt={img.alt} 
+        class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+        loading="lazy"
+      />
+    </a>
+  ))}
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.3/photoswipe.min.css">
+<script type="module">
+  import PhotoSwipeLightbox from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.3/photoswipe-lightbox.esm.min.js';
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '.pswp-gallery',
+    children: 'a',
+    pswpModule: () => import('https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.3/photoswipe.esm.min.js')
+  });
+  lightbox.init();
+</script>

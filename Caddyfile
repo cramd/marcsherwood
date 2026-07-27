@@ -1,0 +1,20 @@
+# Caddyfile for marcsherwood.com
+# Replace marcsherwood.com with your actual domain or IP if testing
+marcsherwood.com {
+    # Assuming Astro is built as a static site and served from /var/www/marcsherwood/dist
+    # If using SSR, use reverse_proxy localhost:4321 instead
+    root * /var/www/marcsherwood/dist
+    file_server
+    
+    encode gzip zstd
+    
+    # Handle routing for Astro static build
+    try_files {path} {path}/index.html /404.html
+
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000;"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+    }
+}

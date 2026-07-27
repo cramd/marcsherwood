@@ -1,0 +1,98 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header class="site-header">
+	<nav class="header-nav">
+		<h2><a href="/" class="logo-link">{SITE_TITLE}</a></h2>
+		<div class="internal-links">
+			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/cv">CV</HeaderLink>
+			<HeaderLink href="/hobbies">Hobbies</HeaderLink>
+			<HeaderLink href="/garage">Garage</HeaderLink>
+			<HeaderLink href="/photography">Photography</HeaderLink>
+			<HeaderLink href="/blog">Blog</HeaderLink>
+		</div>
+		<div class="social-links">
+			<a href="https://linkedin.com/in/marcsherwood" target="_blank" aria-label="LinkedIn">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+			</a>
+			<a href="https://github.com/marcsherwood" target="_blank" aria-label="GitHub">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+			</a>
+		</div>
+	</nav>
+</header>
+<style>
+	.site-header {
+		margin: 0;
+		padding: 0;
+		background-color: var(--bg-color) !important;
+		background: rgba(11, 14, 20, 0.85) !important; /* Explicitly dark background */
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-bottom: 1px solid var(--border-color);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+	.header-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1rem 2rem;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+	h2 {
+		margin: 0;
+		font-size: 1.25rem;
+		font-weight: 600;
+	}
+	h2 a {
+		color: var(--text-primary);
+	}
+	h2 a:hover {
+		color: var(--accent-color);
+	}
+	.internal-links {
+		display: flex;
+		gap: 1.5rem;
+		align-items: center;
+	}
+	.internal-links :global(a) {
+		color: var(--text-secondary);
+		font-weight: 500;
+		font-size: 0.95rem;
+		padding: 0.5rem 0;
+		text-decoration: none;
+	}
+	.internal-links :global(a:hover),
+	.internal-links :global(a.active) {
+		color: var(--text-primary);
+	}
+	.social-links {
+		display: flex;
+		gap: 1.25rem;
+		align-items: center;
+	}
+	.social-links a {
+		color: var(--text-secondary);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: color 0.2s ease;
+	}
+	.social-links a:hover {
+		color: var(--text-primary);
+	}
+	@media (max-width: 720px) {
+		.social-links {
+			display: none;
+		}
+		.internal-links {
+			gap: 1rem;
+		}
+	}
+</style>

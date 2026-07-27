@@ -1,0 +1,84 @@
+---
+// src/components/BlueskyFeed.astro
+interface Props {
+  handle: string;
+  limit?: number;
+}
+
+const { handle, limit = 3 } = Astro.props;
+
+let posts = [];
+let error = null;
+
+try {
+  // Use the public API which doesn't require authentication for public profiles
+  const response = await fetch(
+    `https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=${handle}&limit=${limit}`
+  );
+  
+  if (!response.ok) {
+    throw new Error(`API returned ${response.status}`);
+  }
+  
+  const data = await response.json();
+  // Map out the nested data structure from AT Protocol
+  posts = data.feed.map((item: any) => {
+    const post = item.post;
+    return {
+      id: post.uri,
+      text: post.record.text,
+      createdAt: new Date(post.indexedAt),
+      authorName: post.author.displayName || post.author.handle,
+      authorHandle: post.author.handle,
+      url: `https://bsky.app/profile/${post.author.handle}/post/${post.uri.split('/').pop()}`,
+    };
+  });
+} catch (err) {
+  console.error("Failed to fetch Bluesky feed:", err);
+  error = "Failed to load posts.";
+}
+
+// Helper to format date
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+};
+---
+
+<div class="flex flex-col gap-4">
+  <div class="flex items-center gap-2 mb-2">
+    <svg class="w-5 h-5 text-blue-400" viewBox="0 0 320 286" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M69.3642 19.1462C122.341 54.0773 152.029 101.442 160 119.539C167.971 101.442 197.659 54.0773 250.636 19.1462C278.435 0.812423 320 -15.4295 320 28.5029C320 44.9722 309.289 122.957 299.712 143.19C281.346 181.986 211.383 194.577 167.873 189.97C224.225 197.904 266.398 221.785 259.049 261.218C252.128 298.358 191.077 281.714 160 252.793C128.923 281.714 67.8719 298.358 60.9507 261.218C53.6021 221.785 95.7753 197.904 152.127 189.97C108.617 194.577 38.6539 181.986 20.288 143.19C10.7107 122.957 0 44.9722 0 28.5029C0 -15.4295 41.5649 0.812423 69.3642 19.1462Z" fill="currentColor"/>
+    </svg>
+    <h3 class="text-lg font-semibold text-slate-200">Latest from Bluesky</h3>
+  </div>
+
+  {error ? (
+    <div class="p-4 text-sm text-red-400 bg-red-900/20 border border-red-500/20 rounded-lg">
+      {error}
+    </div>
+  ) : posts.length === 0 ? (
+    <div class="p-4 text-sm text-slate-400 glass-panel rounded-lg">
+      No recent posts found.
+    </div>
+  ) : (
+    <div class="space-y-4">
+      {posts.map((post) => (
+        <a 
+          href={post.url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="block p-5 glass-panel rounded-xl hover:border-blue-500/30 transition-all duration-200 group"
+        >
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <span class="font-medium text-slate-200 group-hover:text-blue-400 transition-colors">{post.authorName}</span>
+              <span class="text-xs text-slate-500 ml-2">@{post.authorHandle}</span>
+            </div>
+            <time class="text-xs font-mono text-slate-400">{formatDate(post.createdAt)}</time>
+          </div>
+          <p class="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">{post.text}</p>
+        </a>
+      ))}
+    </div>
+  )}
+</div>
