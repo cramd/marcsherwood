@@ -4,9 +4,14 @@ marcsherwood.com {
     # Assuming Astro is built as a static site and served from /var/www/marcsherwood/dist
     # If using SSR, use reverse_proxy localhost:4321 instead
     root * /var/www/marcsherwood/dist
-    file_server
-    
     encode gzip zstd
+
+    @staticXml path *.xml
+    handle @staticXml {
+        file_server
+    }
+
+    file_server
     
     # Handle routing for Astro static build
     try_files {path} {path}/index.html /404.html
@@ -16,5 +21,24 @@ marcsherwood.com {
         Strict-Transport-Security "max-age=31536000;"
         X-Content-Type-Options "nosniff"
         X-Frame-Options "DENY"
+    }
+}
+
+sebring.marcsherwood.com {
+    root * /var/www/sebring.marcsherwood.com
+    encode gzip zstd
+
+    @staticXml path *.xml
+    handle @staticXml {
+        file_server
+    }
+
+    file_server
+    try_files {path} {path}/index.html /404.html
+
+    header {
+        Strict-Transport-Security "max-age=31536000;"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
     }
 }

@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+	ogImage?: string;
+	mainClass?: string;
+}
+
+const {
+	title,
+	description,
+	ogImage = '/og-sebring.jpg',
+	mainClass = 'flex-grow',
+} = Astro.props;
+
+const fullTitle = title === 'Sebring 350' ? title : `${title} | Sebring 350`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={Astro.url.href} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url.href} />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(ogImage, Astro.site)} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={fullTitle} />
+		<meta name="twitter:description" content={description} />
+		<slot name="head" />
+	</head>
+	<body class="min-h-screen flex flex-col">
+		<slot name="header" />
+		<main class={mainClass}>
+			<slot />
+		</main>
+		<slot name="footer" />
+	</body>
+</html>

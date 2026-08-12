@@ -1,0 +1,66 @@
+---
+import BeforeAfterSlider from './BeforeAfterSlider';
+import { PROJECT_STARTED, PROJECT_STATUS, SITE_DESCRIPTION, BRAND_NAME } from '../consts';
+
+const beforeImage = '/images/sebring-today.png';
+const afterImage = '/images/sebring-restored.jpg';
+---
+
+<section class="relative overflow-hidden">
+	<div
+		class="absolute inset-0 bg-gradient-to-br from-[var(--metal-dark)] via-[var(--charcoal)] to-[#3d1519]"
+		aria-hidden="true"
+	>
+		<div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);"></div>
+	</div>
+
+	<div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
+		<div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+			<div class="animate-hero">
+				<p class="font-mono text-xs uppercase tracking-[0.3em] text-red-300 mb-4">{BRAND_NAME}</p>
+				<h1 class="font-display text-[clamp(3.5rem,12vw,7rem)] leading-[0.85] tracking-wide text-white mb-2">
+					SEBRING
+				</h1>
+				<p class="font-display text-3xl sm:text-4xl text-[var(--ducati-red)] tracking-wider mb-6">1965 · 350</p>
+				<p class="text-lg text-stone-300 max-w-xl leading-relaxed mb-8">
+					{SITE_DESCRIPTION}
+				</p>
+				<div class="flex flex-wrap gap-4 items-center">
+					<a
+						href="/updates"
+						class="inline-flex items-center px-6 py-3 bg-[var(--ducati-red)] text-white font-semibold rounded hover:bg-red-700 transition-colors"
+					>
+						Follow the build
+					</a>
+					<a
+						href="/inventory"
+						class="inline-flex items-center px-6 py-3 border border-white/30 text-white font-semibold rounded hover:bg-white/10 transition-colors"
+					>
+						Browse inventory
+					</a>
+					<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-900/50 text-red-200 border border-red-800/50">
+						{PROJECT_STATUS}
+					</span>
+				</div>
+				<p class="mt-8 font-mono text-xs text-stone-500">Started {PROJECT_STARTED}</p>
+			</div>
+
+			<div class="animate-hero lg:animate-none" style="animation-delay: 0.12s">
+				<p class="font-mono text-[10px] uppercase tracking-[0.25em] text-red-200/80 mb-3 text-center lg:text-left">
+					Where we are · where we're headed
+				</p>
+				<BeforeAfterSlider
+					client:visible
+					beforeSrc={beforeImage}
+					afterSrc={afterImage}
+					beforeAlt="1965 Ducati Sebring frame in the garage today — red frame, seat, rear wheel"
+					afterAlt="Fully restored 1965 Ducati Sebring 350 — the finish line we're working toward"
+					beforeLabel="Today"
+					afterLabel="When we're done"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="relative z-10 h-16 bg-gradient-to-b from-transparent to-[var(--workshop-cream)]" aria-hidden="true"></div>
+</section>

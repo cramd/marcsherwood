@@ -1,0 +1,36 @@
+---
+description: Deploy sites by SSH/rsync to the Caddy server — not Firebase Hosting or other hosts
+alwaysApply: true
+---
+
+# Deployment
+
+All marcsherwood.com sites deploy the same way:
+
+1. **Build** static Astro output (`npm run build` → `dist/`)
+2. **rsync over SSH** to the Caddy server at `192.168.0.62`
+3. **Caddy** serves files from `/var/www/<hostname>/`
+
+There is no Firebase Hosting, Vercel, or Netlify deploy path for these sites. Firebase is used only as a backend (Firestore, Auth, Storage, Functions) where configured — not for serving the Astro app.
+
+## Hosts
+
+| Site | rsync target |
+|------|----------------|
+| marcsherwood.com | `root@192.168.0.62:/var/www/marcsherwood.com/` |
+| sebring.marcsherwood.com | `root@192.168.0.62:/var/www/sebring.marcsherwood.com/` |
+
+Caddy config lives in `Caddyfile` / `Caddyfile.remote` at repo root.
+
+## Requirements
+
+- Must be on the home LAN or VPN to reach `192.168.0.62`
+- After rsync, reload Caddy if the site block is new
+
+## Sebring app
+
+```bash
+cd apps/sebring
+npm run deploy          # build + rsync
+npm run deploy:rsync    # rsync only
+```

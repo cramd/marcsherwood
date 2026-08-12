@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import LiveInventory from '../components/LiveInventory';
+import { SITE_DESCRIPTION } from '../consts';
+---
+
+<BaseLayout title="Sebring 350" description={SITE_DESCRIPTION} mainClass="flex-grow">
+	<Header slot="header" />
+	<Hero />
+	<Footer slot="footer" />
+
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 animate-fade-up">
+		<div class="ducati-border pl-4 mb-8">
+			<h2 class="text-2xl font-bold">Project health</h2>
+			<p class="text-stone-600 max-w-3xl mt-2">
+				A bird's-eye view of the restoration — how much is ready for assembly, what's still in the barrel, and what's on order from Bevel Heaven.
+			</p>
+		</div>
+		<LiveInventory client:load mode="charts" />
+	</div>
+
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 pb-20 animate-fade-up" style="animation-delay: 0.15s">
+		<div class="ducati-border pl-4 mb-8">
+			<h2 class="text-2xl font-bold">Latest from the garage</h2>
+			<p class="text-stone-600 mt-2">Build log, photos, and video links as we go.</p>
+		</div>
+		<a href="/updates" class="inline-flex items-center text-[var(--ducati-red)] font-semibold hover:underline">
+			View all updates →
+		</a>
+	</div>
+</BaseLayout>

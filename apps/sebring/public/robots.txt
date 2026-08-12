@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sebring.marcsherwood.com/sitemap-index.xml
