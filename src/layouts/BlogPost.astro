@@ -2,21 +2,52 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
+import ProfessionalCTA from '../components/ProfessionalCTA.astro';
 import BaseLayout from './BaseLayout.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type BlogData = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+interface Props extends BlogData {
+	slug: string;
+}
+
+const { title, description, pubDate, updatedDate, heroImage, slug } = Astro.props;
+
+const pageUrl = new URL(`/blog/${slug}/`, Astro.site).href;
+const imageUrl = heroImage
+	? new URL(heroImage.src, Astro.site).href
+	: new URL('/favicon.svg', Astro.site).href;
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: title,
+	description,
+	datePublished: pubDate.toISOString(),
+	...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
+	author: {
+		'@type': 'Person',
+		name: 'Marc Sherwood',
+		url: Astro.site?.href,
+	},
+	url: pageUrl,
+	image: imageUrl,
+	mainEntityOfPage: {
+		'@type': 'WebPage',
+		'@id': pageUrl,
+	},
+};
 ---
 
-<BaseLayout title={title} description={description} image={heroImage}>
+<BaseLayout title={title} description={description} image={heroImage} ogType="article">
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	<article>
-		<div class="mb-10 w-full overflow-hidden rounded-xl shadow-lg shadow-black/20">
+		<div class="mb-10 w-full overflow-hidden rounded-xl shadow-md border border-slate-200">
 			{heroImage && <Image width={1024} height={571} src={heroImage} alt="" class="w-full h-auto object-cover" />}
 		</div>
 		<div class="max-w-3xl mx-auto">
-			<div class="text-center mb-10 pb-10 border-b border-slate-800">
-				<div class="font-mono text-sm text-blue-400 mb-4">
+			<div class="text-center mb-10 pb-10 border-b border-slate-200">
+				<div class="font-mono text-sm text-blue-600 mb-4">
 					<FormattedDate date={pubDate} />
 					{
 						updatedDate && (
@@ -26,12 +57,14 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						)
 					}
 				</div>
-				<h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-100 leading-tight mb-4">{title}</h1>
+				<h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight mb-4">{title}</h1>
 			</div>
 
 			<div class="markdown-prose">
 				<slot />
 			</div>
+
+			<ProfessionalCTA />
 		</div>
 	</article>
 </BaseLayout>

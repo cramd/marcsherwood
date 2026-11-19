@@ -1,0 +1,334 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import mooseImageEn from '../assets/our-moose.jpg';
+import mooseImageFr from '../assets/our-moose-fr.jpg';
+import { COPY } from '../data/canada-fight';
+
+const defaultLang = 'fr';
+const defaultMode = 'youll-be-sorry';
+const pageTitle = COPY[defaultLang].pageTitle;
+const pageDescription = COPY[defaultLang].pageDescription;
+const initialCopy = COPY[defaultLang].modes[defaultMode];
+---
+
+<!doctype html>
+<html lang="fr-CA">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} image={mooseImageFr} />
+		<meta name="robots" content="index, follow" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body data-lang="fr" data-mode="youll-be-sorry">
+		<div class="page">
+			<header class="hero">
+				<p class="kicker" data-i18n="kicker">{COPY.fr.kicker}</p>
+				<h1 class="title" data-i18n="headline">{initialCopy.headline}</h1>
+				<p class="subhead" data-i18n="subhead">{initialCopy.subhead}</p>
+			</header>
+
+			<div class="controls">
+				<div class="control-group" role="group" aria-label="Tone mode">
+					<button type="button" class="control-btn" data-mode="sorry" aria-pressed="false">
+						<span data-i18n="modeSorry">{COPY.fr.modeSorry}</span>
+					</button>
+					<button type="button" class="control-btn is-active" data-mode="youll-be-sorry" aria-pressed="true">
+						<span data-i18n="modeThreat">{COPY.fr.modeThreat}</span>
+					</button>
+				</div>
+				<div class="control-group" role="group" aria-label="Language">
+					<button type="button" class="control-btn control-btn-lang is-active" data-lang="fr" aria-pressed="true">
+						QC
+					</button>
+					<button type="button" class="control-btn control-btn-lang" data-lang="en" aria-pressed="false">
+						EN
+					</button>
+				</div>
+			</div>
+
+			<figure class="moose-frame">
+				<Image
+					src={mooseImageEn}
+					alt="A moose in an RCMP-style hat blocking a border barrier. Sign reads the strait is closed due to unfair tariffs."
+					class="moose-img moose-img-en"
+					id="moose-img-en"
+					width={1024}
+					height={819}
+					loading="eager"
+				/>
+				<Image
+					src={mooseImageFr}
+					alt="Un orignal avec un chapeau de la GRC bloque une barrière frontalière. Pancarte : le détroit de notre orignal est fermé — entrée interdite, tarifs injustes."
+					class="moose-img moose-img-fr"
+					id="moose-img-fr"
+					width={1024}
+					height={819}
+					loading="eager"
+				/>
+			</figure>
+
+			<section class="content" aria-live="polite">
+				<div class="content-body" id="content-body">
+					{
+						initialCopy.paragraphs.map((p) => (
+							<p class="content-para">{p}</p>
+						))
+					}
+				</div>
+				<p class="content-cta" data-i18n="cta">{initialCopy.cta}</p>
+			</section>
+
+			<footer class="footer">
+				<p data-i18n="footer">{COPY.fr.footer}</p>
+			</footer>
+		</div>
+
+		<script define:vars={{ copy: COPY }}>
+			let currentMode = 'youll-be-sorry';
+			let currentLang = 'fr';
+
+			const els = {
+				kicker: document.querySelector('[data-i18n="kicker"]'),
+				headline: document.querySelector('[data-i18n="headline"]'),
+				subhead: document.querySelector('[data-i18n="subhead"]'),
+				cta: document.querySelector('[data-i18n="cta"]'),
+				footer: document.querySelector('[data-i18n="footer"]'),
+				modeSorry: document.querySelector('[data-i18n="modeSorry"]'),
+				modeThreat: document.querySelector('[data-i18n="modeThreat"]'),
+				contentBody: document.getElementById('content-body'),
+			};
+
+			function render() {
+				const page = copy[currentLang];
+				const mode = page.modes[currentMode];
+
+				document.documentElement.lang = currentLang === 'fr' ? 'fr-CA' : 'en';
+				document.title = page.pageTitle;
+				document.body.dataset.mode = currentMode;
+				document.body.dataset.lang = currentLang;
+
+				if (els.kicker) els.kicker.textContent = page.kicker;
+				if (els.headline) els.headline.textContent = mode.headline;
+				if (els.subhead) els.subhead.textContent = mode.subhead;
+				if (els.cta) els.cta.textContent = mode.cta;
+				if (els.footer) els.footer.textContent = page.footer;
+				if (els.modeSorry) els.modeSorry.textContent = page.modeSorry;
+				if (els.modeThreat) els.modeThreat.textContent = page.modeThreat;
+
+				if (els.contentBody) {
+					els.contentBody.innerHTML = mode.paragraphs
+						.map((p) => `<p class="content-para">${p}</p>`)
+						.join('');
+				}
+			}
+
+			document.querySelectorAll('[data-mode]').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					currentMode = btn.dataset.mode;
+					document.querySelectorAll('[data-mode]').forEach((b) => {
+						const active = b.dataset.mode === currentMode;
+						b.classList.toggle('is-active', active);
+						b.setAttribute('aria-pressed', String(active));
+					});
+					render();
+				});
+			});
+
+			document.querySelectorAll('[data-lang]').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					currentLang = btn.dataset.lang;
+					document.querySelectorAll('[data-lang]').forEach((b) => {
+						const active = b.dataset.lang === currentLang;
+						b.classList.toggle('is-active', active);
+						b.setAttribute('aria-pressed', String(active));
+					});
+					render();
+				});
+			});
+
+			render();
+		</script>
+
+		<style is:global>
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				background: #0f1419;
+				color: #f5f5f5;
+				font-family: 'Inter', sans-serif;
+				min-height: 100vh;
+			}
+
+			.page {
+				max-width: 52rem;
+				margin: 0 auto;
+				padding: 2rem 1.25rem 3rem;
+			}
+
+			.kicker {
+				font-family: 'Oswald', sans-serif;
+				text-transform: uppercase;
+				letter-spacing: 0.15em;
+				color: #ef4444;
+				font-size: 0.8rem;
+				margin: 0 0 0.75rem;
+				text-align: center;
+			}
+
+			.title {
+				font-family: 'Oswald', sans-serif;
+				font-size: clamp(2rem, 6vw, 3.25rem);
+				text-transform: uppercase;
+				text-align: center;
+				margin: 0 0 1rem;
+				line-height: 1.1;
+				transition: color 0.3s;
+			}
+
+			body[data-mode='sorry'] .title {
+				color: #fff;
+			}
+
+			body[data-mode='youll-be-sorry'] .title {
+				color: #ef4444;
+			}
+
+			.subhead {
+				text-align: center;
+				color: #a3a3a3;
+				font-size: 1.05rem;
+				line-height: 1.6;
+				max-width: 36rem;
+				margin: 0 auto 2rem;
+			}
+
+			.controls {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 1rem;
+				margin-bottom: 2rem;
+			}
+
+			.control-group {
+				display: flex;
+				border: 2px solid #262626;
+				border-radius: 999px;
+				overflow: hidden;
+			}
+
+			.control-btn {
+				font-family: 'Oswald', sans-serif;
+				font-size: 0.75rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				padding: 0.6rem 1.1rem;
+				border: none;
+				background: #171717;
+				color: #737373;
+				cursor: pointer;
+				transition: background 0.2s, color 0.2s;
+			}
+
+			.control-btn:hover {
+				color: #fff;
+			}
+
+			.control-btn.is-active {
+				background: #ef4444;
+				color: #fff;
+			}
+
+			body[data-mode='sorry'] .control-btn[data-mode='sorry'].is-active {
+				background: #dc2626;
+			}
+
+			body[data-mode='youll-be-sorry'] .control-btn[data-mode='youll-be-sorry'].is-active {
+				background: #ef4444;
+			}
+
+			.control-btn-lang {
+				padding: 0.6rem 0.85rem;
+				min-width: 3rem;
+			}
+
+			.moose-frame {
+				position: relative;
+				margin: 0 0 2rem;
+				border-radius: 0.75rem;
+				overflow: hidden;
+				border: 3px solid #262626;
+				box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+			}
+
+			.moose-img {
+				display: block;
+				width: 100%;
+				height: auto;
+			}
+
+			body[data-lang='en'] .moose-img-fr {
+				display: none;
+			}
+
+			body[data-lang='fr'] .moose-img-en {
+				display: none;
+			}
+
+			.content {
+				background: #171717;
+				border: 1px solid #262626;
+				border-radius: 0.75rem;
+				padding: 1.5rem 1.75rem;
+			}
+
+			.content-para {
+				color: #d4d4d4;
+				line-height: 1.65;
+				margin: 0 0 1rem;
+			}
+
+			.content-para:last-child {
+				margin-bottom: 0;
+			}
+
+			.content-cta {
+				margin: 1.25rem 0 0;
+				padding-top: 1.25rem;
+				border-top: 1px solid #262626;
+				font-family: 'Oswald', sans-serif;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				font-size: 0.85rem;
+				color: #ef4444;
+				text-align: center;
+			}
+
+			body[data-mode='sorry'] .content-cta {
+				color: #f87171;
+			}
+
+			.footer {
+				margin-top: 2.5rem;
+				text-align: center;
+				font-size: 0.8rem;
+				color: #525252;
+			}
+
+			.footer p {
+				margin: 0;
+			}
+		</style>
+	</body>
+</html>

@@ -9,9 +9,18 @@ http://192.168.0.62 {
 }
 
 marc.honeos.ai {
-    reverse_proxy https://marcsherwood-portfolio.web.app {
-        header_up Host marcsherwood-portfolio.web.app
-        header_up X-Real-IP {remote_host}
+    encode gzip zstd
+
+    @static {
+        file
+        path *.css *.js *.svg *.png *.jpg *.jpeg *.webp *.woff2 *.gif
+    }
+    header @static Cache-Control "public, max-age=31536000, must-revalidate"
+
+    root * /var/www/marc.honeos.ai
+    route {
+        try_files {path} /index.html
+        file_server
     }
 }
 

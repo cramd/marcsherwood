@@ -1,0 +1,34 @@
+# Marc Sherwood — marcsherwood.com
+
+> Technical GTM lead, builder, and occasional blogger.
+
+## About
+
+Marc Sherwood bridges complex engineering systems and commercial growth. This site has two main paths: professional work (CV, projects) and personal writing (blog).
+
+## Key pages
+
+- Home: https://marcsherwood.com/
+- CV and projects: https://marcsherwood.com/cv
+- Blog index: https://marcsherwood.com/blog/
+- RSS feed: https://marcsherwood.com/rss.xml
+- Sitemap: https://marcsherwood.com/sitemap.xml
+
+## Blog posts
+
+- Three Wishes and a Prompt: The AI Peter Principle and the Limit of Human Creativity
+  https://marcsherwood.com/blog/genie-rub/
+  AI makes execution easy but thinking harder; the limit is human creativity and taste, not technical skill.
+
+- The Fatal Traps of Commercial Open-Source GTM Strategies
+  https://marcsherwood.com/blog/fatal-traps/
+  When Go-To-Market strategy misaligns with product strategy, commercial open-source companies fall into fatal traps.
+
+## Expertise
+
+GTM systems, DevTools, PLG, commercial open-source (COSS), revenue operations.
+
+## Contact
+
+- LinkedIn: https://linkedin.com/in/marcsherwood
+- GitHub: https://github.com/marcsherwood

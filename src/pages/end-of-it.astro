@@ -1,0 +1,1393 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import TimelineEventSources from '../components/TimelineEventSources.astro';
+import { Image } from 'astro:assets';
+import ogImage from '../assets/end-of-it-og.png';
+import mooseTeaser from '../assets/our-moose-fr.jpg';
+import {
+	getHighlightEvents,
+	getHighlightCount,
+	getTotalEventCount,
+	getYearSpan,
+	getTagCounts,
+	getEventsByDecade,
+	getMaxTagCount,
+	getMaxDecadeCount,
+	getGapForHighlightIndex,
+} from '../data/end-of-it-events';
+
+const pageTitle = 'This Should Have Been The End Of It | Marc Sherwood';
+const pageDescription =
+	"A timeline archive of every moment the world said surely he can't recover from this one.";
+const highlights = getHighlightEvents();
+const highlightCount = getHighlightCount();
+const totalEventCount = getTotalEventCount();
+const yearSpan = getYearSpan();
+const tagCounts = getTagCounts();
+const decadeCounts = getEventsByDecade();
+const maxTagCount = getMaxTagCount();
+const maxDecadeCount = getMaxDecadeCount();
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} image={ogImage} />
+		<meta name="robots" content="index, follow" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;600;800&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+		<div class="bg-grid" aria-hidden="true"></div>
+
+		<header class="hero">
+			<div class="hero-gradient" aria-hidden="true"></div>
+			<p class="hero-kicker">A historical archive</p>
+			<h1 class="hero-title">
+				This Should Have Been <br class="hero-br" />
+				<span class="hero-accent">The End Of It.</span>
+			</h1>
+			<p class="hero-sub">
+				{highlightCount} highlights — click the gaps between them to see what else he walked away from.
+				Starting way before the presidency.
+			</p>
+			<a href="#timeline-start" class="scroll-indicator">
+				<span class="scroll-label">Scroll</span>
+				<svg class="scroll-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+				</svg>
+			</a>
+		</header>
+
+		<section class="stats-strip" id="stats-strip" aria-label="Archive statistics">
+			<div class="stat">
+				<span class="stat-value" data-target={totalEventCount} data-suffix="">0</span>
+				<span class="stat-label">Moments Archived</span>
+				<span class="stat-sublabel">{highlightCount} highlights + {totalEventCount - highlightCount} in the gaps</span>
+			</div>
+			<div class="stat">
+				<span class="stat-value stat-value-text">{yearSpan.start}–{yearSpan.end}</span>
+				<span class="stat-label">Year Span</span>
+			</div>
+			<div class="stat">
+				<span class="stat-value" data-target={100} data-suffix="%">0</span>
+				<span class="stat-label">Still Standing</span>
+			</div>
+		</section>
+
+		<section class="viz-section" aria-label="Outcome breakdown">
+			<h2 class="viz-title">Outcome Tags</h2>
+			<div class="tag-chart">
+				{
+					tagCounts.map(({ tag, count }) => (
+						<div class="tag-row">
+							<span class="tag-label">{tag}</span>
+							<div class="tag-bar-track">
+								<div
+									class="tag-bar-fill"
+									style={`width: ${(count / maxTagCount) * 100}%`}
+									data-count={count}
+								>
+									<span class="tag-count">{count}</span>
+								</div>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="viz-section viz-section-compact" aria-label="Events by decade">
+			<h2 class="viz-title">Density by Decade</h2>
+			<div class="decade-chart">
+				{
+					decadeCounts.map(({ decade, label, count }) => (
+						<div class="decade-col">
+							<div class="decade-bar-track">
+								<div
+									class="decade-bar-fill"
+									style={`height: ${count > 0 ? (count / maxDecadeCount) * 100 : 0}%`}
+									data-count={count}
+								>
+									{count > 0 && <span class="decade-count">{count}</span>}
+								</div>
+							</div>
+							<span class="decade-label">{label}</span>
+							<span class="decade-full">{decade}</span>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<main id="timeline-start" class="main">
+			<div class="timeline-controls">
+				<button type="button" class="timeline-control-btn" id="btn-expand-all" aria-pressed="false">
+					Expand All Gaps
+				</button>
+				<span class="timeline-control-hint">+{totalEventCount - highlightCount} more scandals hiding between the highlights</span>
+			</div>
+
+			<div class="timeline-container">
+				{
+					highlights.map((event, index) => {
+						const isEven = index % 2 === 0;
+						const gap = getGapForHighlightIndex(index);
+						return (
+							<>
+								<div class={`timeline-row timeline-card${isEven ? ' timeline-row-even' : ' timeline-row-odd'}`}>
+									<div class="timeline-dot" aria-hidden="true"></div>
+									{isEven ? (
+										<>
+											<div class="timeline-side timeline-side-left">
+												<article class="event-card">
+													<div class="event-card-glow" aria-hidden="true"></div>
+													<time class="event-date" datetime={String(event.year)}>{event.date}</time>
+													<h3 class="event-title">{event.title}</h3>
+													<p class="event-desc">{event.description}</p>
+													<TimelineEventSources sources={event.sources} />
+													<span class="stamp">{event.tag}</span>
+												</article>
+											</div>
+											<div class="timeline-side timeline-side-right timeline-watermark-side">
+												<div class="watermark" aria-hidden="true">
+													<span>{event.year}</span>
+												</div>
+											</div>
+										</>
+									) : (
+										<>
+											<div class="timeline-side timeline-side-left timeline-watermark-side">
+												<div class="watermark" aria-hidden="true">
+													<span>{event.year}</span>
+												</div>
+											</div>
+											<div class="timeline-side timeline-side-right">
+												<article class="event-card">
+													<div class="event-card-glow" aria-hidden="true"></div>
+													<time class="event-date" datetime={String(event.year)}>{event.date}</time>
+													<h3 class="event-title">{event.title}</h3>
+													<p class="event-desc">{event.description}</p>
+													<TimelineEventSources sources={event.sources} />
+													<span class="stamp">{event.tag}</span>
+												</article>
+											</div>
+										</>
+									)}
+								</div>
+
+								{gap && (
+									<div class="gap-zone" data-gap-id={gap.id}>
+										<div class="gap-spine" aria-hidden="true"></div>
+										<button
+											type="button"
+											class="gap-expander"
+											aria-expanded="false"
+											aria-controls={`gap-panel-${gap.id}`}
+											data-gap-id={gap.id}
+										>
+											<span class="gap-collapsed-label">
+												+{gap.minorEvents.length} more between {gap.label}
+											</span>
+											<span class="gap-expanded-label">Collapse the dodge</span>
+										</button>
+										<div class="gap-panel" id={`gap-panel-${gap.id}`} hidden>
+											<div class="gap-panel-inner">
+												{gap.minorEvents.map((minorEvent, minorIndex) => (
+													<article
+														class="event-card event-card-minor timeline-card"
+														style={`--stagger: ${minorIndex}`}
+													>
+														<time class="event-date" datetime={String(minorEvent.year)}>
+															{minorEvent.date}
+														</time>
+														<h4 class="event-title">{minorEvent.title}</h4>
+														<p class="event-desc">{minorEvent.description}</p>
+														<TimelineEventSources sources={minorEvent.sources} compact />
+														<span class="stamp stamp-minor">{minorEvent.tag}</span>
+													</article>
+												))}
+											</div>
+										</div>
+									</div>
+								)}
+							</>
+						);
+					})
+				}
+			</div>
+
+			<div class="and-yet">
+				<p>And Yet...</p>
+			</div>
+
+			<section class="canada-teaser timeline-card" id="canada-teaser" aria-labelledby="canada-teaser-title">
+				<div class="canada-teaser-copy">
+					<p class="canada-teaser-kicker">One more for the archive</p>
+					<h2 class="canada-teaser-title" id="canada-teaser-title">But Picking a Fight With Canada?</h2>
+					<p class="canada-teaser-desc">
+						Every scandal on this page followed the same script: outrage, shrug, carry on. The moose
+						has a different script. <em>Le détroit de notre orignal est fermé.</em>
+					</p>
+					<a href="/our-moose/" class="canada-teaser-link">
+						See how this one ends differently
+						<span class="canada-teaser-arrow" aria-hidden="true">→</span>
+					</a>
+				</div>
+				<a href="/our-moose/" class="canada-teaser-image-link" tabindex="-1" aria-hidden="true">
+					<Image
+						src={mooseTeaser}
+						alt=""
+						class="canada-teaser-img"
+						width={512}
+						height={410}
+						loading="lazy"
+					/>
+				</a>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<p>Inspired by a post on Bluesky. Not affiliated with any official organization.</p>
+			<p class="site-footer-copy">Created for the sake of the archive. &copy; 2026</p>
+		</footer>
+
+		<script>
+			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+			// Scroll progress bar
+			const scrollProgress = document.getElementById('scroll-progress');
+			function updateScrollProgress() {
+				const scrollTop = window.scrollY;
+				const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+				const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+				if (scrollProgress) scrollProgress.style.width = `${progress}%`;
+			}
+			window.addEventListener('scroll', updateScrollProgress, { passive: true });
+			updateScrollProgress();
+
+			// Intersection observer for timeline cards
+			const cardObserver = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('is-visible');
+						}
+					});
+				},
+				{ root: null, rootMargin: '0px', threshold: 0.15 },
+			);
+
+			function observeCards(root: ParentNode = document) {
+				root.querySelectorAll('.timeline-card').forEach((card) => {
+					if (!card.classList.contains('is-visible')) {
+						cardObserver.observe(card);
+					}
+				});
+			}
+			observeCards();
+
+			// Gap expand/collapse
+			function setGapOpen(gapZone: HTMLElement, open: boolean) {
+				const btn = gapZone.querySelector<HTMLButtonElement>('.gap-expander');
+				const panel = gapZone.querySelector<HTMLElement>('.gap-panel');
+				if (!btn || !panel) return;
+
+				btn.setAttribute('aria-expanded', String(open));
+				gapZone.classList.toggle('is-open', open);
+
+				if (open) {
+					panel.hidden = false;
+					requestAnimationFrame(() => {
+						panel.classList.add('is-open');
+						observeCards(panel);
+						panel.querySelectorAll('.timeline-card').forEach((card) => {
+							if (prefersReducedMotion) card.classList.add('is-visible');
+						});
+					});
+				} else {
+					panel.classList.remove('is-open');
+					if (prefersReducedMotion) {
+						panel.hidden = true;
+					} else {
+						panel.addEventListener('transitionend', () => {
+							if (!gapZone.classList.contains('is-open')) panel.hidden = true;
+						}, { once: true });
+					}
+				}
+			}
+
+			function toggleGap(gapId: string) {
+				const gapZone = document.querySelector<HTMLElement>(`.gap-zone[data-gap-id="${gapId}"]`);
+				if (!gapZone) return;
+				const isOpen = gapZone.classList.contains('is-open');
+				setGapOpen(gapZone, !isOpen);
+				updateExpandAllButton();
+			}
+
+			document.querySelectorAll<HTMLButtonElement>('.gap-expander').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					const gapId = btn.dataset.gapId;
+					if (gapId) toggleGap(gapId);
+				});
+			});
+
+			const expandAllBtn = document.getElementById('btn-expand-all');
+			function updateExpandAllButton() {
+				if (!expandAllBtn) return;
+				const zones = document.querySelectorAll<HTMLElement>('.gap-zone');
+				const allOpen = zones.length > 0 && [...zones].every((z) => z.classList.contains('is-open'));
+				expandAllBtn.textContent = allOpen ? 'Collapse All Gaps' : 'Expand All Gaps';
+				expandAllBtn.setAttribute('aria-pressed', String(allOpen));
+			}
+
+			expandAllBtn?.addEventListener('click', () => {
+				const zones = document.querySelectorAll<HTMLElement>('.gap-zone');
+				const allOpen = [...zones].every((z) => z.classList.contains('is-open'));
+				zones.forEach((zone) => setGapOpen(zone, !allOpen));
+				updateExpandAllButton();
+			});
+
+			document.addEventListener('keydown', (e) => {
+				if (e.key !== 'Escape') return;
+				const active = document.activeElement;
+				if (active instanceof HTMLButtonElement && active.classList.contains('gap-expander')) {
+					const gapId = active.dataset.gapId;
+					const gapZone = gapId
+						? document.querySelector<HTMLElement>(`.gap-zone[data-gap-id="${gapId}"]`)
+						: null;
+					if (gapZone?.classList.contains('is-open')) {
+						setGapOpen(gapZone, false);
+						updateExpandAllButton();
+					}
+				}
+			});
+
+			// Stat counter animation
+			function animateCounter(el: HTMLElement, target: number, suffix: string) {
+				if (prefersReducedMotion) {
+					el.textContent = `${target}${suffix}`;
+					return;
+				}
+				const duration = 1200;
+				const start = performance.now();
+				function tick(now: number) {
+					const elapsed = now - start;
+					const progress = Math.min(elapsed / duration, 1);
+					const eased = 1 - Math.pow(1 - progress, 3);
+					const current = Math.round(eased * target);
+					el.textContent = `${current}${suffix}`;
+					if (progress < 1) requestAnimationFrame(tick);
+				}
+				requestAnimationFrame(tick);
+			}
+
+			const statsStrip = document.getElementById('stats-strip');
+			if (statsStrip) {
+				const statsObserver = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								entry.target.querySelectorAll<HTMLElement>('.stat-value[data-target]').forEach((el) => {
+									const target = Number(el.dataset.target);
+									const suffix = el.dataset.suffix ?? '';
+									animateCounter(el, target, suffix);
+								});
+								statsObserver.unobserve(entry.target);
+							}
+						});
+					},
+					{ threshold: 0.5 },
+				);
+				statsObserver.observe(statsStrip);
+			}
+
+			// Reduced motion: show cards immediately
+			if (prefersReducedMotion) {
+				document.querySelectorAll('.timeline-card').forEach((card) => card.classList.add('is-visible'));
+			}
+		</script>
+
+		<style is:global>
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				margin: 0;
+				background-color: #0a0a0a;
+				color: #f5f5f5;
+				font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+				font-weight: 400;
+				-webkit-font-smoothing: antialiased;
+				overflow-x: hidden;
+				position: relative;
+			}
+
+			::selection {
+				background: #ef4444;
+				color: #fff;
+			}
+
+			/* Scroll progress */
+			.scroll-progress {
+				position: fixed;
+				top: 0;
+				left: 0;
+				height: 3px;
+				width: 0%;
+				background: linear-gradient(90deg, #ef4444, #f97316);
+				z-index: 100;
+				transition: width 0.1s linear;
+				box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+			}
+
+			/* Background grid */
+			.bg-grid {
+				position: fixed;
+				inset: 0;
+				z-index: -20;
+				pointer-events: none;
+				background-size: 40px 40px;
+				background-image:
+					linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+					linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+				mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+				-webkit-mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+			}
+
+			/* Hero */
+			.hero {
+				position: relative;
+				min-height: 70vh;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				padding: 5rem 1.5rem 2.5rem;
+				overflow: hidden;
+			}
+
+			.hero-gradient {
+				position: absolute;
+				inset: 0;
+				z-index: -10;
+				background: radial-gradient(ellipse at center, rgba(23, 23, 23, 0.5) 0%, #0a0a0a 70%);
+			}
+
+			.hero-kicker {
+				color: #ef4444;
+				font-weight: 700;
+				letter-spacing: 0.15em;
+				text-transform: uppercase;
+				margin: 0 0 1rem;
+				font-size: 0.875rem;
+				animation: pulse 2s ease-in-out infinite;
+			}
+
+			@keyframes pulse {
+				0%,
+				100% {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0.6;
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.hero-kicker {
+					animation: none;
+				}
+			}
+
+			.hero-title {
+				font-family: 'Oswald', sans-serif;
+				font-weight: 700;
+				font-size: clamp(2.5rem, 8vw, 5rem);
+				line-height: 1.1;
+				margin: 0 0 1.5rem;
+				max-width: 56rem;
+				text-transform: uppercase;
+				letter-spacing: -0.02em;
+			}
+
+			.hero-br {
+				display: none;
+			}
+
+			@media (min-width: 768px) {
+				.hero-br {
+					display: block;
+				}
+			}
+
+			.hero-accent {
+				background: linear-gradient(to right, #ef4444, #f97316);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+
+			.hero-sub {
+				color: #a3a3a3;
+				max-width: 42rem;
+				margin: 0 auto 3rem;
+				font-size: clamp(1rem, 2.5vw, 1.25rem);
+				font-weight: 300;
+				line-height: 1.6;
+			}
+
+			.scroll-indicator {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				color: #737373;
+				text-decoration: none;
+				margin-top: 2rem;
+				transition: color 0.2s;
+				animation: bounce 2s ease-in-out infinite;
+			}
+
+			.scroll-indicator:hover {
+				color: #fff;
+			}
+
+			.scroll-label {
+				font-size: 0.75rem;
+				text-transform: uppercase;
+				letter-spacing: 0.15em;
+				margin-bottom: 0.5rem;
+			}
+
+			.scroll-icon {
+				width: 1.5rem;
+				height: 1.5rem;
+			}
+
+			@keyframes bounce {
+				0%,
+				100% {
+					transform: translateY(0);
+				}
+				50% {
+					transform: translateY(6px);
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.scroll-indicator {
+					animation: none;
+				}
+			}
+
+			/* Stats strip */
+			.stats-strip {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1rem;
+				max-width: 56rem;
+				margin: 0 auto;
+				padding: 0 1.5rem 3rem;
+				text-align: center;
+			}
+
+			@media (max-width: 480px) {
+				.stats-strip {
+					grid-template-columns: 1fr;
+					gap: 1.5rem;
+				}
+			}
+
+			.stat-value {
+				display: block;
+				font-family: 'Oswald', sans-serif;
+				font-size: clamp(2rem, 5vw, 3rem);
+				font-weight: 700;
+				color: #ef4444;
+				line-height: 1;
+				margin-bottom: 0.35rem;
+			}
+
+			.stat-value-text {
+				font-size: clamp(1.5rem, 4vw, 2.25rem);
+			}
+
+			.stat-label {
+				display: block;
+				font-size: 0.75rem;
+				text-transform: uppercase;
+				letter-spacing: 0.12em;
+				color: #737373;
+			}
+
+			.stat-sublabel {
+				display: block;
+				font-size: 0.65rem;
+				color: #525252;
+				margin-top: 0.35rem;
+				letter-spacing: 0.05em;
+			}
+
+			/* Timeline controls */
+			.timeline-controls {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: center;
+				gap: 1rem;
+				margin-bottom: 3rem;
+				padding: 0 1rem;
+			}
+
+			.timeline-control-btn {
+				font-family: 'Oswald', sans-serif;
+				font-size: 0.8rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				padding: 0.65rem 1.25rem;
+				background: transparent;
+				border: 2px solid #ef4444;
+				color: #ef4444;
+				cursor: pointer;
+				border-radius: 999px;
+				transition: background 0.2s, color 0.2s;
+			}
+
+			.timeline-control-btn:hover {
+				background: #ef4444;
+				color: #fff;
+			}
+
+			.timeline-control-btn[aria-pressed='true'] {
+				background: #ef4444;
+				color: #fff;
+			}
+
+			.timeline-control-hint {
+				font-size: 0.8rem;
+				color: #737373;
+			}
+
+			/* Gap zones */
+			.gap-zone {
+				position: relative;
+				margin: -1.5rem 0 2rem;
+				padding: 2rem 0;
+			}
+
+			@media (min-width: 768px) {
+				.gap-zone {
+					margin: -2rem 0 3rem;
+					padding: 2.5rem 0;
+				}
+			}
+
+			.gap-spine {
+				position: absolute;
+				left: 20px;
+				top: 0;
+				bottom: 0;
+				width: 4px;
+				background: repeating-linear-gradient(
+					to bottom,
+					#ef4444 0,
+					#ef4444 8px,
+					transparent 8px,
+					transparent 16px
+				);
+				opacity: 0.35;
+				animation: gap-pulse 2.5s ease-in-out infinite;
+			}
+
+			@media (min-width: 768px) {
+				.gap-spine {
+					left: 50%;
+					transform: translateX(-50%);
+				}
+			}
+
+			@keyframes gap-pulse {
+				0%,
+				100% {
+					opacity: 0.35;
+				}
+				50% {
+					opacity: 0.6;
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.gap-spine {
+					animation: none;
+				}
+			}
+
+			.gap-zone.is-open .gap-spine {
+				opacity: 0.7;
+				background: linear-gradient(to bottom, #991b1b, #ef4444, #991b1b);
+				animation: none;
+			}
+
+			.gap-expander {
+				position: relative;
+				z-index: 5;
+				display: block;
+				margin: 0 auto;
+				padding: 0.6rem 1.25rem;
+				font-family: 'Oswald', sans-serif;
+				font-size: 0.75rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				background: #171717;
+				border: 2px dashed #ef4444;
+				color: #ef4444;
+				border-radius: 999px;
+				cursor: pointer;
+				transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+			}
+
+			.gap-expander:hover {
+				background: #262626;
+				border-color: #f87171;
+				color: #f87171;
+				transform: scale(1.02);
+			}
+
+			.gap-expanded-label {
+				display: none;
+			}
+
+			.gap-zone.is-open .gap-collapsed-label {
+				display: none;
+			}
+
+			.gap-zone.is-open .gap-expanded-label {
+				display: inline;
+			}
+
+			.gap-panel {
+				overflow: hidden;
+				max-height: 0;
+				opacity: 0;
+				transition: max-height 0.45s cubic-bezier(0.1, 0.2, 0.1, 1), opacity 0.35s ease;
+			}
+
+			.gap-panel.is-open {
+				max-height: 5000px;
+				opacity: 1;
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.gap-panel {
+					transition: none;
+				}
+
+				.gap-panel.is-open {
+					max-height: none;
+				}
+			}
+
+			.gap-panel-inner {
+				padding: 1.5rem 0 0.5rem;
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				max-width: 28rem;
+				margin: 0 auto;
+				padding-left: 3rem;
+			}
+
+			@media (min-width: 768px) {
+				.gap-panel-inner {
+					padding-left: 0;
+					margin-left: calc(50% + 2rem);
+				}
+
+				.gap-zone:nth-child(4n) .gap-panel-inner,
+				.gap-zone:nth-child(4n+2) .gap-panel-inner {
+					margin-left: 0;
+					margin-right: calc(50% + 2rem);
+				}
+			}
+
+			/* Minor event cards */
+			.event-card-minor {
+				padding: 1rem 1.15rem;
+				max-width: 100%;
+				border-color: #1f1f1f;
+				box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.6);
+				opacity: 0;
+				transform: translateY(16px);
+				transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s;
+			}
+
+			.gap-panel.is-open .event-card-minor {
+				opacity: 1;
+				transform: translateY(0);
+				transition-delay: calc(var(--stagger, 0) * 50ms);
+			}
+
+			.gap-panel.is-open .event-card-minor.is-visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.event-card-minor {
+					opacity: 1;
+					transform: none;
+					transition: none;
+				}
+			}
+
+			.event-card-minor .event-title {
+				font-size: 1.05rem;
+				margin-bottom: 0.5rem;
+			}
+
+			.event-card-minor .event-desc {
+				font-size: 0.875rem;
+				margin-bottom: 1rem;
+				color: #737373;
+			}
+
+			.event-card-minor .event-date {
+				font-size: 0.75rem;
+			}
+
+			.stamp-minor {
+				font-size: 0.7rem;
+				padding: 0.15rem 0.5rem;
+				opacity: 0.75;
+				transform: rotate(-3deg);
+			}
+
+			.event-card-minor:hover {
+				border-color: #404040;
+			}
+
+			/* Visualizations */
+			.viz-section {
+				max-width: 48rem;
+				margin: 0 auto 3rem;
+				padding: 0 1.5rem;
+			}
+
+			.viz-section-compact {
+				max-width: 36rem;
+			}
+
+			.viz-title {
+				font-family: 'Oswald', sans-serif;
+				font-size: 0.875rem;
+				text-transform: uppercase;
+				letter-spacing: 0.15em;
+				color: #737373;
+				margin: 0 0 1.25rem;
+				text-align: center;
+			}
+
+			/* Tag chart */
+			.tag-chart {
+				display: flex;
+				flex-direction: column;
+				gap: 0.65rem;
+			}
+
+			.tag-row {
+				display: grid;
+				grid-template-columns: 8.5rem 1fr;
+				gap: 0.75rem;
+				align-items: center;
+			}
+
+			@media (max-width: 480px) {
+				.tag-row {
+					grid-template-columns: 1fr;
+					gap: 0.25rem;
+				}
+			}
+
+			.tag-label {
+				font-size: 0.75rem;
+				color: #a3a3a3;
+				text-align: right;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			@media (max-width: 480px) {
+				.tag-label {
+					text-align: left;
+				}
+			}
+
+			.tag-bar-track {
+				height: 1.5rem;
+				background: #171717;
+				border-radius: 4px;
+				overflow: hidden;
+				border: 1px solid #262626;
+			}
+
+			.tag-bar-fill {
+				height: 100%;
+				min-width: 2rem;
+				background: linear-gradient(90deg, #991b1b, #ef4444);
+				border-radius: 3px;
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				padding-right: 0.5rem;
+				transition: width 0.8s cubic-bezier(0.1, 0.2, 0.1, 1);
+			}
+
+			.tag-count {
+				font-family: 'Oswald', sans-serif;
+				font-size: 0.75rem;
+				font-weight: 700;
+				color: #fff;
+			}
+
+			/* Decade chart */
+			.decade-chart {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-end;
+				gap: 0.5rem;
+				height: 8rem;
+				padding: 0 0.5rem;
+			}
+
+			.decade-col {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				height: 100%;
+			}
+
+			.decade-bar-track {
+				flex: 1;
+				width: 100%;
+				max-width: 3rem;
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+			}
+
+			.decade-bar-fill {
+				width: 100%;
+				min-height: 0;
+				background: linear-gradient(to top, #991b1b, #ef4444);
+				border-radius: 4px 4px 0 0;
+				display: flex;
+				align-items: flex-start;
+				justify-content: center;
+				padding-top: 0.25rem;
+				transition: height 0.8s cubic-bezier(0.1, 0.2, 0.1, 1);
+			}
+
+			.decade-count {
+				font-family: 'Oswald', sans-serif;
+				font-size: 0.7rem;
+				font-weight: 700;
+				color: #fff;
+			}
+
+			.decade-label {
+				font-family: 'Oswald', sans-serif;
+				font-size: 0.875rem;
+				font-weight: 700;
+				color: #ef4444;
+				margin-top: 0.5rem;
+			}
+
+			.decade-full {
+				font-size: 0.65rem;
+				color: #525252;
+				margin-top: 0.15rem;
+			}
+
+			/* Main / Timeline */
+			.main {
+				max-width: 80rem;
+				margin: 0 auto;
+				padding: 3rem 1rem 5rem;
+			}
+
+			@media (min-width: 640px) {
+				.main {
+					padding: 3rem 1.5rem 5rem;
+				}
+			}
+
+			.timeline-container {
+				position: relative;
+			}
+
+			.timeline-container::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				width: 4px;
+				background: linear-gradient(to bottom, transparent, #262626, transparent);
+				left: 20px;
+			}
+
+			@media (min-width: 768px) {
+				.timeline-container::before {
+					left: 50%;
+					transform: translateX(-50%);
+				}
+			}
+
+			.timeline-row {
+				position: relative;
+				width: 100%;
+				margin-bottom: 4rem;
+				display: flex;
+				align-items: center;
+				opacity: 0;
+				transform: translateY(40px);
+				transition: all 0.7s cubic-bezier(0.1, 0.2, 0.1, 1);
+			}
+
+			.timeline-row.is-visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.timeline-row {
+					opacity: 1;
+					transform: none;
+					transition: none;
+				}
+			}
+
+			@media (min-width: 768px) {
+				.timeline-row {
+					margin-bottom: 6rem;
+				}
+			}
+
+			.timeline-dot {
+				position: absolute;
+				width: 16px;
+				height: 16px;
+				border-radius: 50%;
+				background-color: #ef4444;
+				border: 4px solid #0a0a0a;
+				left: 22px;
+				top: 2rem;
+				transform: translateX(-50%);
+				z-index: 10;
+				box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+			}
+
+			@media (min-width: 768px) {
+				.timeline-dot {
+					left: 50%;
+				}
+			}
+
+			.timeline-side {
+				width: 100%;
+				padding-left: 3rem;
+			}
+
+			@media (min-width: 768px) {
+				.timeline-side {
+					width: 50%;
+					padding-left: 0;
+				}
+
+				.timeline-side-left {
+					padding-right: 4rem;
+					display: flex;
+					flex-direction: column;
+					align-items: flex-end;
+					text-align: right;
+				}
+
+				.timeline-row-odd .timeline-side-left {
+					align-items: flex-end;
+				}
+
+				.timeline-side-right {
+					padding-left: 4rem;
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					text-align: left;
+				}
+
+				.timeline-watermark-side {
+					display: flex;
+				}
+			}
+
+			@media (max-width: 767px) {
+				.timeline-watermark-side {
+					display: none;
+				}
+			}
+
+			/* Event card */
+			.event-card {
+				position: relative;
+				background: #171717;
+				padding: 1.5rem;
+				border-radius: 0.75rem;
+				border: 1px solid #262626;
+				box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+				width: 100%;
+				max-width: 32rem;
+				transition: border-color 0.2s;
+			}
+
+			@media (min-width: 768px) {
+				.event-card {
+					padding: 2rem;
+				}
+			}
+
+			.event-card:hover {
+				border-color: #525252;
+			}
+
+			.event-card-glow {
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(to right, transparent, rgba(239, 68, 68, 0.05), transparent);
+				opacity: 0;
+				border-radius: 0.75rem;
+				pointer-events: none;
+				transition: opacity 0.2s;
+			}
+
+			.event-card:hover .event-card-glow {
+				opacity: 1;
+			}
+
+			.event-date {
+				display: block;
+				color: #ef4444;
+				font-family: 'Oswald', sans-serif;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				font-size: 0.875rem;
+				margin-bottom: 0.5rem;
+			}
+
+			.event-title {
+				font-family: 'Oswald', sans-serif;
+				font-size: clamp(1.25rem, 3vw, 1.75rem);
+				font-weight: 700;
+				color: #fff;
+				margin: 0 0 0.75rem;
+				line-height: 1.2;
+			}
+
+			.event-desc {
+				color: #a3a3a3;
+				font-size: 1rem;
+				line-height: 1.65;
+				margin: 0 0 1rem;
+			}
+
+			.stamp {
+				display: inline-block;
+				color: #ef4444;
+				border: 2px solid #ef4444;
+				padding: 0.25rem 0.75rem;
+				text-transform: uppercase;
+				font-weight: 800;
+				font-family: 'Oswald', sans-serif;
+				font-size: 0.875rem;
+				letter-spacing: 0.05em;
+				transform: rotate(-5deg);
+				opacity: 0.9;
+				border-radius: 2px;
+				box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.2);
+			}
+
+			/* Watermark */
+			.watermark {
+				display: flex;
+				width: 100%;
+				height: 100%;
+				align-items: center;
+				justify-content: center;
+				opacity: 0.02;
+				user-select: none;
+				pointer-events: none;
+				transition: opacity 1s;
+			}
+
+			.watermark span {
+				font-family: 'Oswald', sans-serif;
+				font-weight: 700;
+				font-size: clamp(5rem, 12vw, 14rem);
+				letter-spacing: -0.05em;
+				line-height: 1;
+			}
+
+			/* And yet */
+			.and-yet {
+				text-align: center;
+				margin: 8rem 0 5rem;
+				opacity: 0.5;
+				transition: opacity 0.3s;
+			}
+
+			.and-yet:hover {
+				opacity: 1;
+			}
+
+			.and-yet p {
+				font-family: 'Oswald', sans-serif;
+				font-size: clamp(1.75rem, 5vw, 3rem);
+				text-transform: uppercase;
+				letter-spacing: 0.15em;
+				margin: 0;
+			}
+
+			/* Canada / moose teaser */
+			.canada-teaser {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 1.5rem;
+				align-items: center;
+				max-width: 48rem;
+				margin: 0 auto 4rem;
+				padding: 1.75rem;
+				background: linear-gradient(135deg, #171717 0%, #1a0f0f 100%);
+				border: 2px solid #991b1b;
+				border-radius: 1rem;
+				box-shadow: 0 0 40px rgba(239, 68, 68, 0.08);
+			}
+
+			@media (min-width: 640px) {
+				.canada-teaser {
+					grid-template-columns: 1.2fr 1fr;
+					padding: 2rem;
+				}
+			}
+
+			.canada-teaser-kicker {
+				font-family: 'Oswald', sans-serif;
+				text-transform: uppercase;
+				letter-spacing: 0.12em;
+				font-size: 0.7rem;
+				color: #ef4444;
+				margin: 0 0 0.5rem;
+			}
+
+			.canada-teaser-title {
+				font-family: 'Oswald', sans-serif;
+				font-size: clamp(1.5rem, 4vw, 2rem);
+				text-transform: uppercase;
+				color: #fff;
+				margin: 0 0 0.75rem;
+				line-height: 1.15;
+			}
+
+			.canada-teaser-desc {
+				color: #a3a3a3;
+				font-size: 1rem;
+				line-height: 1.65;
+				margin: 0 0 1.25rem;
+			}
+
+			.canada-teaser-desc em {
+				color: #fca5a5;
+				font-style: normal;
+			}
+
+			.canada-teaser-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				font-family: 'Oswald', sans-serif;
+				font-size: 0.85rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				color: #ef4444;
+				text-decoration: none;
+				border: 2px solid #ef4444;
+				padding: 0.65rem 1.1rem;
+				border-radius: 999px;
+				transition: background 0.2s, color 0.2s;
+			}
+
+			.canada-teaser-link:hover {
+				background: #ef4444;
+				color: #fff;
+			}
+
+			.canada-teaser-arrow {
+				transition: transform 0.2s;
+			}
+
+			.canada-teaser-link:hover .canada-teaser-arrow {
+				transform: translateX(3px);
+			}
+
+			.canada-teaser-image-link {
+				display: block;
+				border-radius: 0.5rem;
+				overflow: hidden;
+				border: 2px solid #262626;
+				transition: border-color 0.2s;
+			}
+
+			.canada-teaser-image-link:hover {
+				border-color: #ef4444;
+			}
+
+			.canada-teaser-img {
+				display: block;
+				width: 100%;
+				height: auto;
+			}
+
+			/* Footer */
+			.site-footer {
+				border-top: 1px solid #171717;
+				padding: 2.5rem 1.5rem;
+				text-align: center;
+				color: #525252;
+				font-size: 0.875rem;
+			}
+
+			.site-footer p {
+				margin: 0;
+			}
+
+			.site-footer-copy {
+				margin-top: 0.5rem !important;
+			}
+		</style>
+	</body>
+</html>

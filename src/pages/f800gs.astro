@@ -1,0 +1,566 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import ogImage from '../assets/f800gs-og.jpg';
+
+const pageTitle = '2013 BMW F800GS for Sale — $7,600 | Marc Sherwood';
+const pageDescription =
+	'Turn-key 2013 BMW F800GS adventure bike for sale in Vancouver, BC. ~60,000 km, dealer-serviced since day one, ESA, heated grips, aluminum panniers, Heidenau K60 tires. $7,600 CAD. Open to KTM 300 Enduro trade.';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+	<BaseHead title={pageTitle} description={pageDescription} image={ogImage} />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+	<meta name="color-scheme" content="light dark" />
+	<script is:inline>
+		{
+			const colorScheme = localStorage.getItem("color-scheme");
+			if (colorScheme) {
+				document.querySelector('meta[name="color-scheme"]').content = colorScheme;
+				document.documentElement.setAttribute("data-theme", colorScheme);
+			} else {
+				const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+				document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+			}
+		}
+	</script>
+	<link rel="stylesheet" href="/f800gs-base.css" />
+	<link rel="stylesheet" href="/f800gs.css" />
+</head>
+<body class="f800gs-page">
+
+  <header id="main-header">
+    <div class="header-container">
+      <a href="/" class="logo-link">
+        <span class="logo-text">Marc Sherwood</span>
+        <span class="logo-dot">.</span>
+      </a>
+
+      <nav id="nav-menu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#adventure-selfie" class="nav-link">Selfie</a></li>
+          <li><a href="#included" class="nav-link">Included</a></li>
+          <li><a href="#equipped" class="nav-link">Equipped</a></li>
+          <li><a href="#history" class="nav-link">History</a></li>
+          <li><a href="#inquire" class="nav-link">Inquire</a></li>
+          <li><a href="/" class="nav-link">Home</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle visual theme" title="Toggle color theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
+
+        <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="f800gs-hero" id="hero">
+      <div class="f800gs-hero-bg" aria-hidden="true"></div>
+      <div class="container f800gs-hero-inner">
+        <span class="f800gs-hero-badge">For Sale · Open to Trade</span>
+        <h1 class="f800gs-hero-title">2013 BMW <span class="gradient-text">F800GS</span></h1>
+        <p class="f800gs-hero-price">$7,600 CAD</p>
+        <div class="f800gs-hero-meta">
+          <span>~60,000 km</span>
+          <span>6-speed manual</span>
+          <span>Blue</span>
+          <span>2 owners</span>
+          <span>Vancouver, BC</span>
+        </div>
+        <p class="f800gs-hero-lead">
+          Oh, the places you will go! A turn-key adventure rig — fully armored, fully luggage-equipped, and ready for the backcountry or the daily commute. Also fits in at nearly any Starbucks seamlessly.
+        </p>
+        <div class="f800gs-hero-ctas">
+          <a href="https://www.facebook.com/marketplace/item/4409716719241265/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            <span>Marketplace Listing</span>
+          </a>
+          <a href="mailto:marcsherwood@gmail.com?subject=2013%20BMW%20F800GS%20Inquiry" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+            <span>Email Marc</span>
+          </a>
+          <a href="tel:+17788817148" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span>Call</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1SRKLWRqiCj70OVFSUkrLNGHs9qSXUcFP/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <span>Service Records</span>
+          </a>
+        </div>
+      </div>
+      <a href="#gallery" class="f800gs-scroll-cue" aria-label="Scroll down for photos and details">
+        <span>Scroll for details</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </a>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="f800gs-section">
+      <div class="container">
+        <h2 class="section-title">Photo Gallery</h2>
+        <div class="section-subtitle">A quick look — click any photo to enlarge, or keep scrolling for what comes with the bike.</div>
+
+        <div class="f800gs-gallery-shell is-collapsed">
+          <div class="f800gs-gallery" id="f800gs-gallery">
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--wide" data-gallery-index="0" data-full-src="/assets/f800gs/hero-lake.jpg" data-caption="Seton Lake overlook — ready to tour">
+            <img src="/assets/f800gs/hero-lake.jpg" alt="2013 BMW F800GS at Seton Lake with mountain backdrop" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--tall" data-gallery-index="1" data-full-src="/assets/f800gs/mountain-valley.jpg" data-caption="Loaded for backcountry exploration">
+            <img src="/assets/f800gs/mountain-valley.jpg" alt="F800GS with aluminum panniers overlooking a mountain valley" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--third" data-gallery-index="2" data-full-src="/assets/f800gs/golden-hour.jpg" data-caption="Golden hour at the marina">
+            <img src="/assets/f800gs/golden-hour.jpg" alt="F800GS at golden hour with waterfront background" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--third" data-gallery-index="3" data-full-src="/assets/f800gs/autumn-forest.jpg" data-caption="Autumn forest ride">
+            <img src="/assets/f800gs/autumn-forest.jpg" alt="F800GS parked on a rocky overlook with autumn foliage" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--third" data-gallery-index="4" data-full-src="/assets/f800gs/group-ride.jpg" data-caption="Group ride with fellow adventurers">
+            <img src="/assets/f800gs/group-ride.jpg" alt="F800GS on a gravel road with other adventure bikes" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--half f800gs-gallery-item--extra" data-gallery-index="5" data-full-src="/assets/f800gs/driveway-front.jpg" data-caption="Front three-quarter view">
+            <img src="/assets/f800gs/driveway-front.jpg" alt="F800GS front three-quarter view on driveway" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--half f800gs-gallery-item--extra" data-gallery-index="6" data-full-src="/assets/f800gs/ferry-deck.jpg" data-caption="Ferry deck — BC touring life">
+            <img src="/assets/f800gs/ferry-deck.jpg" alt="F800GS on a ferry deck with touring luggage" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--wide f800gs-gallery-item--extra" data-gallery-index="7" data-full-src="/assets/f800gs/driveway-luggage.jpg" data-caption="Fully loaded — turn-key touring setup">
+            <img src="/assets/f800gs/driveway-luggage.jpg" alt="F800GS with full aluminum luggage on driveway" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--third f800gs-gallery-item--extra" data-gallery-index="8" data-full-src="/assets/f800gs/lego-on-tank.jpg" data-caption="Showroom clean — the care shows in the paint">
+            <img src="/assets/f800gs/lego-on-tank.jpg" alt="Close-up of F800GS with LEGO GS model on the tank" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--third f800gs-gallery-item--extra" data-gallery-index="9" data-full-src="/assets/f800gs/lego-catalogue.jpg" data-caption="LEGO Technic GS &amp; original 2013 BMW catalogue included">
+            <img src="/assets/f800gs/lego-catalogue.jpg" alt="LEGO Technic BMW GS Adventure with Unstoppable Since 1923 catalogue" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--third f800gs-gallery-item--extra" data-gallery-index="10" data-full-src="/assets/f800gs/lego-desk.jpg" data-caption="LEGO Technic BMW GS Adventure — same blue, full panniers">
+            <img src="/assets/f800gs/lego-desk.jpg" alt="LEGO Technic BMW GS Adventure model with aluminum panniers" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--half f800gs-gallery-item--extra" data-gallery-index="11" data-full-src="/assets/f800gs/original-keys.jpg" data-caption="Original keys — dealer tag still shows F800GS, blue, stock #2001635">
+            <img src="/assets/f800gs/original-keys.jpg" alt="Original BMW F800GS keys with dealer identification tag" loading="lazy">
+          </button>
+          <button type="button" class="f800gs-gallery-item f800gs-gallery-item--half f800gs-gallery-item--extra" data-gallery-index="12" data-full-src="/assets/f800gs/original-docs.jpg" data-caption="2013 catalogue, warranty card, and insurance pouch">
+            <img src="/assets/f800gs/original-docs.jpg" alt="2013 BMW brochure, warranty card, and document pouch" loading="lazy">
+          </button>
+        </div>
+
+          <div class="f800gs-gallery-actions">
+            <button type="button" id="f800gs-gallery-toggle" class="btn btn-secondary f800gs-gallery-toggle" aria-expanded="false" aria-controls="f800gs-gallery">
+              <span class="f800gs-gallery-toggle-label">Show 8 more photos</span>
+              <svg class="f800gs-gallery-toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </button>
+            <p class="f800gs-gallery-hint">
+              <a href="#included">What's included with the sale</a> is just below
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Adventure Selfie -->
+    <section id="adventure-selfie" class="f800gs-section f800gs-section-alt">
+      <div class="container">
+        <h2 class="section-title">Picture Yourself on the GS</h2>
+        <div class="section-subtitle">
+          Upload a selfie and we will badly Photoshop you into the adventure — on purpose. Drag, tilt, pick a ridiculous vibe, add a caption, share the chaos. Your photo never leaves your browser.
+        </div>
+
+        <div id="f800gs-adventure-selfie" class="f800gs-selfie">
+          <div class="f800gs-selfie-layout">
+            <div class="f800gs-selfie-preview-wrap">
+              <canvas id="f800gs-selfie-canvas" aria-label="Adventure selfie preview"></canvas>
+              <p id="f800gs-selfie-empty" class="f800gs-selfie-empty">Upload a selfie — we'll obviously paste you in</p>
+              <p id="f800gs-selfie-drag-hint" class="f800gs-selfie-drag-hint" hidden>Drag to reposition</p>
+            </div>
+
+            <div class="f800gs-selfie-controls">
+              <div class="f800gs-selfie-panel">
+                <p class="f800gs-selfie-panel-title">Pick a scene</p>
+                <div class="f800gs-selfie-scenes">
+                  <button type="button" class="f800gs-selfie-scene-btn is-active" data-selfie-scene="lake" data-selfie-src="/assets/f800gs/hero-lake.jpg" data-selfie-x="0.74" data-selfie-y="0.56" data-selfie-scale="0.3" aria-pressed="true">
+                    <img src="/assets/f800gs/hero-lake.jpg" alt="" loading="lazy">
+                    <span>Seton Lake overlook</span>
+                  </button>
+                  <button type="button" class="f800gs-selfie-scene-btn" data-selfie-scene="mountain" data-selfie-src="/assets/f800gs/mountain-valley.jpg" data-selfie-x="0.22" data-selfie-y="0.64" data-selfie-scale="0.34" aria-pressed="false">
+                    <img src="/assets/f800gs/mountain-valley.jpg" alt="" loading="lazy">
+                    <span>Mountain valley camp</span>
+                  </button>
+                  <button type="button" class="f800gs-selfie-scene-btn" data-selfie-scene="golden" data-selfie-src="/assets/f800gs/golden-hour.jpg" data-selfie-x="0.7" data-selfie-y="0.6" data-selfie-scale="0.28" aria-pressed="false">
+                    <img src="/assets/f800gs/golden-hour.jpg" alt="" loading="lazy">
+                    <span>Golden hour waterfront</span>
+                  </button>
+                  <button type="button" class="f800gs-selfie-scene-btn" data-selfie-scene="autumn" data-selfie-src="/assets/f800gs/autumn-forest.jpg" data-selfie-x="0.68" data-selfie-y="0.58" data-selfie-scale="0.3" aria-pressed="false">
+                    <img src="/assets/f800gs/autumn-forest.jpg" alt="" loading="lazy">
+                    <span>Autumn forest pull-off</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="f800gs-selfie-panel">
+                <p class="f800gs-selfie-panel-title">Your photo</p>
+                <label class="f800gs-selfie-upload-label">
+                  <input type="file" id="f800gs-selfie-upload" accept="image/*" capture="user">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+                  <span>Upload or take a selfie</span>
+                </label>
+              </div>
+
+              <div class="f800gs-selfie-panel">
+                <p class="f800gs-selfie-panel-title">Ridiculous vibe</p>
+                <div class="f800gs-selfie-vibe-grid" role="group" aria-label="Funny composite style">
+                  <button type="button" class="f800gs-selfie-vibe-btn is-active" data-selfie-vibe="sticker" aria-pressed="true">Bad sticker</button>
+                  <button type="button" class="f800gs-selfie-vibe-btn" data-selfie-vibe="giant" aria-pressed="false">Giant head</button>
+                  <button type="button" class="f800gs-selfie-vibe-btn" data-selfie-vibe="lurker" aria-pressed="false">Suspicious lurker</button>
+                  <button type="button" class="f800gs-selfie-vibe-btn" data-selfie-vibe="photobomb" aria-pressed="false">Photobomb</button>
+                  <button type="button" class="f800gs-selfie-vibe-btn f800gs-selfie-vibe-btn--wide" data-selfie-vibe="awkward" aria-pressed="false">Awkward cutout</button>
+                </div>
+              </div>
+
+              <div class="f800gs-selfie-panel">
+                <p class="f800gs-selfie-panel-title">Fine-tune the bad Photoshop</p>
+                <label class="f800gs-selfie-slider-label">
+                  Size <output id="f800gs-selfie-size-value">30%</output>
+                  <input type="range" id="f800gs-selfie-size" min="10" max="60" value="30">
+                </label>
+                <label class="f800gs-selfie-slider-label">
+                  Tilt <output id="f800gs-selfie-tilt-value">-8°</output>
+                  <input type="range" id="f800gs-selfie-tilt" min="-18" max="18" value="-8">
+                </label>
+                <label class="f800gs-selfie-caption-toggle">
+                  <input type="checkbox" id="f800gs-selfie-caption-toggle" checked>
+                  <span>Funny caption</span>
+                </label>
+                <button type="button" id="f800gs-selfie-shuffle-caption" class="btn btn-secondary f800gs-selfie-shuffle-btn">Shuffle caption</button>
+              </div>
+
+              <div class="f800gs-selfie-actions">
+                <button type="button" id="f800gs-selfie-reset" class="btn btn-secondary">Reset position</button>
+                <button type="button" id="f800gs-selfie-download" class="btn btn-primary" disabled>Save / Share</button>
+              </div>
+
+              <p class="f800gs-selfie-privacy">Nothing is uploaded to a server — compositing happens entirely on your device. Have a dedicated bike-and-campsite photo? Send it to Marc and we can add it as a scene.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section id="story" class="f800gs-section f800gs-section-alt">
+      <div class="container">
+        <h2 class="section-title">Why This Bike</h2>
+        <div class="section-subtitle">The classic &ldquo;too many motorcycles in the garage&rdquo; mandate has been issued.</div>
+
+        <div class="f800gs-story">
+          <p>
+            I am putting my BMW F800GS up for sale. Since my KTM 790 is getting most of my saddle time lately, it is time to pass the BMW on to the right rider.
+          </p>
+          <p>
+            This is a turn-key adventure rig. The mileage is ~60,000 km, but this bike has been <em>meticulously maintained</em>. Every single service since day one has been performed at a BMW dealership. I have a physical binder with every record and receipt to prove it. You will not find a better-documented middleweight GS on the market.
+          </p>
+          <p>
+            Two owners. Both BMW people. Nobody cut corners — the paint still pops, the chain is clean, and the original keys, tags, and plastic OEM key are still here because nothing got tossed. That is the kind of ownership history you can see and feel on every ride.
+          </p>
+          <p>
+            New battery and ignition antenna installed this week. It is ready for the road and trails. This bike needs absolutely nothing — fully armored, fully luggage-equipped, and ready for the backcountry or the daily commute.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Included with sale -->
+    <section id="included" class="f800gs-section">
+      <div class="container">
+        <h2 class="section-title">Included with the Sale</h2>
+        <div class="section-subtitle">Proof that two owners treated this GS like it mattered — not a flip, not a mystery bike.</div>
+
+        <div class="f800gs-included-feature">
+          <img src="/assets/f800gs/original-keys.jpg" alt="Original BMW F800GS keys with dealer tag showing model, colour, and stock number" loading="lazy">
+          <div class="f800gs-included-feature-body">
+            <h3>Still on the Original Tags</h3>
+            <p>
+              Both metal keys, the plastic OEM spare, and the dealer key tag — still showing <strong>F800GS</strong>, blue, stock #2001635 from when this bike was new. That is not memorabilia; it is proof nobody lost track of what this machine is.
+            </p>
+            <ul class="f800gs-included-list">
+              <li>Two BMW metal keys + plastic OEM spare key</li>
+              <li>Original dealer key tag (model, colour, stock number)</li>
+              <li>Vancouver BMW/Ducati key fob tag</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="f800gs-included-feature f800gs-included-feature--reverse">
+          <img src="/assets/f800gs/original-docs.jpg" alt="2013 BMW Motorrad Canada brochure, limited warranty card, and insurance pouch" loading="lazy">
+          <div class="f800gs-included-feature-body">
+            <h3>Paperwork That Usually Disappears</h3>
+            <p>
+              The 2013 BMW Motorrad Canada full-line catalogue (<em>Unstoppable Since 1923</em>), the original limited warranty card, and the BMW insurance document pouch — kept together, not thrown in a drawer and forgotten.
+            </p>
+            <ul class="f800gs-included-list">
+              <li>2013 BMW Motorrad Canada full-line brochure</li>
+              <li>Original BMW limited motorcycle warranty card</li>
+              <li>BMW Motorrad insurance document pouch</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="f800gs-included-feature">
+          <img src="/assets/f800gs/lego-catalogue.jpg" alt="LEGO Technic BMW GS and 2013 BMW Unstoppable catalogue" loading="lazy">
+          <div class="f800gs-included-feature-body">
+            <h3>And Because You Get It</h3>
+            <p>
+              The built LEGO Technic BMW GS Adventure — an R1200GS, not an F800, but the same blue and the same GS energy. It comes with the bike for the next owner who understands why these details matter.
+            </p>
+            <ul class="f800gs-included-list">
+              <li>LEGO Technic BMW GS Adventure (matching blue, full panniers)</li>
+              <li>Complete dealer service binder + scanned work orders</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="f800gs-equipped-grid">
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--included">Included</span>
+            <h3>Original Keys &amp; Tags</h3>
+            <p>Both metal keys, plastic OEM spare, dealer tag with F800GS / blue / stock #2001635, and Vancouver BMW key fob.</p>
+          </article>
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--included">Included</span>
+            <h3>2013 Catalogue &amp; Warranty</h3>
+            <p>Full-line &ldquo;Unstoppable Since 1923&rdquo; brochure plus the original BMW limited motorcycle warranty card.</p>
+          </article>
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--included">Included</span>
+            <h3>Insurance Pouch</h3>
+            <p>Original BMW Motorrad document pouch — the kind of thing that disappears after the first owner. Still here.</p>
+          </article>
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--included">Included</span>
+            <h3>LEGO Technic BMW GS</h3>
+            <p>Built LEGO Technic GS Adventure in the same blue — not an F800, but the right colour and the right energy for your desk or garage.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Equipped -->
+    <section id="equipped" class="f800gs-section">
+      <div class="container">
+        <h2 class="section-title">Equipped &amp; Upgraded</h2>
+        <div class="section-subtitle">Factory premium features plus adventure-ready armor and luggage.</div>
+
+        <div class="f800gs-equipped-grid">
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--factory">Factory</span>
+            <h3>ESA Suspension</h3>
+            <p>Electronic Suspension Adjustment — dial in comfort or sport on the fly for loaded touring or solo rides.</p>
+          </article>
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--factory">Factory</span>
+            <h3>Heated Grips</h3>
+            <p>Factory BMW heated grips for BC shoulder-season riding and cold mountain passes.</p>
+          </article>
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--upgrade">Upgrade</span>
+            <h3>BMW / Touratech Panniers</h3>
+            <p>Aluminum hard cases — lockable, waterproof, and ready for multi-day trips out of the box.</p>
+          </article>
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--upgrade">Upgrade</span>
+            <h3>ALT Rider Crash Bars</h3>
+            <p>Engine and fairing protection for off-road tumbles and parking-lot tip-overs.</p>
+          </article>
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--upgrade">Upgrade</span>
+            <h3>ALT Rider Rear Rack</h3>
+            <p>Heavy-duty rear rack for dry bags, RotopaX, or additional gear on top of the panniers.</p>
+          </article>
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--upgrade">Upgrade</span>
+            <h3>Heavy-Duty Skid Plate</h3>
+            <p>Aluminum bash plate protecting the engine and exhaust headers on rocky trails.</p>
+          </article>
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--upgrade">Upgrade</span>
+            <h3>Heidenau K60 Tires</h3>
+            <p>Only ~1,000 km on them. Hook up great on all surfaces and last forever.</p>
+          </article>
+          <article class="f800gs-equipped-card">
+            <span class="f800gs-equipped-tag f800gs-equipped-tag--recent">Recent</span>
+            <h3>New Battery &amp; Ignition Antenna</h3>
+            <p>Installed this week — turn the key and go. No deferred maintenance waiting for you.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Specs -->
+    <section id="specs" class="f800gs-section f800gs-section-alt">
+      <div class="container">
+        <h2 class="section-title">Specifications</h2>
+        <div class="section-subtitle">This bike at a glance, plus factory reference specs.</div>
+
+        <div class="f800gs-specs-layout">
+          <div class="f800gs-specs-panel">
+            <h3>This Bike</h3>
+            <div class="spec-row"><strong>Year</strong><span>2013</span></div>
+            <div class="spec-row"><strong>Model</strong><span>BMW F800GS</span></div>
+            <div class="spec-row"><strong>Odometer</strong><span>~60,000 km</span></div>
+            <div class="spec-row"><strong>Owners</strong><span>2</span></div>
+            <div class="spec-row"><strong>Transmission</strong><span>6-speed manual</span></div>
+            <div class="spec-row"><strong>Fuel</strong><span>Gasoline (premium)</span></div>
+            <div class="spec-row"><strong>Color</strong><span>Blue / Black</span></div>
+            <div class="spec-row"><strong>Location</strong><span>Vancouver, BC</span></div>
+            <div class="spec-row"><strong>Price</strong><span>$7,600 CAD</span></div>
+          </div>
+
+          <div class="f800gs-specs-panel">
+            <h3>Factory Reference (2013 F800GS)</h3>
+            <div class="spec-row"><strong>Engine</strong><span>798 cc parallel twin</span></div>
+            <div class="spec-row"><strong>Power</strong><span>85 hp @ 7,500 rpm</span></div>
+            <div class="spec-row"><strong>Torque</strong><span>83 Nm @ 5,750 rpm</span></div>
+            <div class="spec-row"><strong>Fuel tank</strong><span>16 L</span></div>
+            <div class="spec-row"><strong>Seat height</strong><span>880 mm (std)</span></div>
+            <div class="spec-row"><strong>Wet weight</strong><span>214 kg</span></div>
+            <div class="spec-row"><strong>Wheels</strong><span>21&quot; front / 17&quot; rear (spoked)</span></div>
+            <div class="spec-row"><strong>ABS</strong><span>Standard</span></div>
+            <p class="f800gs-specs-note">Factory specs per BMW press materials. Actual equipped weight may differ with luggage and accessories.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- History -->
+    <section id="history" class="f800gs-section">
+      <div class="container">
+        <h2 class="section-title">Service History</h2>
+        <div class="section-subtitle">Documented from day one — no mystery maintenance.</div>
+
+        <div class="f800gs-history-card">
+          <div class="f800gs-history-highlights">
+            <span>Every service at a BMW dealer</span>
+            <span>Physical binder of records</span>
+            <span>Scanned work orders available</span>
+          </div>
+          <p>
+            I have maintained this bike to BMW dealer standards since purchase. Every oil change, valve check, and scheduled service is documented with receipts. A complete scanned archive of work orders and parts history is available for serious buyers.
+          </p>
+          <a href="https://drive.google.com/file/d/1SRKLWRqiCj70OVFSUkrLNGHs9qSXUcFP/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            <span>View Service Record PDF</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trade -->
+    <section id="trade" class="f800gs-section f800gs-section-alt">
+      <div class="container">
+        <div class="f800gs-trade">
+          <h3>Open to a KTM 300 Enduro Trade</h3>
+          <p>
+            I am highly motivated to trade this F800GS for a KTM 300 Enduro. If you have a 300 Enduro and are looking to move to a capable, mid-weight adventure bike, let&rsquo;s talk. I am open to a straight trade or working out a cash difference depending on the year, condition, and setup of your KTM.
+          </p>
+          <a href="mailto:marcsherwood@gmail.com?subject=KTM%20300%20Enduro%20Trade%20for%20F800GS" class="btn btn-primary">
+            <span>Propose a Trade</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inquire -->
+    <section id="inquire" class="f800gs-section">
+      <div class="container">
+        <h2 class="section-title">Get in Touch</h2>
+        <div class="section-subtitle">Serious inquiries welcome. Priced at $7,600 for the right rider.</div>
+
+        <div class="f800gs-inquire-grid">
+          <article class="f800gs-contact-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            <h3>Facebook Marketplace</h3>
+            <p>Message me through the official listing.</p>
+            <a href="https://www.facebook.com/marketplace/item/4409716719241265/" target="_blank" rel="noopener noreferrer">View Listing</a>
+          </article>
+          <article class="f800gs-contact-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+            <h3>Email</h3>
+            <p>Fastest way to ask questions or schedule a viewing.</p>
+            <a href="mailto:marcsherwood@gmail.com?subject=2013%20BMW%20F800GS%20Inquiry">marcsherwood@gmail.com</a>
+          </article>
+          <article class="f800gs-contact-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <h3>Phone / Text</h3>
+            <p>Vancouver, BC area.</p>
+            <a href="tel:+17788817148">+1 (778) 881-7148</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <p class="footer-copy">&copy; 2026 Marc Sherwood. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#inquire">Inquire</a></li>
+        <li><a href="https://linkedin.com/in/marcsherwood" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="f800gs-lightbox" class="f800gs-lightbox" aria-hidden="true" role="dialog" aria-label="Photo gallery">
+    <button type="button" id="f800gs-lightbox-close" class="f800gs-lightbox-close" aria-label="Close gallery">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <button type="button" id="f800gs-lightbox-prev" class="f800gs-lightbox-nav f800gs-lightbox-prev" aria-label="Previous photo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <img id="f800gs-lightbox-img" src="" alt="">
+    <button type="button" id="f800gs-lightbox-next" class="f800gs-lightbox-nav f800gs-lightbox-next" aria-label="Next photo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <p id="f800gs-lightbox-caption" class="f800gs-lightbox-caption"></p>
+  </div>
+
+  <!-- Sticky mobile CTA -->
+  <div class="f800gs-sticky-cta" aria-label="Quick actions">
+    <span class="f800gs-sticky-price">$7,600</span>
+    <div class="f800gs-sticky-actions">
+      <a href="https://www.facebook.com/marketplace/item/4409716719241265/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Marketplace</a>
+      <a href="mailto:marcsherwood@gmail.com?subject=2013%20BMW%20F800GS%20Inquiry" class="btn btn-secondary">Email</a>
+    </div>
+  </div>
+
+  <script is:inline src="/f800gs.js"></script>
+  <script is:inline src="/f800gs-adventure-selfie.js"></script>
+</body>
+</html>

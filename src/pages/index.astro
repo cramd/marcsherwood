@@ -1,60 +1,155 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 import BlueskyFeed from '../components/BlueskyFeed.astro';
 import GitHubProfile from '../components/GitHubProfile.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const latestPost = posts[0];
 ---
 
-<BaseLayout title="Marc Sherwood | Digital Garden" description={SITE_DESCRIPTION} mainClass="flex-grow container mx-auto px-6 py-12 max-w-5xl">
-			<section class="py-16 animate-fade-in text-center max-w-3xl mx-auto">
-				<img src="https://ui-avatars.com/api/?name=Marc+Sherwood&background=0D8ABC&color=fff&size=128" alt="Marc Sherwood" class="w-24 h-24 rounded-full mx-auto mb-6 border-2 border-slate-700 shadow-xl" />
-				<h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-					Welcome to my <span class="text-gradient">Digital Garden</span>.
-				</h1>
-				<p class="text-lg text-slate-400 leading-relaxed mb-10">
-					I'm Marc Sherwood, a Technical GTM Lead by day, and a gear head by night. This space is a collection of my professional journey, my latest thoughts on infrastructure, my motorcycle garage, and the everyday carry gear I rely on.
-				</p>
+<BaseLayout title="Marc Sherwood" description={SITE_DESCRIPTION} mainClass="flex-grow container mx-auto px-6 py-12 max-w-5xl">
+	<section class="py-12 max-w-3xl">
+		<p class="text-sm font-mono text-blue-600 mb-4">Technical GTM lead · Builder · Occasional blogger</p>
+		<h1 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-slate-900">
+			Hi, I am <span class="text-gradient">Marc Sherwood</span>.
+		</h1>
+		<p class="text-lg text-slate-600 leading-relaxed mb-4">
+			I bridge complex engineering systems and commercial growth — DevTools, PLG, and open-source GTM by day.
+			By night I write about AI, architecture, and the gap between what we ask for and what we actually want.
+		</p>
+		<p class="text-base text-slate-600 leading-relaxed mb-3">
+			Fair warning: what I am paid to know and what I am curious about do not always line up. You will get expert-level takes on some topics and proper amateur hour on others — and when it is the latter, I will try to call that out.
+		</p>
+		<p class="text-base text-slate-500 italic mb-8">
+			My areas of expertise and my areas of interest share a Venn diagram about the size of a postage stamp. That is not a bug.
+		</p>
+		<div class="flex flex-wrap gap-4">
+			<a href="/gtm" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+				Fractional GTM
+			</a>
+			<a href="/cv" class="px-6 py-3 glass-panel text-slate-800 font-semibold rounded-lg hover:border-blue-300 transition-colors">
+				View CV
+			</a>
+			<a href="/blog" class="px-6 py-3 glass-panel text-slate-800 font-semibold rounded-lg hover:border-blue-300 transition-colors">
+				Read the blog
+			</a>
+		</div>
+	</section>
+
+	<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+		<a href="/gtm" class="glass-panel p-8 rounded-2xl group hover:border-blue-300 transition-colors flex flex-col">
+			<p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Consulting</p>
+			<h2 class="text-2xl font-bold text-slate-900 mb-2">Fractional GTM</h2>
+			<p class="text-slate-600 mb-6 flex-grow">
+				Positioning, friction audits, events on the floor, and commercial execution for COSS and DevTools — without a full-time hire.
+			</p>
+			<span class="text-sm font-medium text-blue-700 group-hover:text-blue-900 flex items-center gap-1">
+				How I work with clients
+				<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+			</span>
+		</a>
+
+		<a href="/cv#featured-projects" class="glass-panel p-8 rounded-2xl group hover:border-blue-300 transition-colors flex flex-col">
+			<p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Work</p>
+			<h2 class="text-2xl font-bold text-slate-900 mb-2">Professional path</h2>
+			<p class="text-slate-600 mb-6 flex-grow">
+				Resume, featured projects, and the platforms I am building — HoneOS, HuntMode, and GTM systems for DevTools and COSS.
+			</p>
+			<span class="text-sm font-medium text-blue-700 group-hover:text-blue-900 flex items-center gap-1">
+				CV and projects
+				<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+			</span>
+		</a>
+
+		<a href="/blog" class="glass-panel p-8 rounded-2xl group hover:border-teal-300 transition-colors flex flex-col">
+			<p class="text-xs font-bold uppercase tracking-wider text-teal-600 mb-3">Writing</p>
+			<h2 class="text-2xl font-bold text-slate-900 mb-2">Personal path</h2>
+			<p class="text-slate-600 mb-6 flex-grow">
+				Essays on whatever I am thinking about — AI, creativity, open-source business models, systems. Some posts are informed by the day job; some are enthusiastic amateurs doing their best.
+			</p>
+			<span class="text-sm font-medium text-teal-700 group-hover:text-teal-900 flex items-center gap-1">
+				Read posts
+				<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+			</span>
+		</a>
+	</section>
+
+	<section class="mb-16 glass-panel rounded-2xl p-8">
+		<h2 class="text-xl font-bold text-slate-900 mb-6">Expertise vs. interests</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+			<div>
+				<h3 class="text-sm font-bold uppercase tracking-wider text-blue-600 mb-3">What I get paid for</h3>
+				<ul class="flex flex-wrap gap-2">
+					{['GTM systems', 'DevTools', 'PLG', 'COSS strategy', 'Revenue ops'].map((tag) => (
+						<li class="px-3 py-1 rounded-full bg-blue-50 text-blue-800 text-sm border border-blue-200">{tag}</li>
+					))}
+				</ul>
+			</div>
+			<div>
+				<h3 class="text-sm font-bold uppercase tracking-wider text-teal-600 mb-3">What I write about</h3>
+				<ul class="flex flex-wrap gap-2">
+					{['AI and creativity', 'Systems design', 'Open source', 'Prompt craft', 'Architecture'].map((tag) => (
+						<li class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-sm border border-teal-200">{tag}</li>
+					))}
+				</ul>
+			</div>
+		</div>
+		<p class="text-slate-600 text-sm mt-6">
+			The overlap is real. It is just postage-stamp sized — which means the blog is not always a credential flex, and that is on purpose.
+		</p>
+	</section>
+
+	{
+		latestPost && (
+			<section class="mb-16">
+				<div class="flex items-end justify-between mb-6 gap-4">
+					<h2 class="text-2xl font-bold text-slate-900">Latest writing</h2>
+					<a href="/blog" class="text-sm font-medium text-blue-700 hover:text-blue-900 shrink-0">All posts →</a>
+				</div>
+				<a href={`/blog/${latestPost.id}/`} class="block glass-panel p-8 rounded-2xl hover:border-blue-300 transition-colors group">
+					<p class="font-mono text-sm text-slate-500 mb-2">
+						<FormattedDate date={latestPost.data.pubDate} />
+					</p>
+					<h3 class="text-xl font-bold text-slate-900 group-hover:text-blue-700 mb-2">{latestPost.data.title}</h3>
+					{latestPost.data.description && (
+						<p class="text-slate-600">{latestPost.data.description}</p>
+					)}
+				</a>
 			</section>
+		)
+	}
 
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in" style="animation-delay: 0.1s;">
-				
-				<a href="/cv" class="glass-panel p-8 rounded-2xl group hover:border-blue-500/50 transition-colors flex flex-col">
-					<div class="w-12 h-12 bg-blue-900/30 text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-						<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-					</div>
-					<h2 class="text-2xl font-bold text-slate-100 mb-2">Professional Profile</h2>
-					<p class="text-slate-400 mb-6 flex-grow">Dive into my career as a GTM Systems Architect, view my resume, and see the platforms I'm building to bridge engineering and commercial growth.</p>
-					<span class="text-sm font-medium text-blue-400 group-hover:text-blue-300 flex items-center gap-1">View CV <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-				</a>
+	<section class="mb-16 glass-panel rounded-2xl p-8">
+		<h2 class="text-xl font-bold text-slate-900 mb-2">Currently building</h2>
+		<p class="text-slate-600 mb-4">
+			HoneOS — automated pipeline research and OQL intelligence for commercial open-source GTM.
+			HuntMode — AI-native career coaching and job search tooling.
+		</p>
+		<a href="/cv#featured-projects" class="text-sm font-semibold text-blue-700 hover:text-blue-900 inline-flex items-center gap-1">
+			See full project list on CV
+			<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+		</a>
+	</section>
 
-				<a href="/blog" class="glass-panel p-8 rounded-2xl group hover:border-emerald-500/50 transition-colors flex flex-col">
-					<div class="w-12 h-12 bg-emerald-900/30 text-emerald-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-						<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-					</div>
-					<h2 class="text-2xl font-bold text-slate-100 mb-2">Random Musings</h2>
-					<p class="text-slate-400 mb-6 flex-grow">My blog detailing thoughts on TSDBs, PLG monetization, system architecture, and random technical deep-dives.</p>
-					<span class="text-sm font-medium text-emerald-400 group-hover:text-emerald-300 flex items-center gap-1">Read Posts <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-				</a>
-
-				<a href="/garage" class="md:col-span-2 glass-panel p-8 rounded-2xl group hover:border-orange-500/50 transition-colors flex flex-col items-center text-center">
-					<div class="w-12 h-12 bg-orange-900/30 text-orange-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-						<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-					</div>
-					<h2 class="text-2xl font-bold text-slate-100 mb-2">The Bike Garage</h2>
-					<p class="text-slate-400 mb-6 max-w-2xl">My digital service manual and ride log. Track maintenance, upgrades, and weekend rides for my motorcycles.</p>
-					<span class="text-sm font-medium text-orange-400 group-hover:text-orange-300 flex items-center gap-1">Open Garage <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-				</a>
-			</div>
-
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16 animate-fade-in" style="animation-delay: 0.2s;">
-				<div class="glass-panel p-8 rounded-2xl">
-					<h3 class="text-xl font-bold mb-4 flex items-center gap-2"><svg class="w-5 h-5 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg> Live Activity</h3>
-					<BlueskyFeed handle="cramd.bsky.social" limit={2} />
-				</div>
-				<div class="glass-panel p-8 rounded-2xl">
-					<h3 class="text-xl font-bold mb-6 flex items-center gap-2"><svg class="w-5 h-5 text-slate-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg> Open Source</h3>
-					<GitHubProfile compact={true} />
-				</div>
-			</div>
-
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+		<div class="glass-panel p-8 rounded-2xl">
+			<h3 class="text-lg font-bold mb-4 text-slate-900 flex items-center gap-2">
+				<svg class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+				Live activity
+			</h3>
+			<BlueskyFeed handle="cramd.bsky.social" limit={2} />
+		</div>
+		<div class="glass-panel p-8 rounded-2xl">
+			<h3 class="text-lg font-bold mb-6 text-slate-900 flex items-center gap-2">
+				<svg class="w-5 h-5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+				Open source
+			</h3>
+			<GitHubProfile compact={true} />
+		</div>
+	</div>
 </BaseLayout>

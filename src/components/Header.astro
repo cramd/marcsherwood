@@ -8,10 +8,8 @@ import HeaderLink from './HeaderLink.astro';
 		<h2><a href="/" class="logo-link">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/gtm">GTM</HeaderLink>
 			<HeaderLink href="/cv">CV</HeaderLink>
-			<HeaderLink href="/hobbies">Hobbies</HeaderLink>
-			<HeaderLink href="/garage">Garage</HeaderLink>
-			<HeaderLink href="/photography">Photography</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 		</div>
 		<div class="social-links">
@@ -28,8 +26,7 @@ import HeaderLink from './HeaderLink.astro';
 	.site-header {
 		margin: 0;
 		padding: 0;
-		background-color: var(--bg-color) !important;
-		background: rgba(11, 14, 20, 0.85) !important; /* Explicitly dark background */
+		background-color: rgba(255, 255, 255, 0.9);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 		border-bottom: 1px solid var(--border-color);

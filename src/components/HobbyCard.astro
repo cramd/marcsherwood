@@ -9,18 +9,18 @@ interface Props {
 const { title, notes, imageUrl } = Astro.props;
 ---
 
-<div class="group glass-panel rounded-xl overflow-hidden flex flex-col hover:border-slate-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-800/50 transition-all duration-300">
+<div class="group glass-panel rounded-xl overflow-hidden flex flex-col hover:border-blue-300 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
   {imageUrl ? (
-    <div class="w-full h-48 bg-slate-800 overflow-hidden">
-      <img src={imageUrl} alt={title} class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" loading="lazy" />
+    <div class="w-full h-48 bg-slate-100 overflow-hidden">
+      <img src={imageUrl} alt={title} class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500" loading="lazy" />
     </div>
   ) : (
-    <div class="w-full h-48 bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
-      <svg class="w-10 h-10 text-slate-500 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+    <div class="w-full h-48 bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center">
+      <svg class="w-10 h-10 text-slate-400 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
     </div>
   )}
-  <div class="p-5 flex flex-col flex-grow bg-slate-900/50">
-    <h3 class="text-xl font-bold text-slate-200 group-hover:text-white mb-2 transition-colors duration-300">{title}</h3>
-    <p class="text-sm text-slate-400 leading-relaxed flex-grow">{notes}</p>
+  <div class="p-5 flex flex-col flex-grow">
+    <h3 class="text-xl font-bold text-slate-900 group-hover:text-blue-700 mb-2 transition-colors duration-300">{title}</h3>
+    <p class="text-sm text-slate-600 leading-relaxed flex-grow">{notes}</p>
   </div>
 </div>

@@ -5,35 +5,47 @@
 @theme {
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  
-  --color-slate-850: #131720;
-  --color-slate-900: #0B0E14;
-  --color-slate-950: #06080A;
+
+  --color-slate-850: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+}
+
+:root {
+  --bg-color: #fafaf9;
+  --bg-surface: #ffffff;
+  --bg-color-alt: #f5f5f4;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --accent-color: #2563eb;
+  --glass-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --radius: 0.75rem;
 }
 
 body {
-  @apply bg-slate-900 text-slate-100 font-sans antialiased;
+  @apply bg-stone-50 text-slate-900 font-sans antialiased;
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-blue-700;
 }
 
 .glass-panel {
-  @apply bg-slate-800/40 backdrop-blur-md border border-white/10 shadow-lg shadow-black/20;
+  @apply bg-white border border-slate-200 shadow-sm;
 }
 
 /* Custom Markdown Prose Styling for Astro Blog Posts */
 .markdown-prose {
-  @apply text-slate-300 leading-relaxed text-lg;
+  @apply text-slate-700 leading-relaxed text-lg;
 }
 
 .markdown-prose h1, .markdown-prose h2, .markdown-prose h3, .markdown-prose h4 {
-  @apply text-slate-100 font-semibold tracking-tight mt-10 mb-4;
+  @apply text-slate-900 font-semibold tracking-tight mt-10 mb-4;
 }
 
 .markdown-prose h2 {
-  @apply text-3xl border-b border-slate-800 pb-2;
+  @apply text-3xl border-b border-slate-200 pb-2;
 }
 
 .markdown-prose h3 {
@@ -45,11 +57,11 @@ body {
 }
 
 .markdown-prose a {
-  @apply text-blue-400 underline decoration-blue-400/30 underline-offset-4 hover:decoration-blue-400 transition-colors;
+  @apply text-blue-600 underline decoration-blue-600/30 underline-offset-4 hover:decoration-blue-600 transition-colors;
 }
 
 .markdown-prose blockquote {
-  @apply border-l-4 border-blue-500 pl-4 py-1 my-6 italic text-slate-400 bg-slate-800/30 rounded-r-lg;
+  @apply border-l-4 border-blue-500 pl-4 py-1 my-6 italic text-slate-600 bg-slate-50 rounded-r-lg;
 }
 
 .markdown-prose ul {
@@ -61,13 +73,13 @@ body {
 }
 
 .markdown-prose code {
-  @apply font-mono text-sm bg-slate-800 text-blue-300 px-1.5 py-0.5 rounded border border-slate-700;
+  @apply font-mono text-sm bg-slate-100 text-blue-700 px-1.5 py-0.5 rounded border border-slate-200;
 }
 
 .markdown-prose pre {
-  @apply bg-slate-950 p-4 rounded-xl overflow-x-auto mb-6 border border-slate-800;
+  @apply bg-slate-900 p-4 rounded-xl overflow-x-auto mb-6 border border-slate-800;
 }
 
 .markdown-prose pre code {
-  @apply bg-transparent text-slate-300 p-0 border-0 text-sm;
+  @apply bg-transparent text-slate-100 p-0 border-0 text-sm;
 }

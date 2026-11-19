@@ -49,7 +49,7 @@ const formatDate = (date: Date) => {
     <svg class="w-5 h-5 text-blue-400" viewBox="0 0 320 286" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M69.3642 19.1462C122.341 54.0773 152.029 101.442 160 119.539C167.971 101.442 197.659 54.0773 250.636 19.1462C278.435 0.812423 320 -15.4295 320 28.5029C320 44.9722 309.289 122.957 299.712 143.19C281.346 181.986 211.383 194.577 167.873 189.97C224.225 197.904 266.398 221.785 259.049 261.218C252.128 298.358 191.077 281.714 160 252.793C128.923 281.714 67.8719 298.358 60.9507 261.218C53.6021 221.785 95.7753 197.904 152.127 189.97C108.617 194.577 38.6539 181.986 20.288 143.19C10.7107 122.957 0 44.9722 0 28.5029C0 -15.4295 41.5649 0.812423 69.3642 19.1462Z" fill="currentColor"/>
     </svg>
-    <h3 class="text-lg font-semibold text-slate-200">Latest from Bluesky</h3>
+    <h3 class="text-lg font-semibold text-slate-900">Latest from Bluesky</h3>
   </div>
 
   {error ? (
@@ -57,7 +57,7 @@ const formatDate = (date: Date) => {
       {error}
     </div>
   ) : posts.length === 0 ? (
-    <div class="p-4 text-sm text-slate-400 glass-panel rounded-lg">
+    <div class="p-4 text-sm text-slate-600 glass-panel rounded-lg">
       No recent posts found.
     </div>
   ) : (
@@ -71,12 +71,12 @@ const formatDate = (date: Date) => {
         >
           <div class="flex justify-between items-start mb-2">
             <div>
-              <span class="font-medium text-slate-200 group-hover:text-blue-400 transition-colors">{post.authorName}</span>
+              <span class="font-medium text-slate-900 group-hover:text-blue-600 transition-colors">{post.authorName}</span>
               <span class="text-xs text-slate-500 ml-2">@{post.authorHandle}</span>
             </div>
-            <time class="text-xs font-mono text-slate-400">{formatDate(post.createdAt)}</time>
+            <time class="text-xs font-mono text-slate-500">{formatDate(post.createdAt)}</time>
           </div>
-          <p class="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">{post.text}</p>
+          <p class="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap">{post.text}</p>
         </a>
       ))}
     </div>

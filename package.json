@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev --background",
-    "build": "astro build",
+    "build": "astro build && cp dist/sitemap-0.xml dist/sitemap.xml",
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "npm run build && rsync -avz --delete dist/ root@192.168.0.62:/var/www/marcsherwood.com/"

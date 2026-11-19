@@ -1,0 +1,1181 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import { MASKING_SIGNS } from '../data/masking-signs';
+
+const pageTitle = '30 Signs — Arcade Edition';
+const pageDescription =
+	'Self-reflection checklist for autism masking behaviors. For educational purposes only.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+		<meta name="robots" content="noindex, nofollow" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="cabinet" id="cabinet">
+			<!-- Marquee -->
+			<div class="marquee">
+				<div class="marquee-inner">
+					<h1 class="marquee-title">30 SIGNS</h1>
+					<p class="marquee-sub">YOU ARE MASKING</p>
+				</div>
+			</div>
+
+			<div class="cabinet-body">
+				<!-- Leaderboard -->
+				<aside class="leaderboard" aria-label="High score table">
+					<h2 class="leaderboard-title">HI-SCORE</h2>
+					<ol class="leaderboard-list" id="leaderboard-list">
+						<li class="leaderboard-row locked" data-rank="1">
+							<span class="rank">1.</span>
+							<span class="initials">ASS</span>
+							<span class="score">000030</span>
+						</li>
+						<li class="leaderboard-row" data-rank="2">
+							<span class="rank">2.</span>
+							<span class="initials">NT</span>
+							<span class="score">000028</span>
+						</li>
+						<li class="leaderboard-row" data-rank="3">
+							<span class="rank">3.</span>
+							<span class="initials">MSK</span>
+							<span class="score">000024</span>
+						</li>
+						<li class="leaderboard-row" data-rank="4">
+							<span class="rank">4.</span>
+							<span class="initials">???</span>
+							<span class="score">000019</span>
+						</li>
+						<li class="leaderboard-row player" data-rank="5" id="player-row">
+							<span class="rank">5.</span>
+							<span class="initials">1P</span>
+							<span class="score" id="player-leaderboard-score">000000</span>
+						</li>
+					</ol>
+				</aside>
+
+				<!-- CRT Screen -->
+				<div class="screen-bezel">
+					<div class="crt-screen" id="crt-screen" data-stage="idle">
+						<div class="crt-overlay" aria-hidden="true"></div>
+						<div class="crt-content">
+							<!-- HUD -->
+							<div class="hud" id="hud">
+								<div class="hud-left">
+									<div class="hud-block">
+										<span class="hud-label">HIGH SCORE</span>
+										<span class="hud-value" id="score-counter">0</span>
+										<span class="hud-denom">/ 30</span>
+									</div>
+									<div class="hud-progress">
+										<div class="hud-progress-bar" id="progress-bar"></div>
+									</div>
+								</div>
+								<div class="hud-center">
+									<span class="hud-stage" id="stage-label">INSERT COIN</span>
+								</div>
+								<div class="hud-right">
+									<span class="hud-player">1P</span>
+									<button type="button" class="hud-btn" id="btn-mute" aria-pressed="true" title="Toggle sound">
+										SND OFF
+									</button>
+								</div>
+							</div>
+
+							<!-- Action buttons -->
+							<div class="actions">
+								<button type="button" class="arcade-btn" id="btn-select-all">SELECT ALL</button>
+								<button type="button" class="arcade-btn arcade-btn-danger" id="btn-reset">INSERT COIN</button>
+							</div>
+
+							<!-- Intro note -->
+							<div class="intro-note">
+								<strong>NOTE:</strong> Masking is the subconscious or conscious strategy used by autistic
+								individuals to suppress natural behaviors and pass as neurotypical. This checklist is for
+								self-reflection and personal insight. Based on Auticate with Chris &amp; Debby.
+							</div>
+
+							<!-- Checklist -->
+							<form id="checklist-form" class="checklist" onsubmit="return false;">
+								<!-- Items injected by JS -->
+							</form>
+
+							<!-- Results -->
+							<section class="results" id="results-section" aria-live="polite">
+								<div class="results-header">
+									<h2 class="results-title">ASSESSMENT SUMMARY</h2>
+									<button type="button" class="arcade-btn arcade-btn-sm" id="btn-copy">COPY RESULTS</button>
+								</div>
+								<div class="warning-card" id="warning-card">
+									<h3 class="warning-title" id="warning-title">NO SIGNS CHECKED</h3>
+									<p class="warning-desc" id="warning-description">
+										Select any of the signs above that resonate with your daily experiences to generate
+										your total score and masking analysis.
+									</p>
+								</div>
+								<div class="results-grid">
+									<div>
+										<span class="grid-label">IMPACT OF HIGH MASKING:</span>
+										<ul>
+											<li>Autistic burnout &amp; chronic exhaustion</li>
+											<li>Anxiety, nervous system dysregulation</li>
+											<li>Loss of personal identity &amp; boundaries</li>
+										</ul>
+									</div>
+									<div>
+										<span class="grid-label">NEXT STEPS:</span>
+										<ul>
+											<li>Identify high-energy masking habits</li>
+											<li>Create safe unmasking spaces at home</li>
+											<li>Consult a neurodivergent-affirming professional</li>
+										</ul>
+									</div>
+								</div>
+							</section>
+						</div>
+
+						<!-- GAME OVER overlay -->
+						<div class="game-over-overlay hidden" id="game-over-overlay" role="dialog" aria-labelledby="game-over-title">
+							<div class="game-over-box">
+								<h2 class="game-over-title" id="game-over-title">GAME OVER</h2>
+								<p class="game-over-sub">HIGH SCORE IS NOT A GOOD THING</p>
+								<p class="game-over-hint">You can still play. ASS still owns the board.</p>
+								<button type="button" class="arcade-btn" id="btn-dismiss-overlay">CONTINUE</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Ticker toast -->
+			<div class="ticker hidden" id="ticker" aria-live="polite">
+				<span id="ticker-msg">READY PLAYER 1</span>
+			</div>
+
+			<footer class="cabinet-credit">MARC SHERWOOD — FOR EDUCATIONAL USE ONLY</footer>
+		</div>
+
+		<script define:vars={{ items: MASKING_SIGNS }}>
+			const STORAGE_KEY = 'autism_masking_checklist_state';
+			let checkedState = {};
+			let isMuted = true;
+			let audioCtx = null;
+			let gameOverDismissed = false;
+			let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+			const form = document.getElementById('checklist-form');
+			const scoreCounter = document.getElementById('score-counter');
+			const progressBar = document.getElementById('progress-bar');
+			const stageLabel = document.getElementById('stage-label');
+			const crtScreen = document.getElementById('crt-screen');
+			const warningCard = document.getElementById('warning-card');
+			const warningTitle = document.getElementById('warning-title');
+			const warningDesc = document.getElementById('warning-description');
+			const playerScore = document.getElementById('player-leaderboard-score');
+			const gameOverOverlay = document.getElementById('game-over-overlay');
+			const ticker = document.getElementById('ticker');
+			const tickerMsg = document.getElementById('ticker-msg');
+
+			function getCheckedCount() {
+				return Object.values(checkedState).filter(Boolean).length;
+			}
+
+			function getStage(count) {
+				if (count === 0) return 'idle';
+				if (count <= 7) return 'stage1';
+				if (count <= 15) return 'caution';
+				if (count <= 23) return 'burnout';
+				return 'gameover';
+			}
+
+			function getStageLabel(stage) {
+				const labels = {
+					idle: 'INSERT COIN',
+					stage1: 'STAGE 1',
+					caution: 'CAUTION',
+					burnout: 'BURNOUT ALERT',
+					gameover: 'GAME OVER',
+				};
+				return labels[stage] || 'INSERT COIN';
+			}
+
+			function getInsight(count) {
+				if (count === 0) {
+					return {
+						title: 'NO SIGNS CHECKED',
+						description:
+							'Select any of the signs above that resonate with your daily experiences to generate your total score and masking analysis.',
+					};
+				}
+				if (count <= 7) {
+					return {
+						title: 'LOW MASKING SCORE (1 - 7)',
+						description:
+							'You report relatively few masking behaviors. You may feel comfortable expressing your needs naturally or experience minimal social masking energy drain.',
+					};
+				}
+				if (count <= 15) {
+					return {
+						title: 'MODERATE MASKING SCORE (8 - 15)',
+						description:
+							'You regularly use masking strategies to navigate social scenarios. While manageable in small bursts, consistently hiding your traits can cause periodic mental fatigue.',
+					};
+				}
+				if (count <= 23) {
+					return {
+						title: 'HIGH MASKING SCORE (16 - 23) - BURNOUT ALERT',
+						description:
+							'Warning: You engage in heavy daily masking. Maintaining this level of social performance often leads to severe energy drain, anxiety, physical fatigue, and suppressed meltdowns or shutdowns.',
+					};
+				}
+				return {
+					title: 'CRITICAL / VERY HIGH MASKING SCORE (24 - 30) - HIGH RISK OF CHRONIC BURNOUT',
+					description:
+						'Severe Warning: You are operating in constant survival mode. High levels of masking require immense neurological effort and frequently lead to autistic burnout, loss of identity, sensory overload, and chronic fatigue. Prioritizing rest and safe unmasking spaces is strongly recommended.',
+				};
+			}
+
+			function formatScore(n) {
+				return String(n).padStart(6, '0');
+			}
+
+			function initAudio() {
+				if (!audioCtx) {
+					audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+				}
+			}
+
+			function playBlip(freq = 440, duration = 0.08, type = 'square') {
+				if (isMuted) return;
+				try {
+					initAudio();
+					const osc = audioCtx.createOscillator();
+					const gain = audioCtx.createGain();
+					osc.type = type;
+					osc.frequency.value = freq;
+					gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+					gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+					osc.connect(gain);
+					gain.connect(audioCtx.destination);
+					osc.start();
+					osc.stop(audioCtx.currentTime + duration);
+				} catch (_) {
+					/* audio unavailable */
+				}
+			}
+
+			function playCheckSound() {
+				playBlip(660, 0.06);
+				setTimeout(() => playBlip(880, 0.04), 50);
+			}
+
+			function playUncheckSound() {
+				playBlip(330, 0.06);
+			}
+
+			function playResetSound() {
+				playBlip(220, 0.1);
+				setTimeout(() => playBlip(165, 0.15), 80);
+			}
+
+			function flashScreen() {
+				if (prefersReducedMotion) return;
+				crtScreen.classList.add('hit-flash');
+				setTimeout(() => crtScreen.classList.remove('hit-flash'), 150);
+			}
+
+			function shakeScreen() {
+				if (prefersReducedMotion) return;
+				crtScreen.classList.add('shake');
+				setTimeout(() => crtScreen.classList.remove('shake'), 400);
+			}
+
+			function showTicker(msg) {
+				tickerMsg.textContent = msg;
+				ticker.classList.remove('hidden');
+				clearTimeout(showTicker._timer);
+				showTicker._timer = setTimeout(() => ticker.classList.add('hidden'), 2500);
+			}
+
+			function saveState() {
+				try {
+					localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedState));
+				} catch (e) {
+					console.warn('LocalStorage unavailable', e);
+				}
+			}
+
+			function loadState() {
+				try {
+					const saved = localStorage.getItem(STORAGE_KEY);
+					if (saved) checkedState = JSON.parse(saved);
+				} catch (e) {
+					checkedState = {};
+				}
+			}
+
+			function renderChecklist() {
+				form.innerHTML = '';
+				items.forEach((item) => {
+					const isChecked = !!checkedState[item.id];
+					const label = document.createElement('label');
+					label.className = `item-card${isChecked ? ' checked' : ''}`;
+					label.htmlFor = `item-${item.id}`;
+					label.innerHTML = `
+						<input type="checkbox" id="item-${item.id}" value="${item.id}" ${isChecked ? 'checked' : ''} />
+						<div class="item-body">
+							<span class="item-title">#${item.id}. ${item.title}</span>
+							<p class="item-text">${item.text}</p>
+						</div>
+					`;
+					const checkbox = label.querySelector('input');
+					checkbox.addEventListener('change', () => toggleItem(item.id, checkbox.checked));
+					form.appendChild(label);
+				});
+				updateCalculations();
+			}
+
+			function toggleItem(id, checked) {
+				checkedState[id] = checked;
+				saveState();
+				if (checked) {
+					playCheckSound();
+					flashScreen();
+				} else {
+					playUncheckSound();
+				}
+				renderChecklist();
+			}
+
+			function selectAll() {
+				items.forEach((item) => (checkedState[item.id] = true));
+				saveState();
+				renderChecklist();
+				showTicker('ALL SIGNS SELECTED');
+				playBlip(523, 0.1);
+			}
+
+			function resetForm() {
+				checkedState = {};
+				gameOverDismissed = false;
+				saveState();
+				renderChecklist();
+				gameOverOverlay.classList.add('hidden');
+				showTicker('BOARD WIPED — INSERT COIN');
+				playResetSound();
+			}
+
+			function updateCalculations() {
+				const count = getCheckedCount();
+				const stage = getStage(count);
+				const insight = getInsight(count);
+
+				scoreCounter.textContent = String(count);
+				progressBar.style.width = `${Math.round((count / 30) * 100)}%`;
+				stageLabel.textContent = getStageLabel(stage);
+				crtScreen.dataset.stage = stage;
+				warningTitle.textContent = insight.title;
+				warningDesc.textContent = insight.description;
+				warningCard.dataset.stage = stage;
+				playerScore.textContent = formatScore(count);
+
+				if (stage === 'burnout' && count > 15) {
+					shakeScreen();
+				}
+
+				if (stage === 'gameover' && !gameOverDismissed) {
+					gameOverOverlay.classList.remove('hidden');
+					if (!prefersReducedMotion) shakeScreen();
+					playBlip(110, 0.3, 'sawtooth');
+				}
+			}
+
+			function copySummary() {
+				const count = getCheckedCount();
+				const checkedItemsList = items
+					.filter((i) => checkedState[i.id])
+					.map((i) => `- #${i.id}: ${i.title}`)
+					.join('\n');
+				const summaryText = `Autism Masking Assessment Summary:\nTotal Score: ${count} / 30\n\nChecked Traits:\n${checkedItemsList || 'None'}`;
+
+				navigator.clipboard
+					.writeText(summaryText)
+					.then(() => showTicker('RESULTS COPIED'))
+					.catch(() => {
+						const ta = document.createElement('textarea');
+						ta.value = summaryText;
+						document.body.appendChild(ta);
+						ta.select();
+						try {
+							document.execCommand('copy');
+							showTicker('RESULTS COPIED');
+						} catch (_) {
+							showTicker('COPY FAILED');
+						}
+						document.body.removeChild(ta);
+					});
+			}
+
+			document.getElementById('btn-select-all').addEventListener('click', selectAll);
+			document.getElementById('btn-reset').addEventListener('click', resetForm);
+			document.getElementById('btn-copy').addEventListener('click', copySummary);
+			document.getElementById('btn-dismiss-overlay').addEventListener('click', () => {
+				gameOverDismissed = true;
+				gameOverOverlay.classList.add('hidden');
+			});
+			document.getElementById('btn-mute').addEventListener('click', () => {
+				isMuted = !isMuted;
+				const btn = document.getElementById('btn-mute');
+				btn.textContent = isMuted ? 'SND OFF' : 'SND ON';
+				btn.setAttribute('aria-pressed', String(isMuted));
+				if (!isMuted) playBlip(523, 0.05);
+			});
+
+			window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
+				prefersReducedMotion = e.matches;
+			});
+
+			loadState();
+			renderChecklist();
+		</script>
+
+		<style is:global>
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				min-height: 100%;
+				background: #0a0a0f;
+				color: #c8f0c8;
+				font-family: 'VT323', monospace;
+				font-size: 18px;
+				line-height: 1.4;
+			}
+
+			.cabinet {
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				background: linear-gradient(180deg, #1a0a0a 0%, #0d0d12 40%, #0a0a0f 100%);
+				padding: 1rem;
+			}
+
+			/* Marquee */
+			.marquee {
+				background: linear-gradient(180deg, #2a1020 0%, #1a0818 100%);
+				border: 4px solid #4a2040;
+				border-radius: 8px 8px 0 0;
+				padding: 1.25rem 1.5rem;
+				text-align: center;
+				box-shadow:
+					inset 0 2px 20px rgba(255, 0, 128, 0.15),
+					0 0 30px rgba(255, 0, 128, 0.2);
+			}
+
+			.marquee-title {
+				font-family: 'Press Start 2P', monospace;
+				font-size: clamp(0.9rem, 3vw, 1.4rem);
+				color: #ff44aa;
+				text-shadow:
+					0 0 10px #ff44aa,
+					0 0 20px #ff0088,
+					2px 2px 0 #880044;
+				margin: 0 0 0.5rem;
+				letter-spacing: 0.1em;
+			}
+
+			.marquee-sub {
+				font-family: 'Press Start 2P', monospace;
+				font-size: clamp(0.5rem, 2vw, 0.65rem);
+				color: #44ffff;
+				text-shadow: 0 0 8px #44ffff;
+				margin: 0;
+				animation: marquee-blink 2s ease-in-out infinite;
+			}
+
+			@keyframes marquee-blink {
+				0%,
+				100% {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0.6;
+				}
+			}
+
+			.cabinet-body {
+				display: grid;
+				grid-template-columns: 180px 1fr;
+				gap: 0;
+				flex: 1;
+				border: 6px solid #2a1810;
+				border-top: none;
+				background: #1a1210;
+				box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
+			}
+
+			@media (max-width: 768px) {
+				.cabinet-body {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			/* Leaderboard */
+			.leaderboard {
+				background: #0a0808;
+				border-right: 3px solid #3a2818;
+				padding: 1rem 0.75rem;
+			}
+
+			@media (max-width: 768px) {
+				.leaderboard {
+					border-right: none;
+					border-bottom: 3px solid #3a2818;
+				}
+			}
+
+			.leaderboard-title {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.55rem;
+				color: #ffcc00;
+				text-shadow: 0 0 6px #ffcc00;
+				margin: 0 0 1rem;
+				text-align: center;
+			}
+
+			.leaderboard-list {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			.leaderboard-row {
+				display: grid;
+				grid-template-columns: 1.5rem 2.5rem 1fr;
+				gap: 0.25rem;
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.45rem;
+				padding: 0.35rem 0;
+				color: #88aa88;
+			}
+
+			.leaderboard-row.locked {
+				color: #ff4444;
+				text-shadow: 0 0 6px #ff0000;
+			}
+
+			.leaderboard-row.player {
+				color: #44ffff;
+			}
+
+			.leaderboard-row .score {
+				text-align: right;
+				font-variant-numeric: tabular-nums;
+			}
+
+			/* CRT Screen */
+			.screen-bezel {
+				padding: 1rem;
+				background: #0d0a08;
+			}
+
+			.crt-screen {
+				position: relative;
+				background: #0a120a;
+				border: 8px solid #1a1810;
+				border-radius: 12px;
+				overflow: hidden;
+				min-height: 400px;
+				box-shadow:
+					inset 0 0 60px rgba(0, 255, 100, 0.05),
+					0 0 0 2px #2a2018;
+			}
+
+			.crt-overlay {
+				position: absolute;
+				inset: 0;
+				pointer-events: none;
+				z-index: 10;
+				background: repeating-linear-gradient(
+					0deg,
+					transparent,
+					transparent 2px,
+					rgba(0, 0, 0, 0.15) 2px,
+					rgba(0, 0, 0, 0.15) 4px
+				);
+				border-radius: 4px;
+			}
+
+			.crt-screen::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				pointer-events: none;
+				z-index: 9;
+				background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+				border-radius: 4px;
+			}
+
+			.crt-content {
+				position: relative;
+				z-index: 1;
+				padding: 1rem 1.25rem 2rem;
+				max-height: none;
+			}
+
+			/* Stage-based CRT effects */
+			.crt-screen[data-stage='idle'] .crt-overlay {
+				animation: scanline-idle 4s linear infinite;
+			}
+
+			.crt-screen[data-stage='stage1'] {
+				box-shadow: inset 0 0 40px rgba(0, 255, 100, 0.08);
+			}
+
+			.crt-screen[data-stage='caution'] .crt-overlay {
+				animation: scanline-fast 2s linear infinite;
+			}
+
+			.crt-screen[data-stage='caution'] .hud-stage {
+				color: #ffaa00;
+				text-shadow: 0 0 8px #ff8800;
+			}
+
+			.crt-screen[data-stage='burnout'] {
+				animation: burnout-pulse 1.5s ease-in-out infinite;
+			}
+
+			.crt-screen[data-stage='burnout'] .crt-overlay {
+				animation: scanline-fast 1s linear infinite;
+			}
+
+			.crt-screen[data-stage='burnout'] .hud-stage {
+				color: #ff6600;
+				text-shadow: 0 0 10px #ff4400;
+			}
+
+			.crt-screen[data-stage='gameover'] {
+				animation: crt-roll 8s linear infinite, burnout-pulse 0.8s ease-in-out infinite;
+			}
+
+			.crt-screen[data-stage='gameover'] .crt-content {
+				filter: hue-rotate(-20deg) saturate(1.3);
+			}
+
+			.crt-screen[data-stage='gameover'] .hud-stage {
+				color: #ff0044;
+				text-shadow: 0 0 12px #ff0000;
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.crt-screen[data-stage='burnout'],
+				.crt-screen[data-stage='gameover'] {
+					animation: none;
+				}
+
+				.crt-screen[data-stage='idle'] .crt-overlay,
+				.crt-screen[data-stage='caution'] .crt-overlay,
+				.crt-screen[data-stage='burnout'] .crt-overlay {
+					animation: none;
+				}
+
+				.marquee-sub {
+					animation: none;
+				}
+			}
+
+			@keyframes scanline-idle {
+				0% {
+					transform: translateY(0);
+				}
+				100% {
+					transform: translateY(4px);
+				}
+			}
+
+			@keyframes scanline-fast {
+				0% {
+					transform: translateY(0);
+				}
+				100% {
+					transform: translateY(4px);
+				}
+			}
+
+			@keyframes burnout-pulse {
+				0%,
+				100% {
+					box-shadow: inset 0 0 40px rgba(255, 100, 0, 0.1);
+				}
+				50% {
+					box-shadow: inset 0 0 60px rgba(255, 50, 0, 0.2);
+				}
+			}
+
+			@keyframes crt-roll {
+				0%,
+				100% {
+					transform: translateY(0);
+				}
+				25% {
+					transform: translateY(-1px);
+				}
+				75% {
+					transform: translateY(1px);
+				}
+			}
+
+			.crt-screen.hit-flash {
+				filter: brightness(1.4);
+			}
+
+			.crt-screen.shake {
+				animation: screen-shake 0.4s ease-in-out;
+			}
+
+			@keyframes screen-shake {
+				0%,
+				100% {
+					transform: translateX(0);
+				}
+				20% {
+					transform: translateX(-4px);
+				}
+				40% {
+					transform: translateX(4px);
+				}
+				60% {
+					transform: translateX(-3px);
+				}
+				80% {
+					transform: translateX(3px);
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.crt-screen.shake {
+					animation: none;
+				}
+
+				.crt-screen.hit-flash {
+					filter: none;
+				}
+			}
+
+			/* HUD */
+			.hud {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 0.75rem;
+				padding: 0.75rem 1rem;
+				background: rgba(0, 20, 0, 0.6);
+				border: 2px solid #226622;
+				margin-bottom: 1rem;
+				position: sticky;
+				top: 0;
+				z-index: 5;
+			}
+
+			.hud-left {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+			}
+
+			.hud-label {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.4rem;
+				color: #668866;
+				display: block;
+			}
+
+			.hud-value {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 1rem;
+				color: #44ff44;
+				text-shadow: 0 0 8px #00ff00;
+			}
+
+			.hud-denom {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.45rem;
+				color: #446644;
+			}
+
+			.hud-progress {
+				width: 80px;
+				height: 8px;
+				background: #112211;
+				border: 1px solid #226622;
+				overflow: hidden;
+			}
+
+			.hud-progress-bar {
+				height: 100%;
+				width: 0%;
+				background: linear-gradient(90deg, #228822, #44ff44);
+				transition: width 0.3s ease;
+			}
+
+			.hud-stage {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.5rem;
+				color: #ffcc00;
+				text-shadow: 0 0 6px #ffaa00;
+			}
+
+			.crt-screen[data-stage='idle'] .hud-stage {
+				animation: coin-blink 1.5s step-end infinite;
+			}
+
+			@keyframes coin-blink {
+				0%,
+				49% {
+					opacity: 1;
+				}
+				50%,
+				100% {
+					opacity: 0.3;
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.crt-screen[data-stage='idle'] .hud-stage {
+					animation: none;
+				}
+			}
+
+			.hud-right {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+			}
+
+			.hud-player {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.5rem;
+				color: #44ffff;
+			}
+
+			.hud-btn {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.35rem;
+				padding: 0.35rem 0.5rem;
+				background: #1a2a1a;
+				border: 2px solid #336633;
+				color: #88cc88;
+				cursor: pointer;
+			}
+
+			.hud-btn:hover {
+				background: #224422;
+				color: #aaffaa;
+			}
+
+			.hud-btn[aria-pressed='false'] {
+				border-color: #44ff44;
+				color: #44ff44;
+			}
+
+			/* Buttons */
+			.actions {
+				display: flex;
+				gap: 0.75rem;
+				margin-bottom: 1rem;
+				flex-wrap: wrap;
+			}
+
+			.arcade-btn {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.4rem;
+				padding: 0.6rem 1rem;
+				background: #1a2a3a;
+				border: 3px solid #4488cc;
+				color: #88ccff;
+				cursor: pointer;
+				transition: background 0.15s, transform 0.1s;
+			}
+
+			.arcade-btn:hover {
+				background: #224466;
+				transform: translateY(-1px);
+			}
+
+			.arcade-btn-danger {
+				border-color: #cc4444;
+				color: #ff8888;
+				background: #2a1a1a;
+			}
+
+			.arcade-btn-danger:hover {
+				background: #442222;
+			}
+
+			.arcade-btn-sm {
+				font-size: 0.35rem;
+				padding: 0.5rem 0.75rem;
+			}
+
+			/* Intro */
+			.intro-note {
+				background: rgba(0, 40, 60, 0.4);
+				border: 2px solid #226688;
+				padding: 0.75rem 1rem;
+				margin-bottom: 1.25rem;
+				font-size: 1rem;
+				color: #aaccdd;
+			}
+
+			/* Checklist */
+			.checklist {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+				margin-bottom: 2rem;
+			}
+
+			.item-card {
+				display: flex;
+				gap: 0.75rem;
+				padding: 0.75rem 1rem;
+				background: rgba(0, 30, 0, 0.3);
+				border: 2px solid #224422;
+				cursor: pointer;
+				transition: border-color 0.15s, background 0.15s;
+			}
+
+			.item-card:hover {
+				border-color: #336633;
+				background: rgba(0, 40, 0, 0.4);
+			}
+
+			.item-card.checked {
+				border-color: #44aa44;
+				background: rgba(0, 60, 0, 0.25);
+				box-shadow: 0 0 12px rgba(0, 255, 100, 0.1);
+			}
+
+			.item-card input[type='checkbox'] {
+				width: 1.25rem;
+				height: 1.25rem;
+				margin-top: 0.15rem;
+				accent-color: #44ff44;
+				flex-shrink: 0;
+				cursor: pointer;
+			}
+
+			.item-title {
+				font-weight: bold;
+				color: #ccffcc;
+				display: block;
+				margin-bottom: 0.25rem;
+			}
+
+			.item-text {
+				margin: 0;
+				color: #88aa88;
+				font-size: 0.95rem;
+			}
+
+			/* Results */
+			.results {
+				border: 2px solid #336633;
+				padding: 1.25rem;
+				background: rgba(0, 20, 0, 0.4);
+			}
+
+			.results-header {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				margin-bottom: 1rem;
+				padding-bottom: 0.75rem;
+				border-bottom: 2px solid #224422;
+			}
+
+			.results-title {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.55rem;
+				color: #ffcc00;
+				margin: 0;
+			}
+
+			.warning-card {
+				padding: 1rem;
+				margin-bottom: 1rem;
+				border: 2px solid #446644;
+				background: rgba(0, 30, 0, 0.5);
+			}
+
+			.warning-card[data-stage='stage1'] {
+				border-color: #44aa44;
+				background: rgba(0, 60, 0, 0.3);
+			}
+
+			.warning-card[data-stage='caution'] {
+				border-color: #ccaa00;
+				background: rgba(60, 50, 0, 0.3);
+			}
+
+			.warning-card[data-stage='burnout'] {
+				border-color: #cc6600;
+				background: rgba(60, 30, 0, 0.3);
+			}
+
+			.warning-card[data-stage='gameover'] {
+				border-color: #cc0044;
+				background: rgba(60, 0, 20, 0.4);
+			}
+
+			.warning-title {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.45rem;
+				color: #ffcc88;
+				margin: 0 0 0.5rem;
+			}
+
+			.warning-desc {
+				margin: 0;
+				color: #aaccaa;
+				font-size: 1rem;
+			}
+
+			.results-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+				font-size: 0.95rem;
+				color: #88aa88;
+			}
+
+			@media (max-width: 600px) {
+				.results-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			.grid-label {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.35rem;
+				color: #668866;
+				display: block;
+				margin-bottom: 0.5rem;
+			}
+
+			.results-grid ul {
+				margin: 0;
+				padding-left: 1.25rem;
+			}
+
+			/* GAME OVER overlay */
+			.game-over-overlay {
+				position: absolute;
+				inset: 0;
+				z-index: 20;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: rgba(0, 0, 0, 0.75);
+			}
+
+			.game-over-overlay.hidden {
+				display: none;
+			}
+
+			.game-over-box {
+				text-align: center;
+				padding: 2rem;
+				border: 4px solid #ff0044;
+				background: rgba(20, 0, 10, 0.95);
+				box-shadow: 0 0 40px rgba(255, 0, 68, 0.4);
+				max-width: 90%;
+			}
+
+			.game-over-title {
+				font-family: 'Press Start 2P', monospace;
+				font-size: clamp(1rem, 4vw, 1.5rem);
+				color: #ff0044;
+				text-shadow: 0 0 20px #ff0000;
+				margin: 0 0 1rem;
+				animation: game-over-blink 0.5s step-end infinite;
+			}
+
+			@keyframes game-over-blink {
+				0%,
+				49% {
+					opacity: 1;
+				}
+				50%,
+				100% {
+					opacity: 0.7;
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.game-over-title {
+					animation: none;
+				}
+			}
+
+			.game-over-sub {
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.45rem;
+				color: #ff8888;
+				margin: 0 0 0.75rem;
+			}
+
+			.game-over-hint {
+				font-size: 1rem;
+				color: #aa8888;
+				margin: 0 0 1.25rem;
+			}
+
+			/* Ticker */
+			.ticker {
+				position: fixed;
+				bottom: 3rem;
+				left: 50%;
+				transform: translateX(-50%);
+				background: #0a1a0a;
+				border: 2px solid #44ff44;
+				padding: 0.5rem 1.25rem;
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.4rem;
+				color: #44ff44;
+				z-index: 100;
+				box-shadow: 0 0 20px rgba(0, 255, 100, 0.3);
+			}
+
+			.ticker.hidden {
+				display: none;
+			}
+
+			.cabinet-credit {
+				text-align: center;
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.35rem;
+				color: #446644;
+				padding: 1rem;
+				margin-top: auto;
+			}
+		</style>
+	</body>
+</html>

@@ -1,0 +1,91 @@
+---
+import type { TimelineSource } from '../data/end-of-it-events';
+
+interface Props {
+	sources?: TimelineSource[];
+	compact?: boolean;
+}
+
+const { sources = [], compact = false } = Astro.props;
+---
+
+{
+	sources.length > 0 && (
+		<div class:list={['event-sources', compact && 'event-sources-compact']}>
+			<span class="event-sources-label">Sources</span>
+			<ul class="event-sources-list">
+				{sources.map((source) => (
+					<li>
+						<a href={source.url} target="_blank" rel="noopener noreferrer">
+							{source.label}
+							<span class="event-sources-external" aria-hidden="true">
+								↗
+							</span>
+						</a>
+					</li>
+				))}
+			</ul>
+		</div>
+	)
+}
+
+<style>
+	.event-sources {
+		margin: 0 0 1.25rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid #262626;
+	}
+
+	.event-sources-label {
+		display: block;
+		font-size: 0.6875rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #737373;
+		margin-bottom: 0.5rem;
+	}
+
+	.event-sources-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+
+	.event-sources-list a {
+		color: #d4d4d4;
+		font-size: 0.8125rem;
+		line-height: 1.4;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.25rem;
+	}
+
+	.event-sources-list a:hover {
+		color: #ef4444;
+		text-decoration: underline;
+	}
+
+	.event-sources-external {
+		font-size: 0.75em;
+		opacity: 0.7;
+	}
+
+	.event-sources-compact {
+		margin-bottom: 1rem;
+		padding-top: 0.5rem;
+	}
+
+	.event-sources-compact .event-sources-list a {
+		font-size: 0.75rem;
+		color: #737373;
+	}
+
+	.event-sources-compact .event-sources-list a:hover {
+		color: #ef4444;
+	}
+</style>
