@@ -14,7 +14,8 @@
     "deploy:homelab:sebring": "npm run deploy --prefix apps/sebring",
     "deploy:homelab:legacy": "npm run build && rsync -avz --delete dist/ root@192.168.0.62:/var/www/marcsherwood.com/",
     "deploy:pages": "npm run build && wrangler pages deploy dist --project-name=marcsherwood --branch=main",
-    "dns:pages": "node scripts/point-dns-to-pages.mjs"
+    "dns:pages": "node scripts/point-dns-to-pages.mjs",
+    "dns:sebring": "node scripts/ensure-sebring-dns.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.2",
