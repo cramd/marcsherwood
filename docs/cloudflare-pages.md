@@ -16,7 +16,7 @@ Production deploys are triggered by pushes to **`main`** on [cramd/marcsherwood]
 - `marcsherwood.com`
 - `www.marcsherwood.com` (redirects to apex via `public/_redirects`)
 
-`sebring.marcsherwood.com` stays on the homelab Caddy server (`apps/sebring`). DNS must be a **proxied A record** to the homelab public IP (`207.216.8.150` — same as `fuzzynacho.org`), **not** a CNAME to apex/Pages. After apex cutover, run `CF_API_TOKEN=… npm run dns:sebring` if the site shows Cloudflare **522**.
+`sebring.marcsherwood.com` stays on the homelab Caddy server (`apps/sebring`). DNS must be **`sebring`** (not `seabring`): proxied **A** → homelab WAN IP (`207.6.231.172`), **not** a CNAME to apex/Pages. Run `CF_API_TOKEN=… npm run dns:sebring` to apply via API.
 
 ## Homelab-only scripts
 

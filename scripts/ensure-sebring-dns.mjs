@@ -9,7 +9,7 @@ import fs from "node:fs";
  */
 const ZONE_ID = "dffd0c3cdd5c485f042fb0bb5957f042";
 const HOSTNAME = "sebring.marcsherwood.com";
-const DEFAULT_ORIGIN_IP = "207.216.8.150";
+const DEFAULT_ORIGIN_IP = "207.6.231.172";
 
 const dryRun = process.argv.includes("--dry-run");
 
