@@ -52,29 +52,7 @@ www.fuzzynacho.org {
     reverse_proxy localhost:3000
 }
 
-www.marcsherwood.com {
-    route {
-        @crawlerFiles path /robots.txt /llms.txt /rss.xml /sitemap.xml /sitemap-index.xml /sitemap-0.xml
-        handle @crawlerFiles {
-            root * /var/www/marcsherwood.com
-            file_server
-        }
-        redir https://marcsherwood.com{uri} 308
-    }
-}
-
-marcsherwood.com {
-    root * /var/www/marcsherwood.com
-    encode gzip zstd
-
-    @staticXml path *.xml
-    handle @staticXml {
-        file_server
-    }
-
-    file_server
-    try_files {path} {path}/index.html /404.html
-}
+# marcsherwood.com + www → Cloudflare Pages (GitHub main). Removed from Caddy after cutover.
 
 sebring.marcsherwood.com {
     root * /var/www/sebring.marcsherwood.com

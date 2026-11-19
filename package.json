@@ -10,7 +10,9 @@
     "build": "astro build && cp dist/sitemap-0.xml dist/sitemap.xml",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && rsync -avz --delete dist/ root@192.168.0.62:/var/www/marcsherwood.com/"
+    "deploy": "echo \"Production: push to main — Cloudflare Pages builds from GitHub.\"",
+    "deploy:homelab:sebring": "npm run deploy --prefix apps/sebring",
+    "deploy:homelab:legacy": "npm run build && rsync -avz --delete dist/ root@192.168.0.62:/var/www/marcsherwood.com/"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.2",
