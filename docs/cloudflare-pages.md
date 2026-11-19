@@ -22,3 +22,11 @@ Production deploys are triggered by pushes to **`main`** on [cramd/marcsherwood]
 
 - `npm run deploy:homelab:legacy` — old apex rsync (emergency only)
 - `npm run deploy:homelab:sebring` — Sebring subdomain
+- `npm run deploy:pages` — direct upload to Pages (GitHub Actions or Git integration is preferred)
+- `CF_API_TOKEN=… npm run dns:pages` — apex + www CNAME to `marcsherwood.pages.dev` (leaves `sebring` alone)
+
+### GitHub auto-deploy
+
+Add repository secret `CLOUDFLARE_API_TOKEN` (Pages: Edit + Account read). Pushes to `main` run `.github/workflows/cloudflare-pages.yml`.
+
+Alternatively: Workers & Pages → **marcsherwood** → Connect to Git → `cramd/marcsherwood`.

@@ -12,7 +12,9 @@
     "astro": "astro",
     "deploy": "echo \"Production: push to main — Cloudflare Pages builds from GitHub.\"",
     "deploy:homelab:sebring": "npm run deploy --prefix apps/sebring",
-    "deploy:homelab:legacy": "npm run build && rsync -avz --delete dist/ root@192.168.0.62:/var/www/marcsherwood.com/"
+    "deploy:homelab:legacy": "npm run build && rsync -avz --delete dist/ root@192.168.0.62:/var/www/marcsherwood.com/",
+    "deploy:pages": "npm run build && wrangler pages deploy dist --project-name=marcsherwood --branch=main",
+    "dns:pages": "node scripts/point-dns-to-pages.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.2",
