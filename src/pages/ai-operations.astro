@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const phases = [
+  { name: 'The divining rod', verb: 'Find the friction', detail: 'Spend time with the people doing the work. Shadow workflows, follow handoffs, examine queues and exceptions, and listen for the tasks people have learned to tolerate.' },
+  { name: 'The forensic investigator', verb: 'Follow the evidence', detail: 'Trace the work from input to outcome. Establish cycle time, quality, frequency, operating cost and risk. Separate the symptom from its cause, and validate what we think we know.' },
+  { name: 'The mine', verb: 'Extract the value', detail: 'Rank opportunities by evidence-backed return relative to effort. Build the smallest useful solution, introduce it with the people affected, measure the result and revisit the ranked backlog.' },
+];
+
+const milestones = [
+  { period: 'Days 1–30', title: 'Discover & prioritize', body: 'Meet workflow owners across functions. Establish baselines, map friction and constraints, and agree on a ranked opportunity backlog with the people who own the outcomes.', output: 'Evidence-backed shortlist and baseline measures.' },
+  { period: 'Days 31–60', title: 'Build & validate', body: 'Choose the highest-return opportunity that is feasible and safe. Prototype against real workflow examples, test quality, add human review where needed and pilot with a small group.', output: 'A working pilot with evaluation and telemetry.' },
+  { period: 'Days 61–90', title: 'Deliver & measure', body: 'Where the pilot meets quality and risk thresholds, put it into daily use with clear ownership, monitoring and a support path. Compare against the baseline, document lessons and select the next opportunity.', output: 'A measured result and a repeatable delivery approach.' },
+];
+
+const cases = [
+  { name: 'HoneOS', label: 'From manual research to usable intelligence', body: 'I built an AI-assisted account research platform after seeing how much time technical sales teams spent collecting fragmented information. It connects engineering signals to evidence-backed account narratives, with model selection, prompt review, caching, issue reporting and usage, cost and latency instrumentation.', lesson: 'The deliverable is a better research workflow, not simply an LLM-generated answer.', href: 'https://honeos.ai', link: 'Explore HoneOS' },
+  { name: 'HuntMode', label: 'Evidence before a recommendation', body: 'I built an AI-assisted career workflow that maps role requirements to CV evidence, exposes gaps and supports application and interview preparation. Logs, PostHog and accuracy feedback help surface opportunities to improve the workflow.', lesson: 'A recommendation should make its supporting evidence and limitations visible.', href: 'https://github.com/cramd/huntmode', link: 'View the project' },
+  { name: 'Looking Glass', label: 'Make system behaviour visible', body: 'My personal infrastructure work includes Proxmox, VictoriaMetrics, Docker and Ansible. Running and observing these systems gives me a practical environment for investigating behaviour and experimenting with automated monitoring.', lesson: 'A working system is only the beginning; understanding its behaviour is part of the work.', href: '/cv#featured-projects', link: 'Explore my projects' },
+  { name: 'Docker AI', label: 'Translate technology into adoption', body: 'I worked on Docker’s first AI stack with ecosystem partners including Ollama, LangChain and Neo4j, assembled the AI keynote speaker lineup for DockerCon, and created technical content and field enablement.', lesson: 'Useful technology needs a clear connection to the people and workflows it serves.', href: 'https://www.docker.com/contributors/marc-sherwood/', link: 'Read my Docker publications' },
+];
+---
+
+<BaseLayout title="Finding the Gold | AI Operations — Marc Sherwood" description="My approach to applied AI operations: discover business friction, follow the evidence, prioritize return on investment, and deliver measurable improvements." mainClass="flex-grow w-full">
+  <section class="bg-slate-900 text-white border-b border-slate-700">
+    <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
+      <p class="text-sm font-bold uppercase tracking-widest text-blue-300 mb-6">Marc Sherwood · Applied AI Operations</p>
+      <h1 class="text-4xl md:text-6xl font-bold leading-tight max-w-4xl">There is gold in the hills.<br /><span class="text-blue-300">Let's find it.</span></h1>
+      <p class="mt-7 text-xl md:text-2xl leading-relaxed max-w-3xl text-slate-200">I find the friction in how people work, follow the evidence, and build solutions in order of their expected return.</p>
+      <p class="mt-5 text-lg text-slate-300 max-w-3xl">I can't tell you which problems I will solve before I have spent time with your people. I can tell you how I intend to find them, prove their value and deliver something that makes a difference.</p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="#approach" class="inline-block rounded-lg bg-white px-5 py-3 font-bold text-slate-900 hover:bg-blue-100">How I work</a>
+        <a href="#first-90-days" class="inline-block rounded-lg border border-slate-400 px-5 py-3 font-bold hover:bg-slate-800">My first 90 days</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach" class="mx-auto max-w-5xl px-6 py-14 md:py-18">
+    <p class="text-sm font-bold uppercase tracking-widest text-blue-700 mb-3">The operating philosophy</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-5">Part prospector. Part forensic investigator. Part builder.</h2>
+    <p class="max-w-3xl text-lg leading-relaxed text-slate-700 mb-9">I have spent much of my career working with people in the field to understand what they actually need. The same curiosity that shaped product messaging at Docker, Elastic and other companies now drives the way I build AI systems. Start with the work. Let the evidence determine the solution.</p>
+    <div class="grid gap-5 md:grid-cols-3">
+      {phases.map((phase) => (
+        <article class="rounded-xl border border-slate-300 bg-white p-6">
+          <p class="text-sm font-bold uppercase tracking-wider text-blue-700 mb-3">{phase.name}</p>
+          <h3 class="text-2xl font-bold mb-3">{phase.verb}</h3>
+          <p class="text-slate-700 leading-relaxed">{phase.detail}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-14 md:py-18">
+      <p class="text-sm font-bold uppercase tracking-widest text-blue-700 mb-3">Opportunity selection</p>
+      <h2 class="text-3xl md:text-4xl font-bold mb-5">The highest return first.</h2>
+      <p class="text-lg text-slate-700 max-w-3xl mb-8">A technically interesting idea is not necessarily a good business investment. I want a ranked backlog of real problems, with enough evidence to compare their potential value and the cost of solving them.</p>
+      <div class="grid gap-8 md:grid-cols-2">
+        <div>
+          <h3 class="text-xl font-bold mb-4">What I want to know</h3>
+          <ul class="space-y-3 text-slate-700">
+            <li><strong class="text-slate-900">Frequency and time:</strong> How often does the work happen? Where does time go?</li>
+            <li><strong class="text-slate-900">Quality and risk:</strong> What errors, rework or delays matter most?</li>
+            <li><strong class="text-slate-900">Economics:</strong> What would improvement be worth, and what would it cost to build and operate?</li>
+            <li><strong class="text-slate-900">Feasibility:</strong> Can we access the right data safely, and will people actually use the solution?</li>
+          </ul>
+        </div>
+        <aside class="rounded-xl bg-slate-900 p-7 text-white">
+          <p class="text-sm font-bold uppercase tracking-wider text-blue-300 mb-3">Illustrative example · hypothetical data</p>
+          <h3 class="text-2xl font-bold mb-4">A workflow worth investigating</h3>
+          <p class="text-slate-200">20 people × 3 hours of repetitive work per week. If a measured pilot cuts that time in half:</p>
+          <p class="mt-5 text-4xl font-bold text-blue-300">30 hours / week</p>
+          <p class="mt-3 text-slate-200">At an assumed $75/hour of loaded labour cost, that is $2,250/week in potential reclaimed capacity before implementation, review and running costs. Not necessarily cash savings or realized benefit.</p>
+          <p class="mt-4 text-slate-300">Validate adoption, quality and actual time saved before calling it a success.</p>
+        </aside>
+      </div>
+      <p class="mt-8 border-l-4 border-blue-600 pl-5 text-lg font-semibold">Rank by expected net benefit relative to investment, confidence and time to value. Treat security, privacy and reliability as constraints, not optional tradeoffs. Sometimes the best solution isn't AI.</p>
+    </div>
+  </section>
+
+  <section id="first-90-days" class="mx-auto max-w-5xl px-6 py-14 md:py-18">
+    <p class="text-sm font-bold uppercase tracking-widest text-blue-700 mb-3">Execution</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-5">90 days should leave a mark.</h2>
+    <p class="text-lg leading-relaxed text-slate-700 max-w-3xl mb-8">My goal would be to identify and deliver at least one meaningful, measured improvement within the first 90 days. I won't pretend to know what it is today. The first weeks are for finding it, not for defending a solution I arrived with.</p>
+    <div class="space-y-5">
+      {milestones.map((item) => (
+        <article class="grid gap-3 md:grid-cols-[10rem_1fr] rounded-xl border border-slate-300 bg-white p-6">
+          <p class="font-bold text-blue-700">{item.period}</p>
+          <div>
+            <h3 class="text-2xl font-bold mb-2">{item.title}</h3>
+            <p class="text-slate-700 leading-relaxed mb-3">{item.body}</p>
+            <p class="font-semibold text-slate-900">Target: {item.output}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="mt-8 rounded-xl bg-blue-50 border border-blue-200 p-6">
+      <h3 class="text-xl font-bold mb-2">A healthy dose of curiosity and accountability</h3>
+      <p class="text-slate-800 leading-relaxed">If I have not uncovered and materially improved an important workflow by day 90, I would want to understand why. Did I miss the signal? Did we misjudge the opportunity? Did feasibility or governance slow us down? Or is the organization remarkably efficient? Whatever the answer, we should have the evidence to explain it and a clear plan for what comes next.</p>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-14 md:py-18">
+      <p class="text-sm font-bold uppercase tracking-widest text-blue-700 mb-3">Operational discipline</p>
+      <h2 class="text-3xl md:text-4xl font-bold mb-5">Instrument everything that matters.</h2>
+      <div class="grid md:grid-cols-2 gap-6 text-slate-700">
+        <div><h3 class="text-xl font-bold text-slate-900 mb-2">Before: establish the baseline</h3><p>Agree on the outcome, cycle time, quality criteria, failure modes and cost of the current process. Make assumptions explicit.</p></div>
+        <div><h3 class="text-xl font-bold text-slate-900 mb-2">During: evaluate the solution</h3><p>Test representative cases, define what requires human review, trace model behaviour and monitor quality, latency and cost.</p></div>
+        <div><h3 class="text-xl font-bold text-slate-900 mb-2">After: measure real adoption</h3><p>Compare the new workflow against the baseline. Track exceptions, feedback, actual usage and maintenance burden. Keep a rollback path.</p></div>
+        <div><h3 class="text-xl font-bold text-slate-900 mb-2">Throughout: build trust</h3><p>Work with workflow owners, IT, security and legal on data access, governance and acceptable risk. Document ownership, enable users and make problems visible.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proof" class="mx-auto max-w-5xl px-6 py-14 md:py-18">
+    <p class="text-sm font-bold uppercase tracking-widest text-blue-700 mb-3">Selected proof of work</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-5">This is how I already think and build.</h2>
+    <p class="text-lg text-slate-700 max-w-3xl mb-8">These are examples from my own projects and career, showing how I approach workflow discovery, applied AI, observability and adoption.</p>
+    <div class="grid gap-5 md:grid-cols-2">
+      {cases.map((item) => (
+        <article class="flex flex-col rounded-xl border border-slate-300 bg-white p-6">
+          <h3 class="text-2xl font-bold mb-1">{item.name}</h3>
+          <p class="font-semibold text-blue-700 mb-3">{item.label}</p>
+          <p class="text-slate-700 leading-relaxed mb-4">{item.body}</p>
+          <p class="border-t border-slate-200 pt-4 mb-4 text-slate-900 font-semibold">{item.lesson}</p>
+          <a href={item.href} class="mt-auto text-blue-700 font-bold underline underline-offset-4 hover:text-blue-900">{item.link}</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-slate-900 text-white">
+    <div class="mx-auto max-w-5xl px-6 py-14 md:py-18">
+      <p class="text-sm font-bold uppercase tracking-widest text-blue-300 mb-3">Why this work</p>
+      <h2 class="text-3xl md:text-4xl font-bold mb-5">I care about making people's work better.</h2>
+      <p class="text-lg leading-relaxed text-slate-200 max-w-3xl">My background spans enterprise sales, technical marketing, observability, customer discovery and development. I know what it feels like to be on the receiving end of a new tool. I also know the satisfaction of finding a problem, building something useful and seeing the difference it makes. That's the work I want to do.</p>
+      <div class="mt-7 flex flex-wrap gap-4">
+        <a href="/cv" class="rounded-lg bg-white px-5 py-3 font-bold text-slate-900 hover:bg-blue-100">Explore my CV</a>
+        <a href="mailto:marcsherwood@gmail.com?subject=AI%20Operations" class="rounded-lg border border-slate-400 px-5 py-3 font-bold hover:bg-slate-800">Let's talk</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
