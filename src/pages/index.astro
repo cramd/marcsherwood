@@ -1,155 +1,224 @@
 ---
 import { getCollection } from 'astro:content';
-import BlueskyFeed from '../components/BlueskyFeed.astro';
-import GitHubProfile from '../components/GitHubProfile.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_DESCRIPTION } from '../consts';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-const latestPost = posts[0];
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+).slice(0, 3);
+
+const capabilities = [
+  {
+    title: 'Find the real problem.',
+    body: 'I listen to the people closest to the work, investigate assumptions and look at how technology, customers and commercial decisions affect one another.',
+    link: 'How I work',
+    href: '/cv#approach',
+  },
+  {
+    title: 'Connect technology to value.',
+    body: 'I have developed positioning for complex products by working with the field — understanding what customers need and translating technical capabilities into business relevance.',
+    link: 'My commercial experience',
+    href: '/cv#experience',
+  },
+  {
+    title: 'Build something that works.',
+    body: 'When an idea needs testing, I can turn it into a working prototype or application, instrument it, learn from its behaviour and iterate.',
+    link: 'See what I build',
+    href: '/cv#featured-projects',
+  },
+];
+
+const projects = [
+  {
+    title: 'HoneOS',
+    type: 'COMMERCIAL INTELLIGENCE',
+    why: 'Sales teams need better account intelligence, not more research to sift through.',
+    what: 'An AI-assisted platform that connects engineering signals to evidence-backed account research and actionable sales narratives.',
+    tags: ['Applied AI', 'Product development', 'GTM'],
+    href: 'https://honeos.ai',
+    link: 'Explore HoneOS',
+  },
+  {
+    title: 'HuntMode',
+    type: 'AI-ASSISTED DECISION SUPPORT',
+    why: 'A list of matching keywords tells you very little about whether a role is a good fit.',
+    what: 'An evidence-led workflow for assessing career fit, identifying gaps and preparing targeted applications and interviews.',
+    tags: ['LLM workflows', 'Evidence mapping', 'Product design'],
+    href: 'https://github.com/cramd/huntmode',
+    link: 'View the project',
+  },
+];
+
+const paths = [
+  {
+    label: 'For hiring managers',
+    title: 'Explore my experience',
+    body: 'Commercial experience, technical depth and a hands-on approach to innovation. See the roles, projects and disciplines behind the introduction.',
+    href: '/cv',
+    link: 'View CV & capabilities',
+  },
+  {
+    label: 'For technical leadership',
+    title: 'See how I solve problems',
+    body: 'Selected examples of taking an observed problem, building a solution and using feedback to learn what works.',
+    href: '/cv#featured-projects',
+    link: 'Explore projects',
+  },
+  {
+    label: 'For founders & commercial teams',
+    title: 'Work with me',
+    body: 'Technical positioning, customer-led GTM strategy, sales and marketing alignment, and hands-on fractional support.',
+    href: '/gtm',
+    link: 'Fractional GTM services',
+  },
+];
 ---
 
-<BaseLayout title="Marc Sherwood" description={SITE_DESCRIPTION} mainClass="flex-grow container mx-auto px-6 py-12 max-w-5xl">
-	<section class="py-12 max-w-3xl">
-		<p class="text-sm font-mono text-blue-600 mb-4">Technical GTM lead · Builder · Occasional blogger</p>
-		<h1 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-slate-900">
-			Hi, I am <span class="text-gradient">Marc Sherwood</span>.
-		</h1>
-		<p class="text-lg text-slate-600 leading-relaxed mb-4">
-			I bridge complex engineering systems and commercial growth — DevTools, PLG, and open-source GTM by day.
-			By night I write about AI, architecture, and the gap between what we ask for and what we actually want.
-		</p>
-		<p class="text-base text-slate-600 leading-relaxed mb-3">
-			Fair warning: what I am paid to know and what I am curious about do not always line up. You will get expert-level takes on some topics and proper amateur hour on others — and when it is the latter, I will try to call that out.
-		</p>
-		<p class="text-base text-slate-500 italic mb-8">
-			My areas of expertise and my areas of interest share a Venn diagram about the size of a postage stamp. That is not a bug.
-		</p>
-		<div class="flex flex-wrap gap-4">
-			<a href="/gtm" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
-				Fractional GTM
-			</a>
-			<a href="/cv" class="px-6 py-3 glass-panel text-slate-800 font-semibold rounded-lg hover:border-blue-300 transition-colors">
-				View CV
-			</a>
-			<a href="/blog" class="px-6 py-3 glass-panel text-slate-800 font-semibold rounded-lg hover:border-blue-300 transition-colors">
-				Read the blog
-			</a>
-		</div>
-	</section>
+<BaseLayout title="Marc Sherwood | Technical Strategy, Commercial Growth & Applied AI" description="Marc Sherwood — a technical strategist, systems thinker and hands-on builder connecting customer needs, commercial strategy and applied AI. Based in Vancouver, BC." mainClass="flex-grow w-full">
+  <section class="bg-slate-900 text-white border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <div class="grid lg:grid-cols-12 gap-12 items-end">
+        <div class="lg:col-span-8">
+          <p class="font-mono text-sm text-blue-300 mb-5">Marc Sherwood · Vancouver, BC · Technical strategy & innovation</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">
+            Good at figuring things out.<br />
+            <span class="text-blue-300">Better at making them happen.</span>
+          </h1>
+          <p class="text-lg md:text-xl leading-relaxed text-slate-200 max-w-3xl">
+            I bring together technical knowledge, commercial experience and hands-on development to solve problems that cross organizational boundaries.
+          </p>
+          <p class="mt-4 text-slate-300 leading-relaxed max-w-2xl">
+            My background spans enterprise software, open-source infrastructure, developer tools, go-to-market strategy and applied AI.
+          </p>
+          <div class="flex flex-wrap gap-3 mt-8">
+            <a href="/cv" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors">Explore my experience</a>
+            <a href="mailto:marc@honeos.ai?subject=Professional%20opportunity" class="px-6 py-3 border border-slate-500 hover:border-blue-300 text-white font-semibold rounded-lg transition-colors">Let's talk</a>
+          </div>
+        </div>
+        <aside class="lg:col-span-4 border-l-2 border-blue-400 pl-6 py-2">
+          <p class="text-sm font-mono text-blue-300 uppercase tracking-wider mb-4">What I bring to a team</p>
+          <p class="text-2xl font-bold leading-snug">Technical strategist.<br />Systems thinker.<br />Hands-on builder.</p>
+          <p class="mt-5 text-slate-300 leading-relaxed">Open to full-time and fractional opportunities in technical strategy, digital innovation and product commercialization.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
 
-	<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-		<a href="/gtm" class="glass-panel p-8 rounded-2xl group hover:border-blue-300 transition-colors flex flex-col">
-			<p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Consulting</p>
-			<h2 class="text-2xl font-bold text-slate-900 mb-2">Fractional GTM</h2>
-			<p class="text-slate-600 mb-6 flex-grow">
-				Positioning, friction audits, events on the floor, and commercial execution for COSS and DevTools — without a full-time hire.
-			</p>
-			<span class="text-sm font-medium text-blue-700 group-hover:text-blue-900 flex items-center gap-1">
-				How I work with clients
-				<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-			</span>
-		</a>
+  <section class="bg-white border-b border-slate-200" aria-label="Selected career experience">
+    <div class="max-w-6xl mx-auto px-6 py-6">
+      <p class="text-sm font-medium text-slate-500 mb-4">Experience across enterprise technology and commercial open source</p>
+      <ul class="flex flex-wrap gap-x-8 gap-y-3 items-center text-lg font-semibold text-slate-700">
+        {['Docker', 'VictoriaMetrics', 'Elastic', 'Splunk', 'MariaDB', 'Percona', 'Sophos'].map((name) => <li>{name}</li>)}
+      </ul>
+    </div>
+  </section>
 
-		<a href="/cv#featured-projects" class="glass-panel p-8 rounded-2xl group hover:border-blue-300 transition-colors flex flex-col">
-			<p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Work</p>
-			<h2 class="text-2xl font-bold text-slate-900 mb-2">Professional path</h2>
-			<p class="text-slate-600 mb-6 flex-grow">
-				Resume, featured projects, and the platforms I am building — HoneOS, HuntMode, and GTM systems for DevTools and COSS.
-			</p>
-			<span class="text-sm font-medium text-blue-700 group-hover:text-blue-900 flex items-center gap-1">
-				CV and projects
-				<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-			</span>
-		</a>
+  <section class="max-w-6xl mx-auto px-6 py-14 md:py-20">
+    <p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">The way I work</p>
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">I work where things overlap.</h2>
+    <p class="text-lg text-slate-600 max-w-3xl mb-9">The most interesting problems rarely belong to just one department. They require someone who can connect the dots, challenge assumptions and move from understanding to action.</p>
+    <div class="grid md:grid-cols-3 gap-5">
+      {capabilities.map((item) => (
+        <article class="glass-panel rounded-2xl border border-slate-200 p-6 md:p-8 flex flex-col">
+          <h3 class="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
+          <p class="text-slate-600 leading-relaxed flex-grow">{item.body}</p>
+          <a href={item.href} class="mt-6 pt-4 border-t border-slate-200 font-semibold text-blue-700 hover:text-blue-900">{item.link}</a>
+        </article>
+      ))}
+    </div>
+  </section>
 
-		<a href="/blog" class="glass-panel p-8 rounded-2xl group hover:border-teal-300 transition-colors flex flex-col">
-			<p class="text-xs font-bold uppercase tracking-wider text-teal-600 mb-3">Writing</p>
-			<h2 class="text-2xl font-bold text-slate-900 mb-2">Personal path</h2>
-			<p class="text-slate-600 mb-6 flex-grow">
-				Essays on whatever I am thinking about — AI, creativity, open-source business models, systems. Some posts are informed by the day job; some are enthusiastic amateurs doing their best.
-			</p>
-			<span class="text-sm font-medium text-teal-700 group-hover:text-teal-900 flex items-center gap-1">
-				Read posts
-				<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-			</span>
-		</a>
-	</section>
+  <section class="bg-blue-50 border-y border-blue-100">
+    <div class="max-w-6xl mx-auto px-6 py-12 md:py-16 grid md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-5">
+        <p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">A thread through my career</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Start with the customer's reality.</h2>
+      </div>
+      <div class="md:col-span-7 text-lg text-slate-700 leading-relaxed">
+        <p>Whether I'm developing the core messaging for a new product, working with a sales team or building software of my own, the starting point is the same: understand what people are actually trying to accomplish.</p>
+        <p class="mt-4 font-semibold text-slate-900">Technology is the means. Solving the problem is the job.</p>
+      </div>
+    </div>
+  </section>
 
-	<section class="mb-16 glass-panel rounded-2xl p-8">
-		<h2 class="text-xl font-bold text-slate-900 mb-6">Expertise vs. interests</h2>
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-			<div>
-				<h3 class="text-sm font-bold uppercase tracking-wider text-blue-600 mb-3">What I get paid for</h3>
-				<ul class="flex flex-wrap gap-2">
-					{['GTM systems', 'DevTools', 'PLG', 'COSS strategy', 'Revenue ops'].map((tag) => (
-						<li class="px-3 py-1 rounded-full bg-blue-50 text-blue-800 text-sm border border-blue-200">{tag}</li>
-					))}
-				</ul>
-			</div>
-			<div>
-				<h3 class="text-sm font-bold uppercase tracking-wider text-teal-600 mb-3">What I write about</h3>
-				<ul class="flex flex-wrap gap-2">
-					{['AI and creativity', 'Systems design', 'Open source', 'Prompt craft', 'Architecture'].map((tag) => (
-						<li class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-sm border border-teal-200">{tag}</li>
-					))}
-				</ul>
-			</div>
-		</div>
-		<p class="text-slate-600 text-sm mt-6">
-			The overlap is real. It is just postage-stamp sized — which means the blog is not always a credential flex, and that is on purpose.
-		</p>
-	</section>
+  <section class="max-w-6xl mx-auto px-6 py-14 md:py-20" id="selected-work">
+    <div class="flex flex-wrap gap-4 items-end justify-between mb-8">
+      <div>
+        <p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">Selected work</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">I build what I'd like to exist.</h2>
+      </div>
+      <a href="/cv#featured-projects" class="font-semibold text-blue-700 hover:text-blue-900">All projects</a>
+    </div>
+    <div class="grid md:grid-cols-2 gap-5">
+      {projects.map((project) => (
+        <article class="glass-panel border border-slate-200 rounded-2xl overflow-hidden flex flex-col">
+          <div class="bg-slate-900 text-white p-6 md:p-8">
+            <p class="font-mono text-sm text-blue-300 mb-3">{project.type}</p>
+            <h3 class="text-3xl font-bold tracking-tight">{project.title}</h3>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col flex-grow">
+            <p class="text-lg font-semibold text-slate-900 mb-3">{project.why}</p>
+            <p class="text-slate-600 leading-relaxed mb-6 flex-grow">{project.what}</p>
+            <ul class="flex flex-wrap gap-2 mb-5">
+              {project.tags.map((tag) => <li class="px-3 py-1 bg-blue-50 border border-blue-100 text-blue-800 rounded-md text-sm">{tag}</li>)}
+            </ul>
+            <a href={project.href} class="font-semibold text-blue-700 hover:text-blue-900">{project.link}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
 
-	{
-		latestPost && (
-			<section class="mb-16">
-				<div class="flex items-end justify-between mb-6 gap-4">
-					<h2 class="text-2xl font-bold text-slate-900">Latest writing</h2>
-					<a href="/blog" class="text-sm font-medium text-blue-700 hover:text-blue-900 shrink-0">All posts →</a>
-				</div>
-				<a href={`/blog/${latestPost.id}/`} class="block glass-panel p-8 rounded-2xl hover:border-blue-300 transition-colors group">
-					<p class="font-mono text-sm text-slate-500 mb-2">
-						<FormattedDate date={latestPost.data.pubDate} />
-					</p>
-					<h3 class="text-xl font-bold text-slate-900 group-hover:text-blue-700 mb-2">{latestPost.data.title}</h3>
-					{latestPost.data.description && (
-						<p class="text-slate-600">{latestPost.data.description}</p>
-					)}
-				</a>
-			</section>
-		)
-	}
+  <section class="bg-white border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 py-14 md:py-20">
+      <p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">Find the right conversation</p>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-8">What brings you here?</h2>
+      <div class="grid md:grid-cols-3 gap-5">
+        {paths.map((path) => (
+          <a href={path.href} class="block glass-panel rounded-2xl border border-slate-200 hover:border-blue-400 transition-colors p-6 md:p-8 flex flex-col group">
+            <p class="text-sm font-medium text-blue-700 mb-3">{path.label}</p>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">{path.title}</h3>
+            <p class="text-slate-600 leading-relaxed mb-6 flex-grow">{path.body}</p>
+            <span class="font-semibold text-blue-700 group-hover:text-blue-900">{path.link}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 
-	<section class="mb-16 glass-panel rounded-2xl p-8">
-		<h2 class="text-xl font-bold text-slate-900 mb-2">Currently building</h2>
-		<p class="text-slate-600 mb-4">
-			HoneOS — automated pipeline research and OQL intelligence for commercial open-source GTM.
-			HuntMode — AI-native career coaching and job search tooling.
-		</p>
-		<a href="/cv#featured-projects" class="text-sm font-semibold text-blue-700 hover:text-blue-900 inline-flex items-center gap-1">
-			See full project list on CV
-			<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-		</a>
-	</section>
+  <section class="max-w-6xl mx-auto px-6 py-14 md:py-20">
+    <div class="grid md:grid-cols-12 gap-10">
+      <div class="md:col-span-5">
+        <p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">Beyond the day job</p>
+        <h2 class="text-3xl font-bold tracking-tight text-slate-900 mb-4">Curiosity isn't a side project.</h2>
+        <p class="text-slate-600 leading-relaxed mb-4">I write about AI, creativity, architecture, open source and whatever else I can't stop thinking about.</p>
+        <p class="text-slate-500 italic leading-relaxed mb-6">My areas of expertise and my areas of interest share a Venn diagram about the size of a postage stamp. That is not a bug.</p>
+        <a href="/blog" class="font-semibold text-blue-700 hover:text-blue-900">Read my writing</a>
+      </div>
+      <div class="md:col-span-7 space-y-3">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}/`} class="block glass-panel rounded-xl border border-slate-200 hover:border-blue-300 transition-colors p-5 group">
+            <p class="font-mono text-sm text-slate-500 mb-2"><FormattedDate date={post.data.pubDate} /></p>
+            <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-700">{post.data.title}</h3>
+            {post.data.description && <p class="text-slate-600 mt-2">{post.data.description}</p>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-		<div class="glass-panel p-8 rounded-2xl">
-			<h3 class="text-lg font-bold mb-4 text-slate-900 flex items-center gap-2">
-				<svg class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-				Live activity
-			</h3>
-			<BlueskyFeed handle="cramd.bsky.social" limit={2} />
-		</div>
-		<div class="glass-panel p-8 rounded-2xl">
-			<h3 class="text-lg font-bold mb-6 text-slate-900 flex items-center gap-2">
-				<svg class="w-5 h-5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-				Open source
-			</h3>
-			<GitHubProfile compact={true} />
-		</div>
-	</div>
+  <section class="bg-slate-900 text-white">
+    <div class="max-w-6xl mx-auto px-6 py-14 md:py-20 grid md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-8">
+        <p class="font-mono text-sm text-blue-300 uppercase tracking-wider mb-3">Let's connect</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Meaningful problems. Room to build.</h2>
+        <p class="text-lg leading-relaxed text-slate-300">If you're working on a problem that needs technical understanding, commercial perspective and someone willing to roll up their sleeves, I'd like to hear about it.</p>
+        <p class="text-sm text-slate-400 mt-4">Based in Richmond / Vancouver, BC. Open to remote and hybrid work.</p>
+      </div>
+      <div class="md:col-span-4 flex flex-col gap-3">
+        <a href="mailto:marc@honeos.ai?subject=Professional%20opportunity" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors text-center">Start a conversation</a>
+        <a href="https://linkedin.com/in/marcsherwood" class="px-6 py-3 border border-slate-500 hover:border-blue-300 font-semibold rounded-lg text-white transition-colors text-center">Connect on LinkedIn</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
