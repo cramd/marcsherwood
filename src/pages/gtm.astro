@@ -36,12 +36,13 @@ const services = [
 const auditFocus = [
 	{ label: 'Market and buying groups', detail: 'who discovers, influences, champions, and purchases?' },
 	{ label: 'Positioning and messaging', detail: 'do capabilities connect to customer outcomes?' },
-	{ label: 'Adoption to revenue', detail: 'where does technical interest become commercial opportunity?' },
+	{ label: 'Adoption to revenue', detail: 'where does technical interest become commercial opportunity? What happens to a real lead after it enters the funnel?' },
+	{ label: 'CRM and field reality', detail: 'where do pipeline records, qualification criteria, and conversations with the sales team tell different stories?' },
 	{ label: 'Channels and execution', detail: 'what do campaigns, events, demos, and conversations teach — and what gets measured?' },
 ];
 
 const auditDeliverables = [
-	'A clear diagnosis: friction points supported by available evidence.',
+	'A clear diagnosis: friction points supported by available evidence, with assumptions and gaps explicitly identified.',
 	'A customer journey map: where messages, relationships, and opportunities are lost.',
 	'A sharper story: practical technical-to-business messaging recommendations.',
 	'A 30-day action plan: prioritized improvements, owners, and success measures.',
@@ -55,8 +56,7 @@ const proofCards = [
 			'Booth traffic and badge scans rarely explain why a story landed—or why it did not. Teams leave shows with activity metrics but unclear message signal.',
 		did: 'Work the floor with engineers and practitioners: test language, listen for objections, and document what resonates beyond the slide deck.',
 		outcome:
-			'Patterns that feed positioning, sales conversations, and follow-up—not just a list of scanned contacts. [Named event examples — add after review]',
-		outcomePlaceholder: true,
+			'A record of what resonates, what creates confusion, and what the team should change in its messaging and follow-up.',
 	},
 	{
 		title: 'Making complex technology understandable',
@@ -98,7 +98,7 @@ const proofCards = [
 						value translate into commercial results.
 					</p>
 					<p>
-						I show up, walk the floor, and change the words until the story sticks.
+						I investigate where customers lose momentum, test messaging with the people it needs to reach, and help your team close the gaps.
 						<strong class="text-slate-900 font-semibold">
 							Positioning. Technical storytelling. Sales and marketing alignment. Customer discovery. Events. Commercial
 							execution.</strong
@@ -284,7 +284,7 @@ const proofCards = [
 				</p>
 				<p class="text-lg">
 					A focused two-week engagement examining how your product, positioning, customer journey, and commercial
-					execution work together. We begin with the business problem, review available evidence, talk to the people
+					execution work together. We begin with the business problem, review available evidence, interview and shadow the people
 					closest to the work when access allows, and identify gaps between what the company believes, what it communicates,
 					and what the market responds to.
 				</p>
@@ -391,8 +391,7 @@ const proofCards = [
 				I've seen what happens when the story connects.
 			</h2>
 			<p class="text-slate-600 text-center max-w-2xl mx-auto mb-12 text-lg">
-				Examples of the kind of work I do — not a client logo wall. Specific names and metrics can be added as you approve
-				them.
+				Examples of how I approach commercial challenges, grounded in my work across technical marketing, sales enablement, and product development.
 			</p>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 				{
@@ -410,7 +409,7 @@ const proofCards = [
 								</div>
 								<div>
 									<p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Outcome</p>
-									<p class={card.outcomePlaceholder ? 'text-slate-600' : ''}>
+									<p>
 										{card.outcome}
 									</p>
 								</div>
