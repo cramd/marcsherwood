@@ -2,514 +2,275 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GtmEncabulatorVideo from '../components/GtmEncabulatorVideo.astro';
 
-/** Full film can replace `/gtm/encabulator.mp4`; optional poster `/gtm/encabulator-poster.jpg` */
-const encabulatorVideoSrc = '/gtm/encabulator.mp4';
-const encabulatorPoster: string | undefined = undefined;
-
-const pageTitle = 'Fractional GTM Consulting for Commercial Open Source | Marc Sherwood';
-const pageDescription =
-	'Fractional GTM strategy, positioning, technical storytelling, and commercial execution for open-source, infrastructure, and developer-tool companies.';
-
-const mailGtm = 'mailto:marc@honeos.ai?subject=GTM%20conversation';
-const mailEvent = 'mailto:marc@honeos.ai?subject=Event%20or%20conference%20GTM';
+const mailGtm = 'mailto:marc@honeos.ai?subject=GTM%20Friction%20Audit';
+const mailPositioning = 'mailto:marc@honeos.ai?subject=Positioning%20Sprint';
+const mailFractional = 'mailto:marc@honeos.ai?subject=Fractional%20GTM';
+const mailEvent = 'mailto:marc@honeos.ai?subject=Beyond%20the%20Badge%20Scan';
 const linkedIn = 'https://linkedin.com/in/marcsherwood';
 
-const services = [
-	{
-		title: 'GTM Strategy & Positioning',
-		body: 'Understand the market, sharpen the value proposition, and build around how customers actually discover and buy technical products.',
-	},
-	{
-		title: 'Technical Storytelling',
-		body: 'Translate complex engineering into a commercial narrative without sacrificing technical substance or credibility.',
-	},
-	{
-		title: 'Sales & Marketing Alignment',
-		body: 'Connect messaging, account intelligence, qualification, and sales execution around the same customer reality.',
-	},
-	{
-		title: 'Fractional GTM Leadership',
-		body: 'Hands-on commercial leadership for a launch, growth stage, or initiative — without another permanent management layer.',
-	},
+const signals = [
+  'Developers love the product, but enterprise revenue isn\'t following.',
+  'Marketing is generating activity, but sales isn\'t seeing the right opportunities.',
+  'Every department describes the product differently.',
+  'You\'re investing in growth without knowing where demand is being lost.',
 ];
 
 const auditFocus = [
-	{ label: 'Market and buying groups', detail: 'who discovers, influences, champions, and purchases?' },
-	{ label: 'Positioning and messaging', detail: 'do capabilities connect to customer outcomes?' },
-	{ label: 'Adoption to revenue', detail: 'where does technical interest become commercial opportunity?' },
-	{ label: 'Channels and execution', detail: 'what do campaigns, events, demos, and conversations teach — and what gets measured?' },
+  { title: 'The customer journey', detail: 'I examine how a prospect discovers, evaluates and buys your product, including the handoffs between marketing, product and sales.' },
+  { title: 'The reality in the CRM', detail: 'I review available pipeline, qualification and conversion evidence to understand what the reporting tells us — and what it doesn\'t.' },
+  { title: 'Positioning & market feedback', detail: 'I compare product messaging with the language customers actually use, informed by discovery with field teams and available customer evidence.' },
+  { title: 'Sales and execution', detail: 'I look at the experience of reps and technical champions: what helps them move an opportunity forward, where they get stuck, and what needs to change.' },
 ];
 
 const auditDeliverables = [
-	'A clear diagnosis: friction points supported by available evidence.',
-	'A customer journey map: where messages, relationships, and opportunities are lost.',
-	'A sharper story: practical technical-to-business messaging recommendations.',
-	'A 30-day action plan: prioritized improvements, owners, and success measures.',
-	'A leadership working session: findings, trade-offs, and decisions.',
+  'Evidence-backed diagnosis of the most consequential sources of commercial friction.',
+  'Customer journey and handoff map showing where opportunities are being lost.',
+  'Prioritized recommendations for positioning, processes and commercial execution.',
+  'A 30-day action plan with proposed owners and success measures.',
+  'A leadership working session to agree on decisions and next steps.',
 ];
 
-const proofCards = [
-	{
-		title: 'Technical events that create commercial momentum',
-		challenge:
-			'Booth traffic and badge scans rarely explain why a story landed—or why it did not. Teams leave shows with activity metrics but unclear message signal.',
-		did: 'Work the floor with engineers and practitioners: test language, listen for objections, and document what resonates beyond the slide deck.',
-		outcome:
-			'Patterns that feed positioning, sales conversations, and follow-up—not just a list of scanned contacts. [Named event examples — add after review]',
-		outcomePlaceholder: true,
-	},
-	{
-		title: 'Making complex technology understandable',
-		challenge:
-			'Deep technical products often ship with documentation that satisfies practitioners but loses economic buyers on the path to purchase.',
-		did: 'Translate capabilities into vertical narratives, benchmarks, and enablement content—at VictoriaMetrics, Docker, and similar infrastructure contexts—without dumbing down the engineering.',
-		outcome:
-			'Clearer paths from evaluation to commercial conversation for champions who need to sell upward inside their organization.',
-	},
-	{
-		title: 'Building GTM intelligence, not just collecting data',
-		challenge:
-			'Raw pipeline and usage metrics rarely tell sales what to do next with an account.',
-		did: 'Build and operate HoneOS—pipeline research and OQL-style signals for commercial open source—alongside hands-on PLG and conversion work.',
-		outcome:
-			'Structured intent and research that connects engineering behavior to sales action, not another dashboard no one opens.',
-	},
+const engagements = [
+  {
+    title: 'Positioning Sprint',
+    need: 'Your product has changed. Your story hasn\'t.',
+    description: 'For a launch, new market or repositioning, I work with your field and product teams to identify customer needs, sharpen the value proposition and connect technical capabilities to business outcomes.',
+    outputs: ['Customer and buying-group hypotheses', 'Core messaging and value proposition', 'Practical sales and marketing narrative'],
+    href: mailPositioning, link: 'Discuss a positioning sprint', event: 'gtm_positioning_contact_click',
+  },
+  {
+    title: 'Fractional GTM',
+    need: 'You know what needs doing. You need someone to help do it.',
+    description: 'Hands-on support for technical product commercialization, sales enablement, marketing alignment and growth initiatives. The engagement is scoped around the work that matters, not a generic retainer.',
+    outputs: ['Defined initiative and priorities', 'Execution alongside your team', 'Progress, feedback and practical handoff'],
+    href: mailFractional, link: 'Discuss fractional GTM', event: 'gtm_fractional_contact_click',
+  },
+];
+
+const proof = [
+  {
+    title: 'Customer-led positioning',
+    context: 'Docker · VictoriaMetrics',
+    body: 'Developed product messaging and technical narratives by connecting field intelligence, customer requirements and complex engineering capabilities. Worked across executive messaging, partner content, customer stories and sales enablement.',
+  },
+  {
+    title: 'Commercial perspective',
+    context: 'Enterprise software · Commercial open source',
+    body: 'Experience on both sides of the marketing-to-sales handoff. I understand how positioning affects discovery, how technical champions build internal support, and why activity in a CRM is not necessarily commercial progress.',
+  },
+  {
+    title: 'Building the missing tools',
+    context: 'HoneOS',
+    body: 'Built an AI-assisted account research platform that turns engineering signals into evidence-backed intelligence and sales narratives. The product grew out of a problem I had seen in the field: research should help teams sell, not become another task.',
+  },
 ];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} mainClass="flex-grow w-full">
-	<!-- Hero -->
-	<section class="py-16 md:py-20 border-b border-slate-200 bg-stone-50">
-		<div class="max-w-6xl mx-auto px-6">
-			<div class="max-w-3xl">
-				<p class="text-sm font-mono font-medium text-blue-700 uppercase tracking-wider mb-4">
-					Fractional GTM consulting
-				</p>
-				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-tight mb-6">
-					Great Technology. Terrible Translation.
-				</h1>
-				<p class="text-xl text-slate-600 font-medium leading-relaxed mb-6">
-					I help commercial open-source, infrastructure, and developer-tool companies connect technical innovation to
-					customer understanding—and turn that understanding into revenue.
-				</p>
-				<div class="text-lg text-slate-600 space-y-4 mb-8">
-					<p>
-						I'm Marc Sherwood. I work with technical companies that have built something valuable but aren't seeing that
-						value translate into commercial results.
-					</p>
-					<p>
-						I show up, walk the floor, and change the words until the story sticks.
-						<strong class="text-slate-900 font-semibold">
-							Positioning. Technical storytelling. Sales and marketing alignment. Customer discovery. Events. Commercial
-							execution.</strong
-						>
-					</p>
-					<p class="font-mono text-sm text-slate-500 border-l-2 border-blue-500 pl-4 py-1">
-						Experienced GTM help, without the full-time executive commitment.
-					</p>
-					<p class="text-base text-slate-600">
-						Technical excellence matters. So does helping the right people understand why it matters.
-					</p>
-				</div>
-				<div class="flex flex-wrap gap-4">
-					<a
-						href={mailGtm}
-						data-gtm-event="gtm_hero_contact_click"
-						data-gtm-section="hero"
-						class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2"
-					>
-						Let's Talk GTM
-						<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-							><path d="M5 12h14M12 5l7 7-7 7" /></svg
-						>
-					</a>
-					<a
-						href={mailEvent}
-						data-gtm-event="gtm_event_contact_click"
-						data-gtm-section="hero"
-						class="px-6 py-3 glass-panel text-slate-800 font-semibold rounded-lg hover:border-blue-300 transition-colors"
-					>
-						Discuss an Event
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
+<BaseLayout title="GTM Friction Audit & Fractional GTM | Marc Sherwood" description="Find where commercial growth is getting stuck. Customer-led GTM Friction Audits, positioning sprints, fractional GTM and event intelligence for open-source, infrastructure and developer-tool companies." mainClass="flex-grow w-full">
+  <section class="bg-slate-900 text-white border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7">
+          <p class="font-mono text-sm text-blue-300 uppercase tracking-wider mb-4">Fractional GTM · Commercial open source · Developer tools</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">Great technology.<br /><span class="text-blue-300">Terrible translation.</span></h1>
+          <p class="text-xl text-slate-200 leading-relaxed mb-5">If your commercial results don't match the quality of your product, the problem may not be the technology.</p>
+          <p class="text-lg text-slate-300 leading-relaxed max-w-3xl">I help technical companies find where value, customer understanding and commercial execution become disconnected — then work with the people responsible for fixing it.</p>
+          <div class="flex flex-wrap gap-3 mt-8">
+            <a href="#audit" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors" data-gtm-event="gtm_hero_audit_click" data-gtm-section="hero">Explore the GTM Friction Audit</a>
+            <a href={mailGtm} class="px-6 py-3 border border-slate-500 hover:border-blue-300 font-semibold rounded-lg transition-colors" data-gtm-event="gtm_hero_contact_click" data-gtm-section="hero">Let's talk</a>
+          </div>
+        </div>
+        <aside class="lg:col-span-5 rounded-2xl border border-slate-700 bg-slate-800 p-6 md:p-8">
+          <p class="text-sm font-mono font-medium text-blue-300 uppercase tracking-wider mb-5">Does this sound familiar?</p>
+          <ul class="space-y-4">
+            {signals.map((signal) => (
+              <li class="flex items-start gap-3 text-slate-200 leading-relaxed"><span class="text-blue-300 font-bold shrink-0" aria-hidden="true">•</span><span>{signal}</span></li>
+            ))}
+          </ul>
+          <p class="mt-6 pt-5 border-t border-slate-600 font-semibold text-white">Before you spend more on demand generation, find out where you're losing the demand you already have.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
 
-	<!-- Three stories + Encabulator -->
-	<section class="py-16 md:py-20 bg-white border-b border-slate-200">
-		<div class="max-w-6xl mx-auto px-6">
-			<h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-10 tracking-tight">
-				One product. Three stories.<br class="hidden sm:block" /> Absolutely no shared understanding.
-			</h2>
+  <section class="bg-white border-b border-slate-200" aria-label="Career experience">
+    <div class="max-w-6xl mx-auto px-6 py-6">
+      <p class="text-sm text-slate-500 font-medium mb-4">Experience across enterprise technology and commercial open source</p>
+      <ul class="flex flex-wrap items-center gap-x-8 gap-y-3 text-lg font-semibold text-slate-700">
+        {['Docker', 'VictoriaMetrics', 'Elastic', 'Splunk', 'MariaDB', 'Percona', 'Sophos'].map((name) => <li>{name}</li>)}
+      </ul>
+    </div>
+  </section>
 
-			<div class="mb-12">
-				<GtmEncabulatorVideo src={encabulatorVideoSrc} poster={encabulatorPoster} />
-			</div>
+  <section id="audit" class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+    <div class="grid lg:grid-cols-12 gap-10 mb-10 items-start">
+      <div class="lg:col-span-7">
+        <p class="font-mono text-sm font-medium text-blue-700 uppercase tracking-wider mb-3">Signature engagement</p>
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 mb-5">GTM Friction Audit</h2>
+        <p class="text-xl text-slate-700 font-medium leading-relaxed mb-4">Find the friction. Fix the flow.</p>
+        <p class="text-lg text-slate-600 leading-relaxed">A focused diagnostic engagement for technical companies that want to understand why commercial growth isn't meeting expectations. I look at the whole system — product, customers, positioning, adoption and sales — using evidence to separate the real problems from the symptoms.</p>
+      </div>
+      <aside class="lg:col-span-5 rounded-2xl bg-blue-50 border border-blue-100 p-6 md:p-8">
+        <p class="font-mono text-sm uppercase tracking-wider text-blue-700 mb-3">Engagement at a glance</p>
+        <p class="text-2xl font-bold text-slate-900 mb-2">Two weeks. Defined scope.</p>
+        <p class="text-slate-700 leading-relaxed mb-5">A practical diagnosis and action plan, not an open-ended consulting project. Scope, fee and access requirements are agreed up front.</p>
+        <a href={mailGtm} data-gtm-event="gtm_audit_contact_click" data-gtm-section="audit" class="inline-block px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors">Discuss an audit</a>
+      </aside>
+    </div>
 
-			<div class="max-w-3xl mx-auto space-y-6 text-lg text-slate-600">
-				<h3 class="text-2xl font-bold text-slate-900 text-center md:text-left">
-					Does your product need another feature—or a better story?
-				</h3>
-				<p>
-					Your founder understands the architecture. Your sales team understands the revenue target. Your customers
-					understand their problems.
-				</p>
-				<p>
-					But if those perspectives never connect, even great technology can struggle commercially.
-				</p>
-				<p>
-					The developer who discovers your product, the manager responsible for making it work, and the executive
-					approving the purchase aren't three unrelated audiences.
-					<strong class="text-slate-900">They're part of the same buying journey.</strong>
-				</p>
-				<p class="font-mono text-sm bg-slate-50 p-4 rounded-lg border border-slate-200">
-					Your GTM strategy needs to connect them.
-				</p>
-			</div>
-		</div>
-	</section>
+    <h3 class="text-2xl font-bold text-slate-900 mb-6">What I'll examine</h3>
+    <div class="grid md:grid-cols-2 gap-5 mb-10">
+      {auditFocus.map((item) => (
+        <article class="glass-panel rounded-xl p-6 border border-slate-200">
+          <h4 class="text-lg font-bold text-slate-900 mb-3">{item.title}</h4>
+          <p class="text-slate-600 leading-relaxed">{item.detail}</p>
+        </article>
+      ))}
+    </div>
 
-	<!-- Diagnosis -->
-	<section class="py-16 md:py-20 bg-stone-50 border-b border-slate-200">
-		<div class="max-w-6xl mx-auto px-6">
-			<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-				<div class="lg:col-span-5">
-					<p class="text-sm font-mono font-medium text-blue-700 uppercase tracking-wider mb-3">The diagnosis</p>
-					<h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-						Find the friction.<br />Fix the flow.
-					</h2>
-				</div>
-				<div class="lg:col-span-7 space-y-5 text-lg text-slate-600">
-					<p>
-						I look at the whole commercial system, not just one department. Where does the customer journey begin?
-						What gets attention? What makes someone care? What happens when technical evaluation becomes a commercial
-						conversation? Where does momentum disappear?
-					</p>
-					<p>
-						Sometimes the positioning is wrong. Sometimes the right message reaches the wrong audience. Sometimes
-						marketing generates interest sales can't use. Sometimes a technical champion loves the product but has no
-						way to justify buying it.
-					</p>
-					<p class="font-medium text-slate-900">I help identify those disconnects and work with the people responsible for fixing them.</p>
-				</div>
-			</div>
-		</div>
-	</section>
+    <div class="grid lg:grid-cols-12 gap-8 bg-slate-900 text-slate-200 rounded-2xl p-6 md:p-10">
+      <div class="lg:col-span-5">
+        <p class="font-mono text-sm text-blue-300 uppercase tracking-wider mb-3">The deliverables</p>
+        <h3 class="text-3xl font-bold text-white tracking-tight mb-4">What you walk away with.</h3>
+        <p class="leading-relaxed text-slate-300">Recommendations grounded in the evidence available, with gaps and assumptions clearly identified. No enormous strategy deck that sits unread.</p>
+      </div>
+      <ul class="lg:col-span-7 space-y-4">
+        {auditDeliverables.map((item) => (
+          <li class="flex items-start gap-3 leading-relaxed"><span class="text-blue-300 font-bold shrink-0" aria-hidden="true">✓</span><span>{item}</span></li>
+        ))}
+      </ul>
+    </div>
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 mt-8">
+      <p class="text-slate-600 leading-relaxed max-w-2xl"><strong class="text-slate-900">Start with a 30-minute conversation.</strong> We'll talk through the symptoms, determine whether a diagnostic makes sense and agree on what needs examining.</p>
+      <a href={mailGtm} data-gtm-event="gtm_audit_contact_click" data-gtm-section="audit" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-center font-semibold rounded-lg transition-colors shrink-0">Start a conversation</a>
+    </div>
+  </section>
 
-	<!-- Services -->
-	<section class="py-16 md:py-20 bg-white border-b border-slate-200">
-		<div class="max-w-6xl mx-auto px-6">
-			<h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12 tracking-tight">Where I can help</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-				{
-					services.map((item) => (
-						<div class="glass-panel rounded-xl p-8 hover:border-blue-300 transition-colors">
-							<h3 class="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
-							<p class="text-slate-600">{item.body}</p>
-						</div>
-					))
-				}
-			</div>
-		</div>
-	</section>
+  <section class="bg-white border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+      <p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">Not every problem needs an audit</p>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">Other ways to work together.</h2>
+      <p class="text-lg text-slate-600 max-w-3xl mb-9">Maybe you know exactly where the problem is. Let's build an engagement around that.</p>
+      <div class="grid md:grid-cols-2 gap-5">
+        {engagements.map((item) => (
+          <article class="glass-panel rounded-2xl border border-slate-200 p-6 md:p-8 flex flex-col">
+            <h3 class="text-2xl font-bold tracking-tight text-slate-900 mb-3">{item.title}</h3>
+            <p class="text-lg font-semibold text-slate-900 mb-4">{item.need}</p>
+            <p class="text-slate-600 leading-relaxed mb-6">{item.description}</p>
+            <p class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-3">What we'll work toward</p>
+            <ul class="space-y-2 text-slate-700 mb-6 flex-grow">
+              {item.outputs.map((output) => <li class="flex items-start gap-2"><span class="text-blue-600" aria-hidden="true">•</span><span>{output}</span></li>)}
+            </ul>
+            <a href={item.href} class="text-blue-700 font-semibold hover:text-blue-900 border-t border-slate-200 pt-5" data-gtm-event={item.event} data-gtm-section="engagements">{item.link}</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-	<!-- Events offer -->
-	<section class="py-16 md:py-20 bg-stone-50 border-b border-slate-200" id="events">
-		<div class="max-w-6xl mx-auto px-6">
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-				<div>
-					<p class="text-sm font-mono font-medium text-blue-700 uppercase tracking-wider mb-3">Events</p>
-					<h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">
-						I will be the person on the floor.
-					</h2>
-					<p class="text-lg text-slate-600 mb-4">
-						Hire me when you need more than badge scans — someone in the booth and the hallway testing messages,
-						learning from engineers, and feeding what works back into positioning and sales.
-					</p>
-					<p class="text-slate-600 mb-6">
-						At a trade show you'll find me talking with practitioners, asking questions, changing a few words, and
-						trying again. By the end of the day, patterns emerge: what people care about, what they ignore, and where
-						the company's story isn't matching reality.
-					</p>
-					<a
-						href={mailEvent}
-						data-gtm-event="gtm_event_contact_click"
-						data-gtm-section="events"
-						class="text-blue-700 font-semibold hover:text-blue-900 inline-flex items-center gap-1"
-					>
-						Discuss an Event
-						<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-							><path d="M5 12h14M12 5l7 7-7 7" /></svg
-						>
-					</a>
-				</div>
-				<div class="glass-panel rounded-2xl p-8">
-					<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-6">What you get</h3>
-					<ul class="space-y-4 text-slate-700">
-						<li class="flex gap-3">
-							<span class="text-blue-600 font-bold shrink-0">▹</span>
-							<span>Live message testing with real booth and hallway conversations</span>
-						</li>
-						<li class="flex gap-3">
-							<span class="text-blue-600 font-bold shrink-0">▹</span>
-							<span>Objections and language your decks don't capture</span>
-						</li>
-						<li class="flex gap-3">
-							<span class="text-blue-600 font-bold shrink-0">▹</span>
-							<span>Same-day recap: what's working, what's not, what to change next</span>
-						</li>
-						<li class="flex gap-3">
-							<span class="text-blue-600 font-bold shrink-0">▹</span>
-							<span>Tie-in to positioning and sales follow-up after the show</span>
-						</li>
-					</ul>
-					<p class="text-sm text-slate-500 mt-8 italic">
-						From the outside it might look unorthodox. Underneath it's observation, experimentation, and a refusal to
-						accept assumptions without evidence.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
+  <section id="events" class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+    <div class="grid lg:grid-cols-12 gap-10 items-start">
+      <div class="lg:col-span-6">
+        <p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">Beyond the Badge Scan</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">I'll be the person on the floor.</h2>
+        <p class="text-lg font-medium text-slate-900 mb-4">Your next conference should generate more than a spreadsheet of names.</p>
+        <p class="text-slate-600 leading-relaxed mb-4">At technical events you'll find me talking with practitioners, asking questions, changing a few words and trying again. By the end of the day, patterns emerge: what developers care about, which language resonates, and where the company's story isn't matching reality.</p>
+        <p class="text-slate-600 leading-relaxed mb-6">I turn those observations into commercial intelligence that your marketing, product and sales teams can actually use after the event.</p>
+        <a href={mailEvent} data-gtm-event="gtm_event_contact_click" data-gtm-section="events" class="px-5 py-3 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors">Discuss an upcoming event</a>
+      </div>
+      <div class="lg:col-span-6 glass-panel rounded-2xl border border-slate-200 p-6 md:p-8">
+        <h3 class="text-xl font-bold text-slate-900 mb-5">The work before, during and after</h3>
+        <div class="space-y-5 text-slate-700">
+          <div class="border-l-2 border-blue-400 pl-4"><p class="font-semibold text-slate-900">Before</p><p>Understand your audience, commercial goals, messaging and hypotheses worth testing on the floor.</p></div>
+          <div class="border-l-2 border-blue-400 pl-4"><p class="font-semibold text-slate-900">During</p><p>Have real conversations, test positioning, capture objections and share what is working with the team.</p></div>
+          <div class="border-l-2 border-blue-400 pl-4"><p class="font-semibold text-slate-900">After</p><p>Summarize audience patterns, recommend useful messaging changes and connect relevant insights to sales follow-up.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<!-- Friction audit -->
-	<section class="py-16 md:py-20 bg-slate-900 text-slate-300">
-		<div class="max-w-6xl mx-auto px-6">
-			<div class="max-w-3xl mb-12">
-				<p class="text-sm font-mono font-medium text-blue-400 uppercase tracking-wider mb-3">Signature engagement</p>
-				<h2 class="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">Start with a GTM Friction Audit</h2>
-				<p class="text-xl text-slate-400 font-medium mb-4">
-					Before you spend more money generating demand, find out where you're losing the demand you already have.
-				</p>
-				<p class="text-lg">
-					A focused two-week engagement examining how your product, positioning, customer journey, and commercial
-					execution work together. We begin with the business problem, review available evidence, talk to the people
-					closest to the work when access allows, and identify gaps between what the company believes, what it communicates,
-					and what the market responds to.
-				</p>
-			</div>
+  <section class="bg-blue-50 border-y border-blue-100">
+    <div class="max-w-6xl mx-auto px-6 py-12 md:py-16 grid md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-5">
+        <p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">Why I work this way</p>
+        <h2 class="text-3xl md:text-4xl tracking-tight font-bold text-slate-900">I'm a recovering salesperson.</h2>
+      </div>
+      <div class="md:col-span-7 text-lg text-slate-700 leading-relaxed">
+        <p>I know what happens when marketing sends leads that sales can't use. I've seen the difference between what a CRM reports and what the field actually knows. And I've worked with engineers who have built genuinely impressive products that customers don't understand.</p>
+        <p class="mt-4 font-semibold text-slate-900">I know to listen for both the gems and the turds.</p>
+      </div>
+    </div>
+  </section>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-				<div class="bg-slate-800/60 rounded-xl p-8 border border-slate-700">
-					<h3 class="text-xl font-bold text-white mb-6">What we examine</h3>
-					<ul class="space-y-4">
-						{
-							auditFocus.map((item) => (
-								<li class="flex items-start gap-2">
-									<span class="text-blue-400 shrink-0">▹</span>
-									<span>
-										<strong class="text-white">{item.label}:</strong> {item.detail}
-									</span>
-								</li>
-							))
-						}
-					</ul>
-				</div>
-				<div class="bg-slate-800/60 rounded-xl p-8 border border-slate-700">
-					<h3 class="text-xl font-bold text-white mb-6">What you walk away with</h3>
-					<ul class="space-y-3">
-						{
-							auditDeliverables.map((line) => (
-								<li class="flex items-start gap-3">
-									<svg
-										class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										stroke-width="2"
-										><path d="M5 13l4 4L19 7" /></svg
-									>
-									<span>{line}</span>
-								</li>
-							))
-						}
-					</ul>
-				</div>
-			</div>
+  <section class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+    <p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">Relevant experience</p>
+    <h2 class="text-3xl md:text-4xl tracking-tight font-bold text-slate-900 mb-4">Why work with me?</h2>
+    <p class="text-lg text-slate-600 max-w-3xl mb-9">I've worked across the technical and commercial sides of enterprise software. Here are a few examples of how those perspectives come together.</p>
+    <div class="grid md:grid-cols-3 gap-5">
+      {proof.map((item) => (
+        <article class="glass-panel rounded-2xl border border-slate-200 p-6 md:p-8">
+          <p class="text-sm font-medium text-blue-700 mb-3">{item.context}</p>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
+          <p class="text-slate-600 leading-relaxed">{item.body}</p>
+        </article>
+      ))}
+    </div>
+    <a href="/cv" class="inline-block text-blue-700 font-semibold hover:text-blue-900 mt-6">See my full CV and projects</a>
+  </section>
 
-			<div class="max-w-3xl mb-10">
-				<h3 class="text-xl font-bold text-white mb-4">What Happens Next?</h3>
-				<p class="text-lg mb-3">
-					Start with a 30-minute conversation. We'll discuss your GTM challenges, determine whether a focused diagnostic
-					makes sense, and identify what needs closer examination.
-				</p>
-				<p class="text-lg">
-					If there's a fit, I'll propose a defined scope, timeline, and fixed fee.
-				</p>
-			</div>
+  <section class="bg-white border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+      <div class="max-w-3xl mb-8">
+        <p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">The commercial open-source revenue encabulator</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">One product. Three stories. Absolutely no shared understanding.</h2>
+        <p class="text-lg text-slate-600 leading-relaxed">Sometimes satire explains a problem better than a dozen PowerPoint slides. Your founder understands the architecture, sales understands the target, and customers understand their problems. A GTM strategy needs to connect them.</p>
+      </div>
+      <GtmEncabulatorVideo src="/gtm/encabulator.mp4" />
+    </div>
+  </section>
 
-			<div
-				class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-slate-800 rounded-xl p-8 border border-slate-700"
-			>
-				<div class="max-w-2xl">
-					<p class="text-white font-medium">
-						No enormous strategy deck that sits unread. No mysterious framework only the consultant understands. Just
-						evidence, informed judgment, and a practical way forward.
-					</p>
-					<p class="font-mono text-blue-400 text-sm mt-2">Two weeks. Defined scope. Actionable outcomes.</p>
-				</div>
-				<a
-					href={mailGtm}
-					data-gtm-event="gtm_audit_contact_click"
-					data-gtm-section="audit"
-					class="shrink-0 w-full md:w-auto text-center px-6 py-3 bg-white text-slate-900 font-semibold rounded-lg hover:bg-slate-100 transition-colors"
-				>
-					Discuss a GTM Friction Audit
-				</a>
-			</div>
-		</div>
-	</section>
+  <section id="contact" class="bg-slate-900 text-white">
+    <div class="max-w-6xl mx-auto px-6 py-16 md:py-20 grid md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-8">
+        <p class="font-mono text-sm text-blue-300 uppercase tracking-wider mb-3">Let's talk GTM</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Start with the business problem.</h2>
+        <p class="text-lg text-slate-300 leading-relaxed">Tell me where commercial performance isn't matching your expectations. We'll figure out whether an audit, a focused engagement or an altogether different approach makes sense.</p>
+        <p class="text-slate-400 text-sm mt-4">Marc Sherwood · Vancouver, BC · Remote engagements welcome</p>
+      </div>
+      <div class="md:col-span-4 flex flex-col gap-3">
+        <a href={mailGtm} data-gtm-event="gtm_footer_contact_click" data-gtm-section="footer" class="px-6 py-3 text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors">Let's talk GTM</a>
+        <a href={linkedIn} target="_blank" rel="noopener noreferrer" data-gtm-event="gtm_footer_contact_click" data-gtm-section="footer" class="px-6 py-3 text-center border border-slate-500 hover:border-blue-300 text-white font-semibold rounded-lg transition-colors">Connect on LinkedIn</a>
+      </div>
+    </div>
+  </section>
 
-	<!-- Fractional execution -->
-	<section class="py-16 md:py-20 bg-stone-50 border-b border-slate-200">
-		<div class="max-w-3xl mx-auto px-6 text-center">
-			<h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">
-				Need someone to help make it happen?
-			</h2>
-			<div class="text-lg text-slate-600 space-y-5 mb-8 text-left">
-				<p>
-					An audit isn't always the answer. Maybe you already know what's broken — launch, new market, commercial sales
-					motion, or an event where you need an experienced pair of hands.
-				</p>
-				<p>
-					Fractional engagements can cover strategy, messaging, working with sales and marketing, customer
-					conversations, and turning learning into changes that matter.
-				</p>
-				<p class="font-medium text-slate-900 italic border-l-4 border-slate-300 pl-4">
-					I don't believe every problem requires another meeting, dashboard, or process. Sometimes it requires someone
-					willing to ask a better question.
-				</p>
-			</div>
-		</div>
-	</section>
-
-	<!-- Proof of work -->
-	<section class="py-16 md:py-20 bg-white border-b border-slate-200">
-		<div class="max-w-6xl mx-auto px-6">
-			<h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight text-center">
-				I've seen what happens when the story connects.
-			</h2>
-			<p class="text-slate-600 text-center max-w-2xl mx-auto mb-12 text-lg">
-				Examples of the kind of work I do — not a client logo wall. Specific names and metrics can be added as you approve
-				them.
-			</p>
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-				{
-					proofCards.map((card) => (
-						<article class="glass-panel rounded-xl p-8 flex flex-col">
-							<h3 class="text-lg font-bold text-slate-900 mb-4">{card.title}</h3>
-							<div class="space-y-4 text-sm text-slate-600 flex-grow">
-								<div>
-									<p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Challenge</p>
-									<p>{card.challenge}</p>
-								</div>
-								<div>
-									<p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">What I did</p>
-									<p>{card.did}</p>
-								</div>
-								<div>
-									<p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Outcome</p>
-									<p class={card.outcomePlaceholder ? 'text-slate-600' : ''}>
-										{card.outcome}
-									</p>
-								</div>
-							</div>
-						</article>
-					))
-				}
-			</div>
-		</div>
-	</section>
-
-	<!-- About + contact -->
-	<section class="py-16 md:py-20 bg-stone-50" id="contact">
-		<div class="max-w-3xl mx-auto px-6">
-			<h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">Background</h2>
-			<div class="space-y-5 text-lg text-slate-600 mb-12">
-				<p>
-					I've spent years in commercial open source, infrastructure, and developer tools — including
-					<span class="font-mono text-sm bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">VictoriaMetrics</span>,
-					<span class="font-mono text-sm bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">Docker</span>,
-					<span class="font-mono text-sm bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">Elastic</span>,
-					<span class="font-mono text-sm bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">Splunk</span>, and
-					<span class="font-mono text-sm bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">MariaDB</span>.
-				</p>
-				<p>
-					I've worked alongside engineers, founders, product teams, marketers, salespeople, and customers. I understand
-					the excitement of building something technically remarkable — and the pressure of turning it into a sustainable
-					business.
-				</p>
-				<p>
-					I'm also a builder. <strong class="text-slate-900">HoneOS</strong> is pipeline research and OQL intelligence
-					for commercial open-source GTM — which keeps me close to product development, customer discovery, and
-					commercialization.
-				</p>
-				<p class="font-bold text-slate-900 text-xl">I see GTM as a system. When a system isn't working, I want to understand why.</p>
-			</div>
-
-			<div class="glass-panel rounded-2xl p-8 md:p-10 text-center">
-				<h3 class="text-2xl font-bold text-slate-900 mb-4">Let's Talk GTM.</h3>
-				<p class="text-slate-600 mb-8 max-w-xl mx-auto">
-					If commercial results aren't matching the product, reach out at{' '}
-					<span class="font-mono text-sm text-slate-800">marc@honeos.ai</span> — whether that's a friction audit,
-					fractional help, or someone on the floor at your next event.
-				</p>
-				<div class="flex flex-wrap justify-center gap-4">
-					<a
-						href={mailGtm}
-						data-gtm-event="gtm_footer_contact_click"
-						data-gtm-section="footer"
-						class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-					>
-						Let's Talk GTM
-					</a>
-					<a
-						href={linkedIn}
-						target="_blank"
-						rel="noopener noreferrer"
-						data-gtm-event="gtm_footer_contact_click"
-						data-gtm-section="footer"
-						class="px-8 py-3 glass-panel text-slate-800 font-semibold rounded-lg hover:border-blue-300 transition-colors"
-					>
-						LinkedIn
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<script is:inline>
-		(function () {
-			function trackGtmEvent(eventName, params) {
-				if (typeof gtag === 'function') {
-					gtag('event', eventName, params);
-				}
-			}
-
-			document.querySelectorAll('[data-gtm-event]').forEach(function (el) {
-				el.addEventListener('click', function () {
-					var eventName = el.getAttribute('data-gtm-event');
-					if (!eventName) return;
-					trackGtmEvent(eventName, {
-						page_section: el.getAttribute('data-gtm-section') || 'unknown',
-						link_url: el.getAttribute('href') || '',
-					});
-				});
-			});
-
-			var video = document.querySelector('[data-gtm-encabulator-video]');
-			if (video) {
-				var played = false;
-				video.addEventListener('play', function () {
-					if (played) return;
-					played = true;
-					trackGtmEvent('gtm_video_play', {
-						page_section: 'encabulator',
-						link_url: video.currentSrc || video.src || '',
-					});
-				});
-			}
-		})();
-	</script>
+  <script is:inline>
+    (function () {
+      function trackGtmEvent(eventName, params) {
+        if (typeof gtag === 'function') gtag('event', eventName, params);
+      }
+      document.querySelectorAll('[data-gtm-event]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var eventName = el.getAttribute('data-gtm-event');
+          if (!eventName) return;
+          trackGtmEvent(eventName, {
+            page_section: el.getAttribute('data-gtm-section') || 'unknown',
+            link_url: el.getAttribute('href') || '',
+          });
+        });
+      });
+      var video = document.querySelector('[data-gtm-encabulator-video]');
+      if (video) {
+        var played = false;
+        video.addEventListener('play', function () {
+          if (played) return;
+          played = true;
+          trackGtmEvent('gtm_video_play', {
+            page_section: 'encabulator',
+            link_url: video.currentSrc || video.src || '',
+          });
+        });
+      }
+    })();
+  </script>
 </BaseLayout>
