@@ -1,263 +1,256 @@
 ---
-import BlueskyFeed from '../components/BlueskyFeed.astro';
-import LinkedInEmbed from '../components/LinkedInEmbed.astro';
-import GitHubProfile from '../components/GitHubProfile.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_DESCRIPTION } from '../consts';
+import GitHubProfile from '../components/GitHubProfile.astro';
+
+const capabilities = [
+  { title: 'Customer-led positioning', detail: 'Work with field teams to understand what customers actually need, then turn those insights into the core messaging for new technical products and services.', evidence: 'Product messaging · Customer discovery · Field intelligence' },
+  { title: 'Technical translation', detail: 'Connect engineering capabilities to the problems customers are solving and the decisions business leaders need to make, without losing the technical substance.', evidence: 'Docker · VictoriaMetrics · Enterprise infrastructure' },
+  { title: 'Commercial systems thinking', detail: 'Examine the entire journey from discovery and adoption to revenue, looking for friction between product, marketing, sales and the people buying.', evidence: 'Open-source GTM · Sales enablement · Product-led growth' },
+  { title: 'Applied AI and rapid prototyping', detail: 'Turn an observed problem into a working application, test assumptions with real workflows, and improve the system using feedback and instrumentation.', evidence: 'HoneOS · HuntMode · LLM applications' },
+];
+
+const projects = [
+  {
+    name: 'HoneOS', type: 'Commercial intelligence', year: '2026',
+    problem: 'Technical sales teams spend too much time researching accounts and too little time making sense of what matters.',
+    built: 'An AI-assisted research platform that connects public engineering signals, account context and evidence-backed sales narratives. Built with feedback workflows, model selection, cost and latency monitoring, and product analytics.',
+    stack: ['React', 'Node.js', 'LLM APIs', 'Cloud Run', 'PostHog'],
+    href: 'https://honeos.ai', link: 'Explore HoneOS',
+  },
+  {
+    name: 'HuntMode', type: 'Applied AI / decision support', year: '2026',
+    problem: 'Job descriptions and résumés make it difficult to distinguish real alignment from keyword matches.',
+    built: 'A workflow that assesses role fit against career evidence, identifies gaps, and supports targeted applications and interview preparation.',
+    stack: ['LLM APIs', 'Evidence mapping', 'Product analytics'],
+  },
+  {
+    name: 'Looking Glass', type: 'Infrastructure observability', year: '2026',
+    problem: 'Understanding the health of a home infrastructure environment requires visibility across multiple systems.',
+    built: 'A deployment and monitoring project connecting a Proxmox environment to VictoriaMetrics through ShiftMon, with automated infrastructure monitoring and dashboards.',
+    stack: ['Proxmox', 'VictoriaMetrics', 'Docker', 'Ansible'],
+  },
+  {
+    name: 'Social Battery', type: 'Personal software experiment', year: '2026',
+    problem: 'Daily activities can consume energy in ways that are difficult to recognize until after the fact.',
+    built: 'A mobile-first personal energy-tracking application with a self-hosted deployment environment.',
+    stack: ['Mobile development', 'Tailscale', 'Self-hosting'],
+  },
+];
+
+const experience = [
+  {
+    name: 'HoneOS', role: 'Founder & PLG Strategist', period: 'Jan 2026 – Present',
+    body: 'Developing a commercial intelligence platform informed by experience selling and marketing enterprise and open-source technology.',
+    points: [
+      'Translate enterprise sales and research problems into product workflows, prototypes and experiments.',
+      'Build and instrument an AI-assisted application, incorporating user feedback and monitoring model cost, latency and usage.',
+      'Develop positioning and go-to-market experiments for commercial open-source companies.',
+    ],
+  },
+  {
+    name: 'VictoriaMetrics', role: 'Technical Marketing & PLG', period: 'Nov 2024 – Feb 2026',
+    body: 'Worked at the intersection of technical marketing, developer adoption and sales enablement for high-performance observability infrastructure.',
+    points: [
+      'Developed positioning and technical content connecting time-series database capabilities with customer and business requirements.',
+      'Supported the field with competitive intelligence, enablement and feedback on commercial packaging.',
+      'Worked on self-serve onboarding, conversion and developer-focused monetization initiatives.',
+    ],
+  },
+  {
+    name: 'Docker', role: 'Technical Marketing · AI/ML subject matter expertise',
+    body: 'Connected containerization, developer workflows and AI/ML use cases to customer needs and commercial narratives.',
+    points: [
+      'Developed executive messaging, partner content, customer stories, webcasts and sales enablement.',
+      'Worked on AI/ML initiatives, including a 12-week project with the Berkeley Management, Entrepreneurship, & Technology program.',
+      'Translated technical capabilities into their practical implications for different audiences.',
+    ],
+  },
+];
+
+const domains = [
+  { title: 'Commercial & customer', items: ['Enterprise sales', 'Product positioning', 'Customer discovery', 'Sales enablement', 'Commercial open source', 'Product-led growth'] },
+  { title: 'Infrastructure & data', items: ['Observability', 'Metrics · logs · traces', 'Containers', 'Databases & search', 'Docker', 'VictoriaMetrics'] },
+  { title: 'Applied development', items: ['JavaScript / TypeScript', 'Python · SQL · Bash', 'React / Node.js', 'LLM APIs', 'Cloud deployment', 'Product analytics'] },
+];
 ---
 
-<BaseLayout title="Marc Sherwood | Technical GTM Lead" description={SITE_DESCRIPTION} mainClass="flex-grow container mx-auto px-6 py-12 max-w-5xl">
-			<!-- Hero Section -->
-			<section class="py-16 animate-fade-in">
-				<div class="inline-block px-3 py-1 mb-6 text-sm font-mono text-blue-700 bg-blue-50 border border-blue-200 rounded-full">
-					Available for strategic consultation
-				</div>
-				<h1 class="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-slate-900">
-					Hi, I'm <span class="text-gradient">Marc Sherwood</span>.
-				</h1>
-				<p class="text-xl text-slate-600 max-w-3xl leading-relaxed mb-4">
-					Technical GTM Lead & Strategist bridging the gap between complex engineering systems and commercial growth. I specialize in DevTools, AI Operations, and scalable platforms.
-				</p>
-				<p class="text-slate-600 mb-8 max-w-3xl">
-					Looking for fractional GTM, friction audits, or event floor help?
-					<a href="/gtm" class="text-blue-700 font-semibold hover:text-blue-900">See how I work with clients →</a>
-				</p>
-				<div class="flex flex-wrap gap-4">
-					<a href="/dashboard" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
-						View Command Center
-					</a>
-					<a href="https://linkedin.com/in/marcsherwood" target="_blank" class="px-6 py-3 glass-panel text-slate-800 font-semibold rounded-lg hover:border-blue-300 transition-colors flex items-center gap-2">
-						<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-						Connect on LinkedIn
-					</a>
-				</div>
-			</section>
+<BaseLayout title="Marc Sherwood | Technical Strategist, GTM & Applied AI" description="Marc Sherwood — technical strategist and hands-on builder connecting customer needs, commercial strategy, infrastructure and applied AI." mainClass="flex-grow w-full">
+  <section class="bg-slate-900 text-white border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <p class="text-sm font-mono text-blue-300 mb-5">Marc Sherwood · Richmond / Vancouver, BC</p>
+      <div class="grid lg:grid-cols-12 gap-12 items-end">
+        <div class="lg:col-span-8">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">
+            Technical strategist.<br />Systems thinker.<br /><span class="text-blue-300">Hands-on builder.</span>
+          </h1>
+          <p class="text-lg md:text-xl text-slate-200 leading-relaxed max-w-3xl">
+            I connect what technology can do with what people and businesses actually need. My experience spans enterprise software, open-source infrastructure, commercial strategy and applied AI.
+          </p>
+          <div class="flex flex-wrap gap-3 mt-8">
+            <a href="mailto:marc@honeos.ai?subject=Professional%20opportunity" class="px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors">Get in touch</a>
+            <a href="https://linkedin.com/in/marcsherwood" class="px-5 py-3 border border-slate-500 hover:border-blue-300 text-white font-semibold rounded-lg transition-colors">LinkedIn</a>
+            <a href="#experience" class="px-5 py-3 border border-slate-500 hover:border-blue-300 text-white font-semibold rounded-lg transition-colors">Career experience</a>
+          </div>
+        </div>
+        <aside class="lg:col-span-4 border-l-2 border-blue-400 pl-6 py-2">
+          <p class="font-mono text-sm text-blue-300 uppercase tracking-wider mb-3">Where I add value</p>
+          <p class="text-xl font-semibold leading-snug">When a problem crosses the boundaries between technology, customers and business, that's usually where I want to be.</p>
+          <p class="text-slate-300 mt-5">Open to full-time and fractional opportunities, including technical strategy, innovation and product commercialization.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
 
-			<!-- Featured Projects Section -->
-			<section id="featured-projects" class="mt-8 mb-16 animate-fade-in" style="animation-delay: 0.1s;">
-				<div class="text-center mb-10">
-					<h2 class="text-3xl font-bold text-slate-900 mb-4 tracking-tight">Featured Projects</h2>
-					<p class="text-slate-600 max-w-2xl mx-auto">Explore a selection of recent projects focused on AI utilities, data enrichment, and mobile-first products. Hover on skill tags to see where they are applied.</p>
-				</div>
+  <nav aria-label="CV sections" class="border-b border-slate-200 bg-white">
+    <div class="max-w-6xl mx-auto px-6 flex flex-wrap gap-x-6 gap-y-3 py-4 text-sm font-semibold text-slate-700">
+      <a href="#capabilities" class="hover:text-blue-700">Capabilities</a>
+      <a href="#featured-projects" class="hover:text-blue-700">Projects</a>
+      <a href="#experience" class="hover:text-blue-700">Experience</a>
+      <a href="#approach" class="hover:text-blue-700">How I work</a>
+      <a href="#skills" class="hover:text-blue-700">Technical & commercial skills</a>
+    </div>
+  </nav>
 
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					
-					<!-- Project 1 -->
-					<div class="glass-panel rounded-2xl overflow-hidden flex flex-col h-full border border-slate-200 hover:border-blue-300 transition-colors">
-						<div class="h-48 w-full bg-gradient-to-b from-slate-700 to-slate-900 relative">
-							<!-- Image placeholder -->
-							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAwTDggOFpNOCAwTDAgOFoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMSI+PC9wYXRoPgo8L3N2Zz4=')]"></div>
-						</div>
-						<div class="p-6 flex flex-col flex-grow">
-							<div class="flex justify-between items-center mb-3">
-								<span class="text-[10px] font-bold text-purple-400 tracking-wider uppercase">COSS GTM & AI Intelligence</span>
-								<span class="text-[11px] font-mono text-slate-500">2026</span>
-							</div>
-							<div class="flex justify-between items-center mb-4">
-								<h3 class="text-2xl font-bold text-slate-900">HoneOS.ai</h3>
-								<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200">
-									<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-									<span class="text-[10px] font-medium text-slate-700">Online</span>
-								</div>
-							</div>
-							<p class="text-sm text-slate-600 leading-relaxed mb-6 flex-grow">
-								An automated pipeline research platform (HoneOS Vision) and marketing stack that tracks engineering signals to surface Open Source Qualified Leads (OQLs).
-							</p>
-							<div class="flex flex-wrap gap-2 mb-8">
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">React SPA</span>
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">Firebase Hosting</span>
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">Docker</span>
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">Cloud Run</span>
-							</div>
-							<a href="https://marc.honeos.ai" target="_blank" class="mt-auto w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors text-center text-sm font-medium text-white border border-blue-600 flex justify-center items-center gap-2">
-								View Details <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-							</a>
-						</div>
-					</div>
+  <section id="capabilities" class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+    <p class="text-sm font-mono font-medium text-blue-700 uppercase tracking-wider mb-3">What I bring</p>
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">Different disciplines. One way of thinking.</h2>
+    <p class="text-lg text-slate-600 max-w-3xl mb-9">I have worked across the commercial and technical sides of enterprise technology. The useful part is what happens when those perspectives come together.</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      {capabilities.map((item) => (
+        <article class="glass-panel rounded-2xl border border-slate-200 p-6 md:p-8 flex flex-col">
+          <h3 class="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
+          <p class="text-slate-600 leading-relaxed flex-grow">{item.detail}</p>
+          <p class="text-sm font-medium text-blue-700 mt-5 pt-4 border-t border-slate-200">{item.evidence}</p>
+        </article>
+      ))}
+    </div>
+  </section>
 
-					<!-- Project 2 -->
-					<div class="glass-panel rounded-2xl overflow-hidden flex flex-col h-full border border-slate-200 hover:border-blue-300 transition-colors">
-						<div class="h-48 w-full bg-gradient-to-b from-slate-700 to-slate-900 relative">
-							<!-- Image placeholder -->
-							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAwTDggOFpNOCAwTDAgOFoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMSI+PC9wYXRoPgo8L3N2Zz4=')]"></div>
-						</div>
-						<div class="p-6 flex flex-col flex-grow">
-							<div class="flex justify-between items-center mb-3">
-								<span class="text-[10px] font-bold text-purple-400 tracking-wider uppercase">Infrastructure Monitoring</span>
-								<span class="text-[11px] font-mono text-slate-500">2026</span>
-							</div>
-							<div class="flex justify-between items-center mb-4">
-								<h3 class="text-2xl font-bold text-slate-900">Looking Glass</h3>
-								<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200">
-									<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-									<span class="text-[10px] font-medium text-slate-700">Online</span>
-								</div>
-							</div>
-							<p class="text-sm text-slate-600 leading-relaxed mb-6 flex-grow">
-								A deployment orchestrator and dashboard that wires a local VictoriaMetrics instance to a Proxmox server via ShiftMon for automated infrastructure monitoring and analytics.
-							</p>
-							<div class="flex flex-wrap gap-2 mb-8">
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">Proxmox VE</span>
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">VictoriaMetrics</span>
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">Docker</span>
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">Ansible</span>
-							</div>
-							<a href="#" class="mt-auto w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors text-center text-sm font-medium text-white border border-blue-600 flex justify-center items-center gap-2">
-								View Details <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-							</a>
-						</div>
-					</div>
+  <section class="bg-blue-50 border-y border-blue-100">
+    <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-5">
+        <p class="text-sm font-mono text-blue-700 uppercase tracking-wider mb-3">A recurring thread</p>
+        <h2 class="text-3xl font-bold tracking-tight text-slate-900">The field is a source of intelligence.</h2>
+      </div>
+      <div class="md:col-span-7 text-lg text-slate-700 leading-relaxed">
+        <p>Much of my positioning work has started with conversations with field teams: understanding the problems customers are trying to solve, finding the disconnects, and connecting what we build to why it matters.</p>
+        <p class="mt-4 font-semibold text-slate-900">That same habit of listening, investigating and testing now informs the products I build.</p>
+      </div>
+    </div>
+  </section>
 
-					<!-- Project 3 -->
-					<div class="glass-panel rounded-2xl overflow-hidden flex flex-col h-full border border-slate-200 hover:border-blue-300 transition-colors">
-						<div class="h-48 w-full bg-gradient-to-b from-slate-700 to-slate-900 relative">
-							<!-- Image placeholder -->
-							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAwTDggOFpNOCAwTDAgOFoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMSI+PC9wYXRoPgo8L3N2Zz4=')]"></div>
-						</div>
-						<div class="p-6 flex flex-col flex-grow">
-							<div class="flex justify-between items-center mb-3">
-								<span class="text-[10px] font-bold text-cyan-400 tracking-wider uppercase">Mobile App & DevOps</span>
-								<span class="text-[11px] font-mono text-slate-500">2026</span>
-							</div>
-							<div class="flex justify-between items-center mb-4">
-								<h3 class="text-2xl font-bold text-slate-900">Social Battery</h3>
-								<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200">
-									<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-									<span class="text-[10px] font-medium text-slate-700">Online</span>
-								</div>
-							</div>
-							<p class="text-sm text-slate-600 leading-relaxed mb-6 flex-grow">
-								A personalized energy-tracking mobile app designed to log daily activities and prevent burnout, utilizing Tailscale for a zero-friction, secure self-hosted deployment ecosystem.
-							</p>
-							<div class="flex flex-wrap gap-2 mb-8">
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">Mobile Dev</span>
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">Tailscale</span>
-								<span class="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-slate-100 border border-slate-200 rounded-md">Self-Hosted</span>
-							</div>
-							<a href="#" class="mt-auto w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors text-center text-sm font-medium text-white border border-blue-600 flex justify-center items-center gap-2">
-								View Details <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-							</a>
-						</div>
-					</div>
+  <section id="featured-projects" class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+    <p class="text-sm font-mono font-medium text-blue-700 uppercase tracking-wider mb-3">Selected projects</p>
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">From problem to working software.</h2>
+    <p class="text-lg text-slate-600 max-w-3xl mb-9">These projects illustrate how I investigate problems, design practical workflows, build applications and learn from their operation.</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      {projects.map((project) => (
+        <article class="glass-panel border border-slate-200 rounded-2xl overflow-hidden flex flex-col">
+          <div class="bg-slate-900 p-6 md:p-8 text-white">
+            <div class="flex flex-wrap gap-2 items-center justify-between text-sm text-blue-200 mb-4">
+              <span>{project.type}</span><time>{project.year}</time>
+            </div>
+            <h3 class="text-3xl font-bold tracking-tight">{project.name}</h3>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col flex-grow">
+            <p class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-2">The problem</p>
+            <p class="text-slate-700 mb-5">{project.problem}</p>
+            <p class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-2">What I built</p>
+            <p class="text-slate-700 leading-relaxed mb-6 flex-grow">{project.built}</p>
+            <ul class="flex flex-wrap gap-2 mb-4">
+              {project.stack.map((tag) => <li class="rounded-md bg-blue-50 border border-blue-100 px-3 py-1 text-sm text-blue-800">{tag}</li>)}
+            </ul>
+            {project.href && <a href={project.href} class="text-blue-700 font-semibold hover:text-blue-900 mt-2">{project.link}</a>}
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="mt-6 text-sm text-slate-500">Projects include active products and personal experiments; their inclusion is evidence of practical work, not a claim of commercial adoption or revenue.</p>
+  </section>
 
-				</div>
-			</section>
+  <section id="experience" class="bg-white border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+      <p class="text-sm font-mono font-medium text-blue-700 uppercase tracking-wider mb-3">Career experience</p>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-9">Commercial experience. Technical depth.</h2>
+      <div class="space-y-0 divide-y divide-slate-200 border-y border-slate-200">
+        {experience.map((item) => (
+          <article class="grid md:grid-cols-12 gap-5 md:gap-10 py-8">
+            <div class="md:col-span-4">
+              <h3 class="text-2xl font-bold text-slate-900">{item.name}</h3>
+              <p class="font-medium text-blue-700 mt-1">{item.role}</p>
+              {item.period && <p class="font-mono text-sm text-slate-500 mt-2">{item.period}</p>}
+            </div>
+            <div class="md:col-span-8">
+              <p class="text-slate-800 font-medium leading-relaxed mb-4">{item.body}</p>
+              <ul class="list-disc pl-5 space-y-2 text-slate-600 leading-relaxed">
+                {item.points.map((point) => <li>{point}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 mt-8">
+        <h3 class="text-lg font-bold text-slate-900 mb-3">Earlier enterprise technology experience</h3>
+        <p class="text-slate-600 mb-4">My background also includes experience across enterprise sales, security, databases, search and observability at organizations including:</p>
+        <ul class="flex flex-wrap gap-2">
+          {['Elastic', 'Splunk', 'MariaDB', 'Percona', 'Sophos'].map((name) => <li class="rounded-md px-3 py-2 bg-white border border-slate-200 font-semibold text-slate-800">{name}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
 
-			<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-12 animate-fade-in" style="animation-delay: 0.2s;">
-				
-				<!-- Left Column: CV / Portfolio -->
-				<div class="lg:col-span-7 space-y-16">
-					
-					<!-- Experience Timeline -->
-					<section>
-						<h2 class="text-2xl font-semibold text-slate-900 mb-8 flex items-center gap-3 border-b border-slate-200 pb-4">
-							<svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-							Professional Experience
-						</h2>
-						
-						<div class="space-y-10 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
-							
-							<!-- Experience 1 -->
-							<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-								<div class="flex items-center justify-center w-10 h-10 rounded-full border border-slate-300 bg-white text-slate-400 group-[.is-active]:text-blue-600 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-									<svg class="w-4 h-4 fill-current" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 14A6 6 0 1 1 8 2a6 6 0 0 1 0 12z"/></svg>
-								</div>
-								<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-6 rounded-xl">
-									<div class="flex flex-col mb-2">
-										<span class="font-bold text-slate-900 text-lg">Founder & PLG Strategist</span>
-										<span class="text-blue-600 font-medium">HoneOSS</span>
-										<time class="font-mono text-sm text-slate-500 mt-1">Jan 2026 – Present</time>
-									</div>
-									<p class="text-slate-600 text-sm leading-relaxed">
-										Operating with a 0→1 mentality to help technical and open-source platforms improve monetization, optimize conversions, and scale toward $10M+ ARR.
-									</p>
-								</div>
-							</div>
-							
-							<!-- Experience 2 -->
-							<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-								<div class="flex items-center justify-center w-10 h-10 rounded-full border border-slate-300 bg-white text-slate-400 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-									<svg class="w-4 h-4 fill-current" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 14A6 6 0 1 1 8 2a6 6 0 0 1 0 12z"/></svg>
-								</div>
-								<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-6 rounded-xl opacity-80 hover:opacity-100 transition-opacity">
-									<div class="flex flex-col mb-2">
-										<span class="font-bold text-slate-900 text-lg">Technical Marketing & PLG</span>
-										<span class="text-blue-600 font-medium">VictoriaMetrics</span>
-										<time class="font-mono text-sm text-slate-500 mt-1">Nov 2024 – Feb 2026</time>
-									</div>
-									<p class="text-slate-600 text-sm leading-relaxed">
-										Drove developer-focused monetization pipelines, trial-to-paid conversion optimizations, and self-serve onboarding metrics for high-performance TSDB infrastructure.
-									</p>
-								</div>
-							</div>
+  <section id="approach" class="bg-slate-900 text-slate-100">
+    <div class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+      <p class="text-sm font-mono text-blue-300 uppercase tracking-wider mb-3">How I work</p>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-9">Understand the system. Test the assumption.</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {[
+          ['Investigate', 'Start with the real problem. Talk to people closest to it and look for the patterns.'],
+          ['Connect', 'Bring together technical, commercial and customer perspectives to understand the system.'],
+          ['Prototype', 'Make the idea tangible. Build something or design an experiment that tests the hypothesis.'],
+          ['Learn', 'Measure what happens, challenge the assumptions and change direction when the evidence says to.'],
+        ].map(([title, detail]) => (
+          <article class="border-t-2 border-blue-400 pt-5">
+            <h3 class="text-xl font-bold text-white mb-3">{title}</h3>
+            <p class="text-slate-300 leading-relaxed">{detail}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-						</div>
-					</section>
+  <section id="skills" class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+    <p class="text-sm font-mono font-medium text-blue-700 uppercase tracking-wider mb-3">Tools and disciplines</p>
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-8">A working vocabulary across teams.</h2>
+    <div class="grid md:grid-cols-3 gap-5">
+      {domains.map((domain) => (
+        <article class="glass-panel p-6 rounded-xl border border-slate-200">
+          <h3 class="text-lg font-bold text-slate-900 mb-4">{domain.title}</h3>
+          <ul class="space-y-2.5 text-slate-700">
+            {domain.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+    <div class="glass-panel p-6 md:p-8 rounded-2xl mt-8">
+      <h3 class="text-xl font-bold text-slate-900 mb-5">Open source & development</h3>
+      <GitHubProfile compact={true} />
+    </div>
+  </section>
 
-					<!-- Skills Matrix -->
-					<section>
-						<h2 class="text-2xl font-semibold text-slate-900 mb-6 flex items-center gap-3 border-b border-slate-200 pb-4">
-							<svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-							Skills Matrix
-						</h2>
-						
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-							<div class="glass-panel p-5 rounded-xl">
-								<h3 class="text-slate-900 font-medium mb-3 border-b border-slate-200 pb-2">GTM & Strategy</h3>
-								<div class="flex flex-wrap gap-2">
-									<span class="px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-md font-mono">PLG Models</span>
-									<span class="px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-md font-mono">Monetization</span>
-									<span class="px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-md font-mono">DevRel</span>
-									<span class="px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-md font-mono">Cohort Analysis</span>
-								</div>
-							</div>
-							<div class="glass-panel p-5 rounded-xl">
-								<h3 class="text-slate-900 font-medium mb-3 border-b border-slate-200 pb-2">Technical Core</h3>
-								<div class="flex flex-wrap gap-2">
-									<span class="px-3 py-1 bg-blue-50 border border-blue-200 text-blue-800 text-xs rounded-md font-mono">Astro / React</span>
-									<span class="px-3 py-1 bg-blue-50 border border-blue-200 text-blue-800 text-xs rounded-md font-mono">AI Ops / LLMs</span>
-									<span class="px-3 py-1 bg-blue-50 border border-blue-200 text-blue-800 text-xs rounded-md font-mono">Docker / Caddy</span>
-									<span class="px-3 py-1 bg-blue-50 border border-blue-200 text-blue-800 text-xs rounded-md font-mono">TSDBs</span>
-								</div>
-							</div>
-						</div>
-					</section>
-
-					<!-- GitHub Section -->
-					<section>
-						<h2 class="text-2xl font-semibold text-slate-900 mb-6 flex items-center gap-3 border-b border-slate-200 pb-4">
-							<svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-							Open Source & Development
-						</h2>
-						<GitHubProfile />
-					</section>
-
-				</div>
-
-				<!-- Right Column: Social Feeds -->
-				<div class="lg:col-span-5 space-y-10">
-					
-					<section>
-						<h2 class="text-2xl font-semibold text-slate-900 mb-6 flex items-center gap-3 border-b border-slate-200 pb-4">
-							<svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-							Activity Stream
-						</h2>
-						
-						<!-- Bluesky Integration -->
-						<BlueskyFeed handle="cramd.bsky.social" limit={3} />
-						
-						<div class="my-8"></div>
-						
-						<!-- LinkedIn Embed -->
-						<!-- Replace the src with your actual LinkedIn post embed URL -->
-						<LinkedInEmbed 
-							src="https://www.linkedin.com/embed/feed/update/urn:li:share:7244439169622941697" 
-							title="Marc Sherwood LinkedIn Post" 
-							height="400" 
-						/>
-
-					</section>
-
-				</div>
-			</div>
+  <section class="border-t border-slate-200 bg-white">
+    <div class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-8">
+        <p class="text-sm font-mono font-medium text-blue-700 uppercase tracking-wider mb-3">What's next</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">Meaningful problems and room to build.</h2>
+        <p class="text-lg text-slate-600 leading-relaxed">I'm interested in roles where I can investigate complex problems, collaborate across disciplines, and turn ideas into action. That includes opportunities in technical GTM, digital innovation and applied AI, in technology companies and beyond.</p>
+        <p class="text-sm text-slate-500 mt-4">Based in the Vancouver area. Open to remote and hybrid work.</p>
+      </div>
+      <div class="md:col-span-4 flex flex-col gap-3">
+        <a href="mailto:marc@honeos.ai?subject=Professional%20opportunity" class="text-center px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors">Start a conversation</a>
+        <a href="/gtm" class="text-center px-5 py-3 glass-panel text-slate-800 font-semibold rounded-lg hover:border-blue-300 transition-colors">Fractional GTM services</a>
+        <a href="/blog" class="text-center px-5 py-3 glass-panel text-slate-800 font-semibold rounded-lg hover:border-blue-300 transition-colors">Read my writing</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
