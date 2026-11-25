@@ -2,7 +2,7 @@
 title: "There's Gold in the Hills"
 description: "Why AI adoption needs a divining rod before it needs a roadmap: discover business friction, follow the evidence, and prioritize measurable returns."
 pubDate: 2026-11-24
-heroImage: "../../assets/gold-hero.webp"
+heroImage: "../../assets/gold-preview.jpg"
 tags: ["AI", "Business Operations", "Observability", "ROI"]
 author: "Marc Sherwood"
 ---
