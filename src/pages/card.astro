@@ -1,0 +1,88 @@
+---
+import '../styles/global.css';
+const key = import.meta.env.PUBLIC_CARD_POSTHOG_KEY || '';
+const host = import.meta.env.PUBLIC_CARD_POSTHOG_HOST || 'https://us.i.posthog.com';
+const paths = [
+  { id: 'hire', title: 'I’m hiring', prompt: 'Find the person behind the résumé.', heading: 'Technical strategy. Commercial judgement. Hands-on execution.', body: 'I work across technical and commercial boundaries to find the problems worth solving, then build and test solutions. My background spans Docker, VictoriaMetrics, Elastic, Splunk and commercial open source.', links: [['Explore my CV', '/cv'], ['See my AI & operations work', '/ai-operations'], ['Discuss a role', 'mailto:marc@honeos.ai?subject=Professional%20opportunity']] },
+  { id: 'consult', title: 'I have a problem to solve', prompt: 'Find the friction. Work out what matters.', heading: 'Start with the business outcome.', body: 'I help teams investigate customer and commercial friction, connect technical capabilities to business value, and turn ideas into measurable experiments. Fractional GTM, technical positioning and applied AI are all tools in the kit.', links: [['Explore fractional GTM', '/gtm'], ['See what I build', '/cv#featured-projects'], ['Tell me about the problem', 'mailto:marc@honeos.ai?subject=Let%27s%20investigate%20a%20problem']] },
+  { id: 'curious', title: 'I’m just curious', prompt: 'There’s more behind the terminal.', heading: 'Curiosity isn’t a side project.', body: 'I like investigating unfamiliar systems, building things that should exist, and writing about what I learn along the way. This little terminal is one of those experiments.', links: [['Browse my writing', '/blog'], ['Explore my projects', '/cv#featured-projects'], ['Visit my personal site', '/']] },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Scan to investigate | Marc Sherwood</title>
+  <meta name="description" content="Meet Marc Sherwood: technical strategist, systems thinker and hands-on builder in Vancouver, BC." />
+  <link rel="canonical" href="https://marcsherwood.com/card/" />
+  <link rel="icon" href="/favicon.svg" />
+</head>
+<body>
+<main class="card-shell" data-key={key} data-host={host}>
+  <div class="terminal">
+    <div class="terminal-bar"><span class="indicator"></span> MS / PERSONAL TERMINAL <span class="version">V.01</span></div>
+    <div class="screen">
+      <p class="command">&gt; whoami <span aria-hidden="true">_</span></p>
+      <p class="eyebrow">SCAN TO INVESTIGATE</p>
+      <h1>Marc Sherwood.</h1>
+      <p class="tagline">Good at figuring things out.<br/><strong>Better at making them happen.</strong></p>
+      <p class="location">Technical strategist · Systems thinker · Hands-on builder<br/>Richmond / Vancouver, BC</p>
+    </div>
+    <div class="keys" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i class="blue"></i></div>
+  </div>
+  <section class="journeys" aria-labelledby="choose">
+    <p class="eyebrow blue-text">&gt; choose a path</p>
+    <h2 id="choose">What brings you here?</h2>
+    <p>Pick the conversation that makes sense for you.</p>
+    {paths.map((path) => <details id={path.id} name="journey" data-journey={path.id}>
+      <summary><span><strong>{path.title}</strong><small>{path.prompt}</small></span><span class="plus" aria-hidden="true">+</span></summary>
+      <div class="journey-content"><h3>{path.heading}</h3><p>{path.body}</p><ul>{path.links.map(([label, href]) => <li><a data-action={label} href={href}>{label}</a></li>)}</ul></div>
+    </details>)}
+  </section>
+  <section class="contact" aria-labelledby="contact-title">
+    <p class="eyebrow">&gt; establish connection</p><h2 id="contact-title">Let's talk.</h2>
+    <a class="primary" href="/card/marc-sherwood.vcf" download data-action="save_contact">Save my contact</a>
+    <div class="contact-links"><a href="mailto:marc@honeos.ai" data-action="email">Email</a><a href="https://linkedin.com/in/marcsherwood" data-action="linkedin">LinkedIn</a><a href="/" data-action="website">Full website</a><a href="/card/qr.svg" data-action="qr">QR code</a></div>
+    <button class="share" type="button" id="share" hidden>Share this card</button><p id="share-status" role="status"></p>
+  </section>
+  <footer><span>MS / TERMINAL 01</span><button type="button" id="analytics" hidden aria-pressed="false">Enable anonymous analytics</button></footer>
+</main>
+<script>
+  const shell = document.querySelector<HTMLElement>('.card-shell')!;
+  const key = shell.dataset.key || '';
+  const host = shell.dataset.host || '';
+  const sourceParam = new URLSearchParams(location.search).get('src');
+  const source = sourceParam === 'nfc' || sourceParam === 'qr' ? sourceParam : 'direct';
+  let consent = false;
+  let session = '';
+  const analytics = document.querySelector<HTMLButtonElement>('#analytics')!;
+  function capture(event: string, extra: Record<string, string> = {}) {
+    if (!consent || !key || !session) return;
+    const body = JSON.stringify({ api_key: key, event, distinct_id: session, properties: { $process_person_profile: false, source, ...extra } });
+    void fetch(`${host.replace(/\/$/, '')}/i/v0/e/`, {method:'POST', headers:{'Content-Type':'application/json'}, body, keepalive:true, credentials:'omit'}).catch(() => {});
+  }
+  if (key && /^https:\/\/[a-z0-9.-]+(?::\d+)?$/i.test(host)) {
+    analytics.hidden = false;
+    analytics.addEventListener('click', () => {
+      consent = !consent;
+      analytics.setAttribute('aria-pressed', String(consent));
+      analytics.textContent = consent ? 'Disable anonymous analytics' : 'Enable anonymous analytics';
+      if (consent) { session = crypto.randomUUID(); capture('card_view'); } else { session = ''; }
+    });
+  }
+  document.querySelectorAll<HTMLDetailsElement>('[data-journey]').forEach(detail => detail.addEventListener('toggle', () => { if (detail.open) capture('card_journey_selected', {journey:detail.dataset.journey || ''}); }));
+  document.querySelectorAll<HTMLElement>('[data-action]').forEach(link => link.addEventListener('click', () => capture('card_action', {action:link.dataset.action || '', journey:link.closest<HTMLElement>('[data-journey]')?.dataset.journey || 'general'})));
+  const share = document.querySelector<HTMLButtonElement>('#share')!;
+  const status = document.getElementById('share-status')!;
+  if (navigator.share || navigator.clipboard) {
+    share.hidden = false;
+    share.addEventListener('click', async () => { try { const url = 'https://marcsherwood.com/card/'; if (navigator.share) await navigator.share({title:'Marc Sherwood',url}); else { await navigator.clipboard.writeText(url); status.textContent='Link copied.'; } capture('card_action',{action:'share'}); } catch { status.textContent='Sharing cancelled or unavailable.'; } });
+  }
+</script>
+<style>
+  body{background:#fafaf9;color:#0f172a}.card-shell{max-width:650px;margin:auto;padding:24px 16px 18px}.terminal{background:#1e293b;border:1px solid #475569;border-radius:22px;padding:16px;box-shadow:0 10px 24px #0f172a25}.terminal-bar{display:flex;align-items:center;gap:8px;color:#cbd5e1;font:500 11px var(--font-mono);letter-spacing:.05em;margin:0 2px 13px}.indicator{width:8px;height:8px;background:#60a5fa;border-radius:100%;box-shadow:0 0 12px #60a5fa}.version{margin-left:auto}.screen{background:#020617;border:2px solid #334155;border-radius:12px;padding:24px 18px;color:#e2e8f0;box-shadow:inset 0 0 30px #2563eb20}.command,.eyebrow{font:500 13px var(--font-mono);letter-spacing:.04em;color:#93c5fd}.command{margin-bottom:22px}.screen h1{font-size:clamp(2rem,8vw,3.5rem);font-weight:700;letter-spacing:-.04em;line-height:1.05;margin:10px 0 14px}.tagline{font-size:clamp(1.1rem,4vw,1.45rem);line-height:1.4}.tagline strong{color:#93c5fd}.location{font-size:14px;line-height:1.6;color:#cbd5e1;margin-top:16px}.keys{display:flex;gap:7px;justify-content:center;margin:15px 0 0}.keys i{height:15px;flex:1;max-width:55px;background:#334155;border-radius:4px;border-bottom:3px solid #0f172a}.keys .blue{background:#2563eb}.journeys{margin:32px 0}.blue-text{color:#1d4ed8}.journeys h2,.contact h2{font-size:1.65rem;font-weight:700;margin:6px 0}.journeys>p:not(.eyebrow){color:#475569;margin-bottom:16px}.journeys details{background:#fff;border:1px solid #cbd5e1;border-radius:12px;margin-bottom:10px;overflow:hidden}.journeys details[open]{border-color:#2563eb}summary{cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px;list-style:none;gap:12px}summary::-webkit-details-marker{display:none}summary strong{font-size:1.1rem}summary small{display:block;font-size:14px;color:#475569;margin-top:3px}.plus{font-size:24px;color:#1d4ed8}details[open] .plus{transform:rotate(45deg)}.journey-content{padding:0 16px 18px;border-top:1px solid #e2e8f0}.journey-content h3{font-size:1.12rem;font-weight:700;margin-top:14px}.journey-content p{color:#334155;line-height:1.6;margin:8px 0 12px}.journey-content a{display:block;padding:10px 0;color:#1d4ed8;font-weight:600;text-decoration:underline;text-underline-offset:3px}.contact{background:#0f172a;color:#f8fafc;padding:22px;border-radius:16px}.primary{display:block;text-align:center;background:#2563eb;color:#fff;border-radius:8px;padding:14px;margin:15px 0;font-weight:700}.contact-links{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}.contact-links a,.share{color:#bfdbfe;text-decoration:underline;text-underline-offset:4px;padding:8px 0}.share{display:block;margin-top:10px;cursor:pointer}.share[hidden]{display:none}footer{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#475569;font:500 12px var(--font-mono);margin:20px 0}footer button{cursor:pointer;text-decoration:underline;text-align:right}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #60a5fa;outline-offset:3px}@media(min-width:680px){.card-shell{padding:36px 24px}.screen{padding:36px}.terminal{padding:20px}}
+</style>
+</body>
+</html>
