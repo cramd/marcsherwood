@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const title = 'Back to the Woods | 2025 KTM 300 XC-W | Marc Sherwood';
+const description = 'The latest addition to my garage: a 2025 KTM 300 XC-W, a return to technical BC singletrack and a new chapter in a lifelong motorcycle obsession.';
+const priorities = [
+  {title:'Get to know the bike.',body:'Ride it, learn the feel of its suspension and power delivery, and spend time on the terrain I care about before deciding what it needs.'},
+  {title:'Protect the essentials.',body:'Review the skid plate, hand protection, cooling and the little things that matter when a ride takes you deep into the woods.'},
+  {title:'Stay ahead of maintenance.',body:'Establish a service baseline and track hours, maintenance and the eventual top-end work. This is a bike I want to ride for years.'}
+];
+---
+<BaseLayout title={title} description={description} mainClass="flex-grow w-full">
+  <section class="bg-slate-950 text-white border-b border-orange-600">
+    <div class="max-w-6xl mx-auto px-6 py-12 md:py-20 grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <a href="/garage/" class="text-orange-300 font-semibold">Back to the Garage</a>
+        <p class="font-mono text-sm uppercase tracking-widest text-orange-400 mt-7 mb-4">New chapter · November 2026</p>
+        <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-5">Back to<br/><span class="text-orange-400">the woods.</span></h1>
+        <p class="text-2xl font-bold mb-4">2025 KTM 300 XC-W</p>
+        <p class="text-lg leading-relaxed text-slate-300 max-w-xl">A purpose-built enduro, a lifetime of two-strokes, and the chance to get back to the kind of riding I've been missing.</p>
+      </div>
+      <div class="rounded-2xl bg-orange-600 p-8 md:p-12 overflow-hidden relative min-h-64 flex flex-col items-center justify-center">
+        <span class="font-mono text-sm uppercase tracking-widest">2025 / XC-W</span>
+        <span class="text-8xl md:text-9xl font-black tracking-tighter leading-none">300</span>
+        <span class="font-mono text-sm uppercase tracking-widest mt-4">BC singletrack · Two-stroke</span>
+      </div>
+    </div>
+  </section>
+  <section class="bg-orange-50 border-y border-orange-100"><div class="max-w-6xl mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-4 text-slate-900">
+    <div><p class="text-sm text-slate-600">Model</p><strong class="text-xl">2025</strong></div><div><p class="text-sm text-slate-600">Machine</p><strong class="text-xl">300 XC-W</strong></div><div><p class="text-sm text-slate-600">Terrain</p><strong class="text-xl">BC woods</strong></div><div><p class="text-sm text-slate-600">Status</p><strong class="text-xl">Newest addition</strong></div>
+  </div></section>
+  <section class="max-w-4xl mx-auto px-6 py-14 md:py-20">
+    <p class="font-mono text-sm text-orange-700 uppercase tracking-wider mb-3">01 / Why this bike?</p>
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">The right tool for the trails I love.</h2>
+    <div class="space-y-5 text-lg text-slate-700 leading-relaxed">
+      <p>My riding roots are motocross and two-strokes. The last bike I raced was a 1991 Kawasaki KX125, and the sound of a little two-stroke on the pipe has never left me. But these days it's the technical singletrack in the BC woods that keeps calling.</p>
+      <p>I've spent a lot of time riding bikes built for other jobs, including the adventure bikes and my Suzuki RM250. This time, I chose a machine built for the job I actually want it to do.</p>
+      <p>The 300 XC-W isn't about buying my way into being a better rider. It's about finding a bike that suits the terrain, developing my skills again, and spending less time wondering how to make the machine something it isn't.</p>
+      <p>It's the same philosophy behind <a href="/thriftyjeep/" class="font-semibold text-orange-700 underline">Operation Thrifty Jeep</a>: learn the terrain, then make every change earn its place.</p>
+    </div>
+  </section>
+  <section class="bg-slate-900 text-white"><div class="max-w-6xl mx-auto px-6 py-14 md:py-20">
+    <p class="font-mono text-sm text-orange-300 uppercase tracking-wider mb-3">02 / The plan</p>
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-8">Ride first. Modify with purpose.</h2>
+    <div class="grid md:grid-cols-3 gap-4">{priorities.map(p=><article class="border border-slate-600 rounded-xl p-6"><h3 class="text-xl font-bold mb-3">{p.title}</h3><p class="text-slate-300 leading-relaxed">{p.body}</p></article>)}</div>
+  </div></section>
+  <section class="max-w-4xl mx-auto px-6 py-14 md:py-20">
+    <p class="font-mono text-sm text-orange-700 uppercase tracking-wider mb-3">03 / Ride journal</p>
+    <h2 class="text-3xl font-bold tracking-tight mb-4">Chapter one.</h2>
+    <p class="text-lg text-slate-700 leading-relaxed">The KTM is the newest member of the herd. I'll add photos of the actual bike, first impressions, trail stories and maintenance notes as this next chapter unfolds.</p>
+    <div class="mt-8 border-l-4 border-orange-500 bg-stone-100 p-6"><p class="font-mono text-sm text-slate-500">November 2026</p><h3 class="font-bold text-xl mt-1">The decision is made.</h3><p class="mt-2 text-slate-700">After looking at the available options, the 2025 300 XC-W is the bike I chose for the return to the woods.</p></div>
+    <a href="/garage/" class="mt-8 inline-block font-semibold text-orange-700">Explore the rest of the Garage</a>
+  </section>
+</BaseLayout>

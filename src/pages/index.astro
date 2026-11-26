@@ -207,6 +207,24 @@ const paths = [
     </div>
   </section>
 
+  <section class="bg-stone-100 border-y border-slate-200" id="garage">
+    <div class="max-w-6xl mx-auto px-6 py-14 md:py-20">
+      <div class="flex flex-wrap items-end justify-between gap-5 mb-8">
+        <div><p class="font-mono text-sm text-blue-700 uppercase tracking-wider mb-3">Beyond the day job</p><h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-3">The Garage.</h2><p class="text-lg text-slate-600 max-w-3xl">Two-strokes, technical trails, restoration projects and a lifetime of figuring things out with a wrench in hand.</p></div>
+        <a href="/garage/" class="px-5 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-700">Explore the Garage</a>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <a href="/ktm300/" class="rounded-xl overflow-hidden bg-slate-900 text-white flex flex-col border border-orange-500"><div class="aspect-video bg-orange-600 flex items-center justify-center"><span class="text-5xl font-black tracking-tighter text-white">300</span></div><div class="p-4"><p class="text-xs font-mono text-orange-300 uppercase mb-1">Newest addition</p><h3 class="font-bold">2025 KTM 300 XC-W</h3><p class="text-sm text-slate-300 mt-1">Back to the woods.</p></div></a>
+        {[
+          {href:'/rm250/',img:'/assets/rm250/rm250-hero.jpg',name:'2008 Suzuki RM250',tag:'Final-year two-stroke'},
+          {href:'/rm125/',img:'/assets/rm125/finished-side.jpg',name:'2007 Suzuki RM125',tag:'Meet Suzanne'},
+          {href:'/f800gs/',img:'/assets/f800gs/hero-lake.jpg',name:'2013 BMW F800GS',tag:'Adventure bike'},
+          {href:'/thriftyjeep/',img:'/assets/thriftyjeep/wheel-placement.jpg',name:'2013 Jeep Wrangler JK',tag:'Operation Thrifty Jeep'}
+        ].map(v=><a href={v.href} class="block rounded-xl overflow-hidden bg-white border border-slate-200 hover:border-blue-400"><img class="w-full aspect-video object-cover" src={v.img} alt={v.name} loading="lazy"/><div class="p-4"><h3 class="font-bold text-slate-900">{v.name}</h3><p class="text-sm text-slate-600 mt-1">{v.tag}</p></div></a>)}
+      </div>
+    </div>
+  </section>
+
   <section class="bg-slate-900 text-white">
     <div class="max-w-6xl mx-auto px-6 py-14 md:py-20 grid md:grid-cols-12 gap-8 items-center">
       <div class="md:col-span-8">
