@@ -1,111 +1,26 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-const pageTitle = '2008 Suzuki RM250 — Final-Year Two-Stroke | Marc Sherwood';
-const pageDescription = '2008 Suzuki RM250 in Richmond, BC. Final-year two-stroke motocross bike with a race-oriented build, Too-Trick Racing suspension, Magura hydraulic clutch, Pro Circuit exhaust, upgraded brakes and extensive extras. Contact for details.';
-const upgrades = [
-  { title: 'Suspension & handling', items: ['Too-Trick Racing suspension', 'Upgraded wheels', 'Oversized brakes', 'Braided brake lines', 'New tires'] },
-  { title: 'Controls & drivetrain', items: ['Magura hydraulic clutch', 'New race clutch', 'Additional performance and race-oriented upgrades'] },
-  { title: 'Engine & exhaust', items: ['Pro Circuit expansion chamber and silencer', 'Aftermarket reed-valve intake (brand to be confirmed)', 'Factory-style case covers'] }
+const title = '2008 Suzuki RM250 — Final-Year Two-Stroke | Marc Sherwood';
+const description = '2008 Suzuki RM250 motocross bike in Richmond, BC. Race-built two-stroke with Too-Trick Racing suspension, Magura clutch, Pro Circuit exhaust and extensive extras. Ask for details.';
+const photos = [
+  {src:'/assets/rm250/rm250-hero.jpg',alt:'2008 Suzuki RM250 in silver graphics, side profile on a stand',caption:'RM250 · Silver graphics'},
+  {src:'/assets/rm250/rm250-trailside.jpg',alt:'2008 Suzuki RM250 beside mountain lake after a ride',caption:'Out on the trails'},
+  {src:'/assets/rm250/rm250-silver-kit.jpg',alt:'2008 Suzuki RM250 with grey kit and number 42 outdoors',caption:'Side profile'},
+  {src:'/assets/rm250/rm250-yellow-kit.jpg',alt:'2008 Suzuki RM250 with yellow and black graphics in garage',caption:'Alternate yellow kit'},
+  {src:'/assets/rm250/rm250-pipe-detail.jpg',alt:'Close-up of Suzuki RM250 expansion chamber, frame and bodywork',caption:'Two-stroke details'},
 ];
-const extras = ['Multiple sets of plastics', 'New-in-box genuine OEM Suzuki spare seat', 'New-in-box DB tall spare seat', 'Additional spare parts', 'Ask for a complete inventory of what is included'];
+const groups = [
+ {name:'Suspension & wheels',parts:['Too-Trick Racing suspension','Upgraded wheels','Oversized brake rotor and upgraded brakes','Braided brake lines','New tires']},
+ {name:'Powertrain & controls',parts:['Magura hydraulic clutch','New race clutch','Pro Circuit pipe and silencer','Aftermarket reed-valve system (confirm specification)']},
+ {name:'Race details & extras',parts:['Factory-style engine case covers','Additional plastics and graphics','New-in-box OEM Suzuki spare seat', 'New-in-box DB tall spare seat','Spare parts and additional equipment']}
+];
 ---
-<!doctype html>
-<html lang="en">
-<head>
-  <BaseHead title={pageTitle} description={pageDescription} />
-  <meta name="theme-color" content="#101b1d" />
-  <style>
-    :root { color-scheme: dark; }
-    html {scroll-behavior:smooth}
-    body.rm-page{margin:0;background:#101b1d;color:#f3f4ef;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    .rm-page *{box-sizing:border-box}
-    .rm-page a{color:inherit}
-    .rm-wrap{max-width:1160px;margin:auto;padding:0 24px}
-    .rm-header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0}
-    .rm-logo{font-size:16px;font-weight:800;letter-spacing:-.04em;text-decoration:none}
-    .rm-logo b{color:#d8f16a}
-    .rm-nav{display:flex;flex-wrap:wrap;gap:23px;font-size:13px}
-    .rm-nav a{text-decoration:none;color:#c4d2ca}
-    .rm-nav a:hover{color:#d8f16a}
-    .rm-hero{background:radial-gradient(ellipse at 85% 0%,#315143 0%,transparent 50%),linear-gradient(145deg,#17282b,#101b1d);border-block:1px solid #2e4140;position:relative;overflow:hidden}
-    .rm-hero:before{content:"250";position:absolute;right:-.06em;bottom:-.25em;font-size:clamp(220px,45vw,640px);font-weight:1000;line-height:1;color:#fff1;letter-spacing:-.1em;pointer-events:none}
-    .rm-hero-content{position:relative;padding:100px 0 110px;max-width:830px}
-    .rm-eyebrow{color:#d8f16a;text-transform:uppercase;letter-spacing:.19em;font-size:12px;font-weight:800}
-    .rm-hero h1{font-size:clamp(70px,12vw,152px);line-height:.89;letter-spacing:-.09em;margin:20px 0 24px;font-weight:900}
-    .rm-hero h1 span{color:#d8f16a}
-    .rm-lead{font-size:clamp(19px,2.5vw,27px);line-height:1.5;max-width:690px;color:#d3ded8}
-    .rm-tags{display:flex;gap:9px;flex-wrap:wrap;margin:28px 0 34px}
-    .rm-tags span{font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:750;border:1px solid #587168;padding:10px 13px}
-    .rm-buttons{display:flex;flex-wrap:wrap;gap:12px}
-    .rm-button{display:inline-flex;padding:16px 23px;background:#d8f16a;border:2px solid #d8f16a;color:#13211b!important;text-decoration:none;font-size:14px;font-weight:800}
-    .rm-button.secondary{background:transparent;color:#d8f16a!important}
-    .rm-button:hover{filter:brightness(1.08)}
-    .rm-section{padding:88px 0;border-bottom:1px solid #304441}
-    .rm-section.alt{background:#142327}
-    .rm-section h2{font-size:clamp(38px,5vw,62px);line-height:1.07;letter-spacing:-.06em;margin:14px 0 30px}
-    .rm-copy{max-width:815px;font-size:18px;line-height:1.85;color:#c6d4ce}
-    .rm-copy p{margin:0 0 20px}
-    .rm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:38px}
-    .rm-card{border:1px solid #3a504c;background:#1a2d30;padding:27px}
-    .rm-card small{font-family:monospace;color:#d8f16a;letter-spacing:.1em}
-    .rm-card h3{font-size:23px;letter-spacing:-.04em;margin:20px 0 15px}
-    .rm-card ul{color:#d0dcd7;font-size:15px;line-height:1.7;padding-left:20px}
-    .rm-card li+li{margin-top:8px}
-    .rm-extras{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:30px}
-    .rm-extra{border-left:3px solid #d8f16a;background:#1a2d30;padding:18px 20px;color:#d3ded8}
-    .rm-photo{display:grid;place-items:center;text-align:center;margin-top:38px;padding:40px 25px;min-height:220px;border:1px dashed #638179;background:repeating-linear-gradient(45deg,#15272b,#15272b 12px,#182b2f 12px,#182b2f 24px)}
-    .rm-photo strong{font-size:22px}
-    .rm-photo p{max-width:520px;color:#bfcec7;line-height:1.7}
-    .rm-note{font-size:13px;line-height:1.65;color:#a8bdb3;margin-top:26px}
-    .rm-contact{background:#d8f16a;color:#152419;padding:84px 0}
-    .rm-contact .rm-eyebrow{color:#556c24}
-    .rm-contact h2{font-size:clamp(43px,6vw,77px);letter-spacing:-.06em;margin:15px 0 25px;line-height:1.05}
-    .rm-contact p{font-size:18px;line-height:1.7;max-width:620px}
-    .rm-contact .rm-button{background:#172923;color:#d8f16a!important;border-color:#172923;margin-top:14px}
-    .rm-footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding:28px 0;color:#a1b6ac;font-size:12px}
-    :focus-visible{outline:3px solid #d8f16a;outline-offset:4px}
-    @media(max-width:740px){.rm-hero-content{padding:75px 0 90px}.rm-section{padding:62px 0}.rm-grid,.rm-extras{grid-template-columns:1fr}.rm-nav{gap:12px}.rm-hero h1{font-size:clamp(68px,18vw,110px)}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  .rm-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32}.rm-hero-content{z-index:1}.rm-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:32px}.rm-gallery a{display:block;color:inherit;text-decoration:none}.rm-gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.rm-gallery span{display:block;padding:12px 0;font-size:13px;font-weight:700}@media(max-width:650px){.rm-gallery{grid-template-columns:1fr}}</style>
-</head>
-<body class="rm-page">
-  <header class="rm-wrap rm-header">
-    <a class="rm-logo" href="/">Marc Sherwood<b>.</b></a>
-    <nav class="rm-nav" aria-label="Page navigation"><a href="#story">The bike</a><a href="#photos">Photos</a><a href="#build">The build</a><a href="#extras">Extras</a><a href="#contact">Inquire</a></nav>
-  </header>
-  <main>
-    <section class="rm-hero"><img class="rm-hero-photo" src="/assets/rm250/rm250-hero.jpg" alt="" fetchpriority="high"/><div class="rm-wrap"><div class="rm-hero-content">
-      <div class="rm-eyebrow">A classic two-stroke · Richmond, BC</div>
-      <h1>2008<br/><span>RM250.</span></h1>
-      <p class="rm-lead">Suzuki's final-year 250cc two-stroke motocrosser. Race-oriented upgrades. Serious character. The kind of bike they don't build anymore.</p>
-      <div class="rm-tags"><span>250cc two-stroke</span><span>Final model year</span><span>Built to ride</span></div>
-      <div class="rm-buttons"><a href="#contact" class="rm-button">Ask about the bike ↗</a><a href="#build" class="rm-button secondary">Explore the build ↓</a></div>
-    </div></div></section>
-    <section class="rm-section" id="photos"><div class="rm-wrap"><div class="rm-eyebrow">Actual bike photos</div><h2>See the RM250.</h2><p class="rm-copy">Photographs of this exact Suzuki RM250 in different graphics. Select any photo to enlarge it.</p><div class="rm-gallery"><a href="/assets/rm250/rm250-hero.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm250-hero.jpg" alt="Side profile of the 2008 RM250" loading="lazy"/><span>Side profile of the 2008 RM250 ↗</span></a><a href="/assets/rm250/rm250-trailside.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm250-trailside.jpg" alt="RM250 out riding" loading="lazy"/><span>RM250 out riding ↗</span></a><a href="/assets/rm250/rm250-yellow-kit.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm250-yellow-kit.jpg" alt="Yellow race graphics" loading="lazy"/><span>Yellow race graphics ↗</span></a><a href="/assets/rm250/rm250-silver-kit.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm250-silver-kit.jpg" alt="Another view of the RM250" loading="lazy"/><span>Another view of the RM250 ↗</span></a><a href="/assets/rm250/rm250-pipe-detail.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm250-pipe-detail.jpg" alt="Pro Circuit expansion chamber detail" loading="lazy"/><span>Pro Circuit expansion chamber detail ↗</span></a></div></div></section><section class="rm-section" id="story"><div class="rm-wrap">
-      <div class="rm-eyebrow">01 / The bike</div><h2>Not your average old dirt bike.</h2>
-      <div class="rm-copy"><p>This is a <strong>2008 Suzuki RM250</strong>, the final model year of Suzuki's 250cc two-stroke motocross bike. It's an ex-racer build with a lot of thoughtful hardware — not just decals and a pipe.</p>
-      <p>It's equipped with a Magura hydraulic clutch, Too-Trick Racing suspension, a Pro Circuit exhaust, upgraded wheels and brakes, and more. I also have multiple sets of plastics, two seats, and other spare parts.</p>
-      <p>I'm moving back toward a purpose-built enduro for BC singletrack. The RM is ready for somebody who wants a proper motocross two-stroke and appreciates the work that went into it.</p></div>
-      
-    </div></section>
-    <section class="rm-section alt" id="build"><div class="rm-wrap">
-      <div class="rm-eyebrow">02 / Equipment</div><h2>Built, not merely accessorized.</h2>
-      <p class="rm-copy">A snapshot of the hardware on the bike. There's more to go through in person.</p>
-      <div class="rm-grid">{upgrades.map((group,i)=><article class="rm-card"><small>0{i+1} / BUILD</small><h3>{group.title}</h3><ul>{group.items.map(item=><li>{item}</li>)}</ul></article>)}</div>
-      <p class="rm-note">The exact reed-valve brand and full internal engine specification should be confirmed from parts or inspection before being treated as verified.</p>
-    </div></section>
-    <section class="rm-section" id="extras"><div class="rm-wrap">
-      <div class="rm-eyebrow">03 / Included equipment</div><h2>There's more than a bike.</h2>
-      <p class="rm-copy">Multiple options for plastics, seats, and spares make this a more interesting package than the average used RM250.</p>
-      <div class="rm-extras">{extras.map(item=><div class="rm-extra">{item}</div>)}</div>
-      <p class="rm-note">Specific parts, quantities and inclusion to be confirmed when discussing the sale.</p>
-    </div></section>
-    <section class="rm-section alt" id="suzanne"><div class="rm-wrap"><div class="rm-eyebrow">04 / Another Suzuki</div><h2>Meet Suzanne.</h2><div class="rm-copy"><p>There's a little sister in the garage: <strong>Suzanne, a 2007 Suzuki RM125</strong> that received a frame-up rebuild. She's a different bike from this RM250, and could potentially be rehomed alongside it.</p><p><a href="/rm125/" style="color:#d8f16a;font-weight:700">Read Suzanne's story →</a></p><a href="/rm125/"><img src="/assets/rm250/rm125-companion.jpg" loading="lazy" alt="Suzanne, 2007 RM125 with red and black seat" style="width:100%;max-width:650px;margin-top:18px"/></a></div></div></section>
-<section class="rm-contact" id="contact"><div class="rm-wrap">
-      <div class="rm-eyebrow">04 / Inquire</div><h2>Interested in the RM?</h2>
-      <p>Located in Richmond, BC. Get in touch for more photos, a walk-through of the build, what comes with it, and the details of the sale.</p>
-      <a class="rm-button" href="mailto:marcsherwood@gmail.com?subject=2008%20Suzuki%20RM250%20Inquiry">Email about the RM250 ↗</a>
-    </div></section>
-  </main>
-  <footer class="rm-wrap rm-footer"><span>© Marc Sherwood · Richmond, BC</span><a href="/">Back to marcsherwood.com</a></footer>
-</body></html>
+<!doctype html><html lang="en"><head><BaseHead title={title} description={description}/><meta name="theme-color" content="#101b1d"/><style>
+html{scroll-behavior:smooth}body{margin:0;background:#101b1d;color:#f3f4ef;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}*{box-sizing:border-box}a{color:inherit}.wrap{max-width:1180px;margin:auto;padding:0 24px}header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}header>a{font-weight:850;letter-spacing:-.04em;text-decoration:none}header a b{color:#d8f16a}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:13px}nav a{text-decoration:none;color:#cfdbd4}nav a:hover{color:#d8f16a}.hero{background:#17282b;position:relative;overflow:hidden}.hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#101b1dfa 0%,#101b1db9 46%,#101b1d10 100%);z-index:1}.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}.hero-content{position:relative;z-index:2;min-height:620px;display:flex;align-items:center;padding-top:70px;padding-bottom:80px}.hero-content>div{max-width:760px}.eyebrow{color:#d8f16a;text-transform:uppercase;letter-spacing:.18em;font-weight:800;font-size:12px}.hero h1{font-size:clamp(70px,12vw,150px);letter-spacing:-.09em;line-height:.86;margin:22px 0 25px;font-weight:900}.hero h1 span{color:#d8f16a}.lead{font-size:clamp(19px,2.6vw,27px);line-height:1.5;max-width:700px;color:#e1e8e0}.tags{display:flex;flex-wrap:wrap;gap:9px;margin:30px 0}.tags span{font-weight:750;border:1px solid #85978b;padding:10px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.08em}.btn{display:inline-flex;align-items:center;padding:16px 23px;background:#d8f16a;color:#14221c!important;text-decoration:none;font-size:14px;font-weight:850;border:2px solid #d8f16a}.btn.ghost{background:transparent;color:#d8f16a!important}.actions{display:flex;flex-wrap:wrap;gap:12px}.section{padding:86px 0;border-bottom:1px solid #354946}.section.alt{background:#142327}.section h2{font-size:clamp(36px,5vw,62px);letter-spacing:-.06em;line-height:1.09;margin:13px 0 27px}.copy{max-width:830px;font-size:18px;line-height:1.78;color:#d1dbd5}.copy p{margin:0 0 20px}.gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:13px;margin-top:35px}.photo{grid-column:span 4;display:block;position:relative;background:#1c2e30;overflow:hidden;aspect-ratio:4/3}.photo:nth-child(1),.photo:nth-child(2){grid-column:span 6}.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s}.photo:hover img{transform:scale(1.025)}.photo span{position:absolute;bottom:0;left:0;right:0;padding:24px 14px 12px;font-size:13px;font-weight:650;background:linear-gradient(transparent,#101b1dcf)}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:37px}.card{padding:28px;border:1px solid #3d5550;background:#1b3030}.card h3{font-size:22px;letter-spacing:-.04em;margin:0 0 16px}.card ul{padding-left:20px;color:#d1ddd5;line-height:1.8;font-size:15px}.note{color:#aabeb4;font-size:13px;line-height:1.6;margin-top:18px}.companion{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}.companion img{display:block;width:100%;height:auto}.companion h2{margin-top:12px}.contact{background:#d8f16a;color:#142219;padding:80px 0}.contact .eyebrow{color:#5a6f2b}.contact h2{font-size:clamp(42px,6vw,75px);line-height:1;letter-spacing:-.06em;margin:14px 0 28px}.contact p{font-size:18px;max-width:700px;line-height:1.65}.contact .btn{background:#172923;border-color:#172923;color:#d8f16a!important;margin-top:12px}footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px;color:#a9bbb1;padding:28px 0;font-size:12px}a:focus-visible{outline:3px solid #d8f16a;outline-offset:4px}@media(max-width:760px){.hero-content{min-height:600px}.hero:before{background:linear-gradient(#101b1d9c,#101b1de8)}.section{padding:62px 0}.photo,.photo:nth-child(1),.photo:nth-child(2){grid-column:span 6}.cards,.companion{grid-template-columns:1fr}.companion{gap:24px}}@media(max-width:490px){.photo,.photo:nth-child(1),.photo:nth-child(2){grid-column:span 12}.hero h1{font-size:clamp(66px,19vw,110px)}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.photo img{transition:none}}
+</style></head><body><header class="wrap"><a href="/">Marc Sherwood<b>.</b></a><nav aria-label="Page navigation"><a href="#photos">Photos</a><a href="#build">The build</a><a href="#rm125">RM125</a><a href="#contact">Inquire</a></nav></header><main>
+<section class="hero"><img class="hero-img" src="/assets/rm250/rm250-hero.jpg" alt="2008 Suzuki RM250 with grey graphics and number 42" fetchpriority="high"/><div class="wrap hero-content"><div><div class="eyebrow">Richmond, BC · Final-year two-stroke</div><h1>2008<br/><span>RM250.</span></h1><p class="lead">A proper, race-prepared Suzuki two-stroke. Too-Trick Racing suspension, Magura hydraulic clutch, Pro Circuit exhaust and a whole lot of character.</p><div class="tags"><span>250cc two-stroke</span><span>2008 · final year</span><span>Ex-racer build</span></div><div class="actions"><a class="btn" href="#contact">Ask about the bike ↗</a><a class="btn ghost" href="#photos">View photos ↓</a></div></div></div></section>
+<section class="section" id="photos"><div class="wrap"><div class="eyebrow">01 / Photo gallery</div><h2>See it from every angle.</h2><p class="copy">Photos of the actual RM250, shown in more than one set of plastics. Click any photo to open the full-size version.</p><div class="gallery">{photos.map(photo=><a class="photo" href={photo.src} target="_blank" rel="noopener noreferrer"><img src={photo.src} alt={photo.alt} loading="lazy" decoding="async"/><span>{photo.caption} ↗</span></a>)}</div></div></section>
+<section class="section alt" id="story"><div class="wrap"><div class="eyebrow">02 / The story</div><h2>Not just another old dirt bike.</h2><div class="copy"><p>This is a <strong>2008 Suzuki RM250</strong>, the final production year of Suzuki's 250cc two-stroke motocross machine. It's an ex-racer with the kind of equipment and attention that makes it stand out from a stock bike.</p><p>I'm making room for a purpose-built enduro for BC singletrack. The RM250 deserves a rider who will appreciate everything that has gone into it.</p></div></div></section>
+<section class="section" id="build"><div class="wrap"><div class="eyebrow">03 / The build</div><h2>The good stuff.</h2><div class="cards">{groups.map(group=><article class="card"><h3>{group.name}</h3><ul>{group.parts.map(part=><li>{part}</li>)}</ul></article>)}</div><p class="note">The reed-valve brand and detailed internal engine specification can be confirmed when reviewing the bike. Parts shown across photos may vary with the installed graphics or equipment.</p></div></section>
+<section class="section alt" id="rm125"><div class="wrap companion"><div><div class="eyebrow">04 / The little sister</div><h2>There's an RM125, too.</h2><div class="copy"><p>The bike with the <strong>red-and-black seat</strong> is not the RM250. Meet <strong>Suzanne</strong>, a separate <strong>2007 Suzuki RM125</strong> that received a frame-up rebuild.</p><p>It could potentially be rehomed alongside the RM250. <a href="/rm125/" style="color:#d8f16a;font-weight:700">See Suzanne’s rebuild story →</a></p></div></div><a href="/assets/rm250/rm125-companion.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm125-companion.jpg" alt="2007 Suzuki RM125 with red and black seat and yellow bodywork, separately available companion bike" loading="lazy"/></a></div></section>
+<section class="contact" id="contact"><div class="wrap"><div class="eyebrow">05 / Inquire</div><h2>Interested in the RM?</h2><p>Located in Richmond, British Columbia. Get in touch to discuss the build, included extras, viewing arrangements or the possibility of taking both Suzukis home.</p><a class="btn" href="mailto:marcsherwood@gmail.com?subject=2008%20Suzuki%20RM250%20Inquiry">Email about the RM250 ↗</a></div></section></main><footer class="wrap"><span>© Marc Sherwood · Richmond, BC</span><a href="/">Back to marcsherwood.com</a></footer></body></html>
