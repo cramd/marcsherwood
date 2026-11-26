@@ -10,7 +10,7 @@ import { Font } from 'astro:assets';
 interface Props {
 	title: string;
 	description: string;
-	image?: ImageMetadata;
+	image?: Pick<ImageMetadata, 'src' | 'width' | 'height'>;
 	ogType?: 'website' | 'article';
 }
 
