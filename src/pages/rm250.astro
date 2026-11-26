@@ -66,27 +66,27 @@ const extras = ['Multiple sets of plastics', 'New-in-box genuine OEM Suzuki spar
     :focus-visible{outline:3px solid #d8f16a;outline-offset:4px}
     @media(max-width:740px){.rm-hero-content{padding:75px 0 90px}.rm-section{padding:62px 0}.rm-grid,.rm-extras{grid-template-columns:1fr}.rm-nav{gap:12px}.rm-hero h1{font-size:clamp(68px,18vw,110px)}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  </style>
+  .rm-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32}.rm-hero-content{z-index:1}.rm-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:32px}.rm-gallery a{display:block;color:inherit;text-decoration:none}.rm-gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.rm-gallery span{display:block;padding:12px 0;font-size:13px;font-weight:700}@media(max-width:650px){.rm-gallery{grid-template-columns:1fr}}</style>
 </head>
 <body class="rm-page">
   <header class="rm-wrap rm-header">
     <a class="rm-logo" href="/">Marc Sherwood<b>.</b></a>
-    <nav class="rm-nav" aria-label="Page navigation"><a href="#story">The bike</a><a href="#build">The build</a><a href="#extras">Extras</a><a href="#contact">Inquire</a></nav>
+    <nav class="rm-nav" aria-label="Page navigation"><a href="#story">The bike</a><a href="#photos">Photos</a><a href="#build">The build</a><a href="#extras">Extras</a><a href="#contact">Inquire</a></nav>
   </header>
   <main>
-    <section class="rm-hero"><div class="rm-wrap"><div class="rm-hero-content">
+    <section class="rm-hero"><img class="rm-hero-photo" src="/assets/rm250/rm250-hero.jpg" alt="" fetchpriority="high"/><div class="rm-wrap"><div class="rm-hero-content">
       <div class="rm-eyebrow">A classic two-stroke · Richmond, BC</div>
       <h1>2008<br/><span>RM250.</span></h1>
       <p class="rm-lead">Suzuki's final-year 250cc two-stroke motocrosser. Race-oriented upgrades. Serious character. The kind of bike they don't build anymore.</p>
       <div class="rm-tags"><span>250cc two-stroke</span><span>Final model year</span><span>Built to ride</span></div>
       <div class="rm-buttons"><a href="#contact" class="rm-button">Ask about the bike ↗</a><a href="#build" class="rm-button secondary">Explore the build ↓</a></div>
     </div></div></section>
-    <section class="rm-section" id="story"><div class="rm-wrap">
+    <section class="rm-section" id="photos"><div class="rm-wrap"><div class="rm-eyebrow">Actual bike photos</div><h2>See the RM250.</h2><p class="rm-copy">Photographs of this exact Suzuki RM250 in different graphics. Select any photo to enlarge it.</p><div class="rm-gallery"><a href="/assets/rm250/rm250-hero.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm250-hero.jpg" alt="Side profile of the 2008 RM250" loading="lazy"/><span>Side profile of the 2008 RM250 ↗</span></a><a href="/assets/rm250/rm250-trailside.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm250-trailside.jpg" alt="RM250 out riding" loading="lazy"/><span>RM250 out riding ↗</span></a><a href="/assets/rm250/rm250-yellow-kit.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm250-yellow-kit.jpg" alt="Yellow race graphics" loading="lazy"/><span>Yellow race graphics ↗</span></a><a href="/assets/rm250/rm250-silver-kit.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm250-silver-kit.jpg" alt="Another view of the RM250" loading="lazy"/><span>Another view of the RM250 ↗</span></a><a href="/assets/rm250/rm250-pipe-detail.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/rm250/rm250-pipe-detail.jpg" alt="Pro Circuit expansion chamber detail" loading="lazy"/><span>Pro Circuit expansion chamber detail ↗</span></a></div></div></section><section class="rm-section" id="story"><div class="rm-wrap">
       <div class="rm-eyebrow">01 / The bike</div><h2>Not your average old dirt bike.</h2>
       <div class="rm-copy"><p>This is a <strong>2008 Suzuki RM250</strong>, the final model year of Suzuki's 250cc two-stroke motocross bike. It's an ex-racer build with a lot of thoughtful hardware — not just decals and a pipe.</p>
       <p>It's equipped with a Magura hydraulic clutch, Too-Trick Racing suspension, a Pro Circuit exhaust, upgraded wheels and brakes, and more. I also have multiple sets of plastics, two seats, and other spare parts.</p>
       <p>I'm moving back toward a purpose-built enduro for BC singletrack. The RM is ready for somebody who wants a proper motocross two-stroke and appreciates the work that went into it.</p></div>
-      <div class="rm-photo"><div><strong>Actual-bike photos to be added</strong><p>I'd rather use current pictures of this exact RM250 than generic catalogue shots. Contact me for photos in the meantime.</p></div></div>
+      
     </div></section>
     <section class="rm-section alt" id="build"><div class="rm-wrap">
       <div class="rm-eyebrow">02 / Equipment</div><h2>Built, not merely accessorized.</h2>
@@ -100,7 +100,7 @@ const extras = ['Multiple sets of plastics', 'New-in-box genuine OEM Suzuki spar
       <div class="rm-extras">{extras.map(item=><div class="rm-extra">{item}</div>)}</div>
       <p class="rm-note">Specific parts, quantities and inclusion to be confirmed when discussing the sale.</p>
     </div></section>
-    <section class="rm-section alt" id="suzanne"><div class="rm-wrap"><div class="rm-eyebrow">04 / Another Suzuki</div><h2>Meet Suzanne.</h2><div class="rm-copy"><p>There's a little sister in the garage: <strong>Suzanne, a 2007 Suzuki RM125</strong> that received a frame-up rebuild. She's a different bike from this RM250, and could potentially be rehomed alongside it.</p><p><a href="/rm125/" style="color:#d8f16a;font-weight:700">Read Suzanne's story →</a></p></div></div></section>
+    <section class="rm-section alt" id="suzanne"><div class="rm-wrap"><div class="rm-eyebrow">04 / Another Suzuki</div><h2>Meet Suzanne.</h2><div class="rm-copy"><p>There's a little sister in the garage: <strong>Suzanne, a 2007 Suzuki RM125</strong> that received a frame-up rebuild. She's a different bike from this RM250, and could potentially be rehomed alongside it.</p><p><a href="/rm125/" style="color:#d8f16a;font-weight:700">Read Suzanne's story →</a></p><a href="/rm125/"><img src="/assets/rm250/rm125-companion.jpg" loading="lazy" alt="Suzanne, 2007 RM125 with red and black seat" style="width:100%;max-width:650px;margin-top:18px"/></a></div></div></section>
 <section class="rm-contact" id="contact"><div class="rm-wrap">
       <div class="rm-eyebrow">04 / Inquire</div><h2>Interested in the RM?</h2>
       <p>Located in Richmond, BC. Get in touch for more photos, a walk-through of the build, what comes with it, and the details of the sale.</p>
