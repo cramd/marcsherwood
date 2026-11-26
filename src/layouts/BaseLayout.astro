@@ -7,7 +7,7 @@ import Header from '../components/Header.astro';
 interface Props {
 	title: string;
 	description: string;
-	image?: ImageMetadata;
+	image?: Pick<ImageMetadata, 'src' | 'width' | 'height'>;
 	mainClass?: string;
 	ogType?: 'website' | 'article';
 }
